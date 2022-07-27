@@ -1,0 +1,21 @@
+<div class="dashboard-main">
+
+    <h4 class="headings my-3">
+      Your Project
+    </h4>
+    <div class="projects-carousel d-flex">
+<!-- TODO : ADD CAROUSEL and remove Overflow from project-carousel class-->
+        <div class="card d-flex m-2 col-md-4" style="width: 18rem;" *ngFor="let project of projectList" [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project.id)">
+            <div class="card-body">
+              <h5 class="card-title">{{project.title}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+    </div>
+
+
+
+</div>

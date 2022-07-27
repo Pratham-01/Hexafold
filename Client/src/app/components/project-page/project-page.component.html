@@ -1,0 +1,38 @@
+<div class="project-page-main">
+
+    <h2 class="headings">
+        {{projectData.title}}
+    </h2>
+
+    <div class="progress-report">
+        <h4 class="headings">Progress</h4>
+        <p class="subtitle">The project will soo be completed</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: 20%"></div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <h4 class="headings">Features</h4>
+
+        <h6 class="headings">Current Features</h6>
+        <div class="current-features">
+            <div *ngFor="let feature of projectData.features" class="m-2">
+                <div class="card py-2 px-5 w-100 d-flex flex-row" *ngIf="feature.accepted">
+                        <div class="w-50">{{feature.title}}</div>
+                        <div class="w-25">{{feature.cost | currency}}</div>
+                        <div class="w-25">
+                            <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'done'">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="headings">New Features</h6>
+        <div class="new-features">
+
+        </div>
+
+    </div>
+
+</div>
