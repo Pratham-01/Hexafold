@@ -7,6 +7,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
+import { CommunityComponent } from './components/community/community.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
     NavBarComponent,
     DashboardComponent,
     HomeComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    CommunityComponent
   ],
   imports: [
     BrowserModule,
