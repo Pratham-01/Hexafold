@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeComponent } from '../home/home.component';
+import { FeatureCostPopupComponent } from '../popups/feature-cost-popup/feature-cost-popup.component';
 
 @Component({
   selector: 'app-project-page',
@@ -13,7 +16,8 @@ export class ProjectPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +37,11 @@ export class ProjectPageComponent implements OnInit {
         { title:"feature2", accepted:true, cost: 125, start_date: new Date(), deadline: 3, status: "done"},
         { title:"feature3", accepted:false, cost: 125, start_date: new Date(), deadline: 3},
         { title:"feature4", accepted:false, cost: 125, start_date: new Date(), deadline: 3},
+      ],
+      "comments": [
+        { user: "Pushpit", description: "We should add this feature We should add this feature We should add this feature We should add this feature We should add this featureWe should add this feature We should add this feature We should add this feature" },
+        { user: "Photon", description: "Bhai kyooo" },
+        { user: "Divya", description: "Haa bhai nhi dalre" },
       ]
     }
     var doneFeaturesCount:any = 0;
@@ -44,6 +53,14 @@ export class ProjectPageComponent implements OnInit {
       }
     });
     this.projectData.progress = (doneFeaturesCount / acceptedFeaturesCount)*100;
+  }
+
+  openAcceptFeaturePopup(feature:any){
+    let dialogRef = this.dialog.open(FeatureCostPopupComponent, {
+      height: '250px',
+      width: '300px',
+      data: {feature:feature}
+    });
   }
 
 

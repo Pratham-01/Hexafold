@@ -49,6 +49,14 @@
               Training
             </a>
           </li>
+          <li class="nav-item text-center mx-2 mx-lg-1">
+            <a class="nav-link" [ngClass]="activeTab == 'rewards' ? 'active' : ''" (click)="changeTab('rewards')"  aria-current="page" routerLink = "rewards">
+              <div>
+                <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
+              </div>
+              Rewards
+            </a>
+          </li>
           <li class="nav-item dropdown text-center mx-2 mx-lg-1">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
               aria-expanded="false">

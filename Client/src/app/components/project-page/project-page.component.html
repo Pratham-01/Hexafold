@@ -6,11 +6,13 @@
 
     <div class="progress-report">
         <h4 class="headings">Progress</h4>
-        <p class="subtitle">The project will soo be completed</p>
+        <p class="subtitle">The project will soon be completed</p>
         <div class="progress-bar">
             <div class="progress" style="width: 20%"></div>
         </div>
     </div>
+
+    <hr>
 
     <div class="features-section">
         <h4 class="headings">Features</h4>
@@ -18,20 +20,63 @@
         <h6 class="headings">Current Features</h6>
         <div class="current-features">
             <div *ngFor="let feature of projectData.features" class="m-2">
-                <div class="card py-2 px-5 w-100 d-flex flex-row" *ngIf="feature.accepted">
-                        <div class="w-50">{{feature.title}}</div>
-                        <div class="w-25">{{feature.cost | currency}}</div>
-                        <div class="w-25">
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted">
+                        <div class="w-50 d-flex align-items-center">{{feature.title}}</div>
+                        <div class="w-25 d-flex align-items-center">{{feature.cost | currency}}</div>
+                        <div class="w-25 d-flex justify-content-end align-items-center">
                             <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'done'">
                         </div>
                 </div>
             </div>
         </div>
 
-        <h6 class="headings">New Features</h6>
+        <div class="d-flex justify-content-between align-items-end">
+            <h6 class="headings">New Features</h6>
+            <button class="btn btn-dark">Add New Feature &nbsp;&nbsp; +</button>
+        </div>
+
+
         <div class="new-features">
+            <div *ngFor="let feature of projectData.features" class="m-2">
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="!feature.accepted">
+                        <div class="w-50 d-flex align-items-center">{{feature.title}}</div>
+                        <div class="w-25 d-flex align-items-center"></div>
+                        <div class="w-25 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-secondary m-2">Reject</button>
+                            <button class="btn btn-dark m-2" (click)="openAcceptFeaturePopup(feature)">Accept</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="features-comments">
+
+            <h5 class="headings">Troubleshooting</h5>
+            <div class="new-comment">
+                <p class="subtitle">Add Comment</p>
+                <textarea name="" id="" class="w-100 text-muted" rows="5" draggable="false"></textarea>
+                <div class="d-flex justify-content-end w-100">
+                    <button class="btn btn-dark">Post</button>
+                </div>
+            </div>
+
+            <h6 class="headings">Comments</h6>
+            <div class="comments">
+                <div class="card d-flex flex-row bg-secondary text-white my-2" *ngFor="let comment of projectData.comments">
+                    <div class="comment-logo d-flex justify-content-center align-items-center">
+                        <img src="assets/Images/avatar.png" height="32" alt="" class="avatar-img">
+                    </div>
+                    <div class="comment-body d-flex flex-column">
+                        <span class="comment-user-name">{{comment.user}}</span>
+                        <span class="comment-description">{{comment.description}}</span>
+                    </div>
+                </div>
+            </div>
 
         </div>
+
 
     </div>
 

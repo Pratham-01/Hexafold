@@ -16,3 +16,35 @@ html,body{
 .subtitle{
     color:#42526E;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.avatar-img{
+    border-radius: 50%;
+}
+
+.comments{
+    .card{
+        padding: 0.5rem;
+        .comment-logo{
+            width: 54px;
+        }
+        .comment-body{
+            padding: 0 1rem;
+            width: calc(100% - 54px);
+            .comment-user-name{
+                font-size: 0.75rem;
+            }
+            .comment-description{
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+textarea {
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 1rem;
+}

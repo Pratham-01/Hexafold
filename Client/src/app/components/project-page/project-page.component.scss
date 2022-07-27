@@ -2,6 +2,16 @@
     padding: 2rem;
 }
 
+hr{
+    width: 50%;
+    margin: 2rem auto;
+}
+
+button{
+    display: flex;
+    height: 2rem;
+    align-items: center;
+}
 
 .progress-report{
     width: 100%;
@@ -16,12 +26,23 @@
         height: 8px;
         border: green solid 1px;
         border-radius: 5px;
-        padding: 0 1px;
 
         .progress{
-            height: 6px;
+            height: 8px;
             background-color: green;
         }
     }
 
+}
+.features-section{
+    .headings{
+        margin-top: 1.5rem;
+    }
+    .feature-card{
+        height: 3.5rem;
+        padding: 2%;
+        input{
+            height: 2rem;
+        }
+    }
 }
