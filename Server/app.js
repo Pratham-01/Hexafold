@@ -7,5 +7,6 @@ app.get('/project/:projectId', api.getProject);
 app.get('/client/:clientId', api.getClientProjects);
 app.get('/project/user/:userId', api.getUserProjects);
 app.get('/communityPosts', api.getCommunityPosts);
+app.get('/showcasePosts', api.getShowcasePosts);
 
 server = app.listen(8080);
