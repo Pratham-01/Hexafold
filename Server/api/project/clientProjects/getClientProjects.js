@@ -1,4 +1,4 @@
-var constants = require('../../constants/constantVariables');
+var constants = require('../../../constants/constantVariables')
 var ObjectId = require('mongodb').ObjectId;
 exports.getClientProjects = async (req, res) => {
 	console.log('Request received for getting projects of a client/user');

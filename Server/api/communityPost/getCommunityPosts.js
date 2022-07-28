@@ -1,7 +1,7 @@
 var constants = require('../../constants/constantVariables');
 
 exports.getCommunityPosts = async (req, res) => {
-	console.log('Request received for getting community posts');
+	console.log('Request received for fetching community posts');
 	constants.mongoclient.connect(constants.url, function (err, db) {
 		if (err) throw err;
 		var dbo = db.db('hexafold');

@@ -26,7 +26,14 @@ module.exports = {
 	...getUserByEmail,
 	...getProject,
 	...getClientProjects,
+	
 	...getCommunityPosts,
+	...addCommunityPost,
+	...updateCPLikeComment,
+
 	...getShowcasePosts,
+	...addShowcasePost,
+	...updateSPLikeComment,
+	
 	...getUserProjects,
 };
