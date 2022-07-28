@@ -1,13 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
-//var mongoclient = require('mongodb').MongoClient;
 var api = require('./api/api');
-
-var url =
-	'mongodb+srv://hexafold:czZ7r2WUsoAcNZ3y@cluster0.jcb819v.mongodb.net/?retryWrites=true&w=majority';
-
 app.get('/user/:email', api.getUserByEmail);
-app.get('/project/:id', api.getProject);
+app.get('/project/:projectId', api.getProject);
+app.get('/client/:clientId', api.getClientProjects);
+app.get('/project/user/:userId', api.getUserProjects);
+app.get('/communityPosts', api.getCommunityPosts);
 
 server = app.listen(8080);
