@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
+import { TrainingCourseComponent } from './components/training-course/training-course.component';
+import { TrainingHomeComponent } from './components/training-home/training-home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: 'projects/:project_id', component: ProjectPageComponent },
+  { path: 'training', component: TrainingHomeComponent },
+  { path: 'training/:course_id', component: TrainingCourseComponent },
   
 
   // { path: 'signin', component: SignInComponent },

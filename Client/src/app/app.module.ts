@@ -8,13 +8,18 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule } from '@angular/material/dialog';
 import { FeatureCostPopupComponent } from './components/popups/feature-cost-popup/feature-cost-popup.component';
+import { TrainingHomeComponent } from './components/training-home/training-home.component';
+import { TrainingCourseComponent } from './components/training-course/training-course.component';
+
+import { NgxCollapseModule } from 'ngx-collapse';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,9 @@ import { FeatureCostPopupComponent } from './components/popups/feature-cost-popu
     DashboardComponent,
     HomeComponent,
     ProjectPageComponent,
-    FeatureCostPopupComponent
+    FeatureCostPopupComponent,
+    TrainingHomeComponent,
+    TrainingCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +39,9 @@ import { FeatureCostPopupComponent } from './components/popups/feature-cost-popu
     MatInputModule, 
     MatButtonModule, 
     MatCardModule, 
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgxCollapseModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

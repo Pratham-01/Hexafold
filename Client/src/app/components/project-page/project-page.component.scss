@@ -16,7 +16,7 @@ button{
 .progress-report{
     width: 100%;
     padding: 2rem;
-    background-color: #eee;
+    background-color: #EDEDF0;
     border: none;
     border-radius: 0.5rem;
     margin: 1rem 0;
@@ -41,8 +41,9 @@ button{
     .feature-card{
         height: 3.5rem;
         padding: 2%;
-        input{
-            height: 2rem;
-        }
+        background-color: #EDEDF0;
+        box-shadow: 1px 1px 2px #999;
+        border-radius: 0;
+
     }
 }
