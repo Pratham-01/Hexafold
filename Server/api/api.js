@@ -22,6 +22,8 @@ const getShowcasePosts = require('./showcasePost/getShowcasePosts');
 const addShowcasePost = require('./showcasePost/addShowcasePost');
 const updateSPLikeComment = require('./showcasePost/updateLikeComment');
 
+const addTask = require('./tasks/addTask');
+
 module.exports = {
 	...getUserByEmail,
 	...getClientByEmail,
@@ -37,4 +39,5 @@ module.exports = {
 	...updateSPLikeComment,
 
 	...getUserProjects,
+	...addTask,
 };

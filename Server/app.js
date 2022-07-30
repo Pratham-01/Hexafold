@@ -12,7 +12,7 @@ app.get('/project/client/:clientId', api.getClientProjects);
 
 app.get('/project/user/:userId', api.getUserProjects);
 app.get('/client/:email', api.getClientByEmail);
-app.get('/');
+
 app.get('/communityPosts', api.getCommunityPosts);
 app.post('/addCommunityPost', jsonParser, api.addCommunityPost);
 app.put('/updateCPLikeComment', jsonParser, api.updateCPLikeComment);
@@ -20,5 +20,8 @@ app.put('/updateCPLikeComment', jsonParser, api.updateCPLikeComment);
 app.get('/showcasePosts', api.getShowcasePosts);
 app.post('/addShowcasePost', jsonParser, api.addShowcasePost);
 app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
+
+//Tasks
+app.post('/addTask', jsonParser, api.addTask);
 
 server = app.listen(8080);
