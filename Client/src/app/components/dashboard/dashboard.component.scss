@@ -2,8 +2,14 @@
     padding: 1rem;
 }
 
+button{
+    display: flex;
+    height: 2.5rem;
+    align-items: center;
+}
+
 .projects-carousel{
-    overflow-x: scroll;
+    // overflow-x: scroll;
 
     .card{
         border: none;

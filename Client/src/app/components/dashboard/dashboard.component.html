@@ -1,11 +1,19 @@
 <div class="dashboard-main">
 
+  <div class="project-heading d-flex justify-content-between align-items-center">
     <h4 class="headings my-3">
       Your Project
     </h4>
-    <div class="projects-carousel d-flex">
+
+    <button class="btn btn-dark">
+      <small>Add New Project &nbsp;&nbsp;</small>
+      <small>+</small> 
+    </button>
+  </div>
+
+    <div class="projects-carousel row">
 <!-- TODO : ADD CAROUSEL and remove Overflow from project-carousel class-->
-        <div class="card d-flex m-2 col-md-4" style="width: 18rem;" *ngFor="let project of projectList" [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project.id)">
+        <div class="card d-flex m-2 col-md-3 col-sm-10" *ngFor="let project of projectList" [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project.id)">
             <div class="card-body">
               <h5 class="card-title">{{project.title}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
