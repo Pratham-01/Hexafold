@@ -21,6 +21,8 @@ import { NgxCollapseModule } from 'ngx-collapse';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './components/toast/toast.component';
 import { CommunityComponent } from './components/community/community.component';
+import { DatePipe } from '@angular/common';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { CommunityComponent } from './components/community/community.component';
     TrainingHomeComponent,
     TrainingCourseComponent,
     ToastComponent,
-    CommunityComponent
+    CommunityComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,9 @@ import { CommunityComponent } from './components/community/community.component';
     NgxCollapseModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

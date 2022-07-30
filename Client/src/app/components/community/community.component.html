@@ -1,18 +1,19 @@
-<div class="screen">
-    <div class="announcements ">
-        <h1 class="px-4">Important Announcements</h1>
-        <div class="my-4">
-            <div class="position-fixed top-5 p-3" style="z-index: 1">
-            <div *ngFor="let toast of toasts" class="mt-2">
-                <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.message" (closeHit)="toast.isShow = false">
+<div class="community-main row">
 
-                </app-toast>
-            </div>
+    <div class="announcements bg-secondary col-md-3 col-sm-12">
+        <h2 class="headings text-white position-fixed bg-dark m-0">Important <br> Announcements</h2>
+        <div class="announcements-list">
+            <div style="z-index: 1; padding: 1rem 1.5rem;">
+                <div *ngFor="let toast of toasts" class="mt-2">
+                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.message" (closeHit)="toast.isShow = false">
+                    </app-toast>
+                </div>
             </div>
         </div>
     </div>
-    <div class="community-posts">
-        <h1 class="px-4">Posts</h1>
+
+    <div class="community-posts col-md-9 col-sm-12">
+        <h2 class="px-4 headings">Posts</h2>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <div class="container">
             <div class="row">
