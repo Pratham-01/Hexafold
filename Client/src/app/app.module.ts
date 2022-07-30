@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { CommunityComponent } from './components/community/community.component';
+import { ControlsComponent } from './components/controls/controls.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CommunityComponent } from './components/community/community.component';
     DashboardComponent,
     HomeComponent,
     ProjectPageComponent,
-    CommunityComponent
+    CommunityComponent,
+    ControlsComponent
   ],
   imports: [
     BrowserModule,
