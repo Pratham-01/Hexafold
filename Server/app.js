@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 const app = express();
 var api = require('./api/api');
 
@@ -11,7 +11,8 @@ app.get('/project/:projectId', api.getProject);
 app.get('/project/client/:clientId', api.getClientProjects);
 
 app.get('/project/user/:userId', api.getUserProjects);
-
+app.get('/client/:email', api.getClientByEmail);
+app.get('/');
 app.get('/communityPosts', api.getCommunityPosts);
 app.post('/addCommunityPost', jsonParser, api.addCommunityPost);
 app.put('/updateCPLikeComment', jsonParser, api.updateCPLikeComment);

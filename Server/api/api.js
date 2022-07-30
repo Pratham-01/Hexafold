@@ -1,6 +1,7 @@
 const getUserByEmail = require('./user/getUserByEmail');
 
 const getUserChats = require('./chat/getUserChats');
+const getClientByEmail = require('./client/getClientByEmail');
 const getChat = require('./chat/getChat');
 
 const getTrainings = require('./training/getTrainings');
@@ -21,12 +22,12 @@ const getShowcasePosts = require('./showcasePost/getShowcasePosts');
 const addShowcasePost = require('./showcasePost/addShowcasePost');
 const updateSPLikeComment = require('./showcasePost/updateLikeComment');
 
-
 module.exports = {
 	...getUserByEmail,
+	...getClientByEmail,
 	...getProject,
 	...getClientProjects,
-	
+
 	...getCommunityPosts,
 	...addCommunityPost,
 	...updateCPLikeComment,
@@ -34,6 +35,6 @@ module.exports = {
 	...getShowcasePosts,
 	...addShowcasePost,
 	...updateSPLikeComment,
-	
+
 	...getUserProjects,
 };
