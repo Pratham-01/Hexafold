@@ -23,6 +23,8 @@ import { ToastComponent } from './components/toast/toast.component';
 import { CommunityComponent } from './components/community/community.component';
 import { DatePipe } from '@angular/common';
 import { SafePipe } from './safe.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiUrls } from './api_urls';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { SafePipe } from './safe.pipe';
     TrainingCourseComponent,
     ToastComponent,
     CommunityComponent,
-    SafePipe
+    SafePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -48,10 +51,13 @@ import { SafePipe } from './safe.pipe';
     MatCardModule, 
     MatFormFieldModule,
     NgxCollapseModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    ApiUrls
+
   ],
   bootstrap: [AppComponent]
 })

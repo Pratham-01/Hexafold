@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunityService } from 'src/app/services/community.service';
 import { ToastComponent } from '../toast/toast.component';
 @Component({
   selector: 'app-community',
@@ -24,9 +25,26 @@ export class CommunityComponent implements OnInit {
   get toasts(){
     return this._toasts.filter(f => f.isShow);
   }
-  constructor() { }
+
+  constructor(
+    private communityService : CommunityService
+  ) { }
 
   ngOnInit(): void {
+
+    this.getPosts();
+
+  }
+
+  getPosts(){
+    this.communityService.getCommunityPosts().subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+      
+    })
   }
 
 }
