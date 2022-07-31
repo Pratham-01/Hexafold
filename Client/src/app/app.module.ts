@@ -21,6 +21,7 @@ import { NgxCollapseModule } from 'ngx-collapse';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './components/toast/toast.component';
 import { CommunityComponent } from './components/community/community.component';
+import { RewardComponent } from './components/reward/reward.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CommunityComponent } from './components/community/community.component';
     TrainingHomeComponent,
     TrainingCourseComponent,
     ToastComponent,
-    CommunityComponent
+    CommunityComponent,
+    RewardComponent
   ],
   imports: [
     BrowserModule,

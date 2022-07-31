@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { TrainingCourseComponent } from './components/training-course/training-course.component';
 import { TrainingHomeComponent } from './components/training-home/training-home.component';
+import { RewardComponent } from './components/reward/reward.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'projects/:project_id', component: ProjectPageComponent },
   { path: 'training', component: TrainingHomeComponent },
+  { path: 'rewards', component: RewardComponent },
   { path: 'training/:course_id', component: TrainingCourseComponent },
   
 
