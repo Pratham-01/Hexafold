@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html,body{
+    font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    overflow-x: hidden;
+    ::-webkit-scrollbar { width: 0 !important }
+    overflow: -moz-scrollbars-none; 
+    -ms-overflow-style: none; 
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.headings {
+    color:#253858;
+}
+.subtitle{
+    color:#42526E;
+}
+
+
+.avatar-img{
+    border-radius: 50%;
+}
+
+.comments{
+    .card{
+        padding: 0.5rem;
+        .comment-logo{
+            width: 54px;
+        }
+        .comment-body{
+            padding: 0 1rem;
+            width: calc(100% - 54px);
+            .comment-user-name{
+                font-size: 0.75rem;
+            }
+            .comment-description{
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+textarea {
+    resize: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 1rem;
+}
+
+.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main{
+    margin-top: 64px;
+}
+
+.form-check-input:checked {
+    background-color: #212529;
+    border-color: #212529;
+}
