@@ -21,7 +21,12 @@ import { NgxCollapseModule } from 'ngx-collapse';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './components/toast/toast.component';
 import { CommunityComponent } from './components/community/community.component';
+<<<<<<< HEAD
 import { RewardComponent } from './components/reward/reward.component';
+=======
+import { DatePipe } from '@angular/common';
+import { SafePipe } from './safe.pipe';
+>>>>>>> 9ca4f10feadab434cfac1789da1acdf334630e2f
 
 @NgModule({
   declarations: [
@@ -35,7 +40,11 @@ import { RewardComponent } from './components/reward/reward.component';
     TrainingCourseComponent,
     ToastComponent,
     CommunityComponent,
+<<<<<<< HEAD
     RewardComponent
+=======
+    SafePipe
+>>>>>>> 9ca4f10feadab434cfac1789da1acdf334630e2f
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,9 @@ import { RewardComponent } from './components/reward/reward.component';
     NgxCollapseModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

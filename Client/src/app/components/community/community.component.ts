@@ -14,6 +14,12 @@ export class CommunityComponent implements OnInit {
     {title:"1st announcement", message:"This is the first message", date:new Date(),"id": 1, isShow:true},
     {title:"2nd announcement", message:"This is the second message", date:new Date(), "id": 2,isShow:true},
     {title:"3rd announcement", message:"This is the third message", date:new Date(), "id": 3, isShow:true},
+    {title:"1st announcement", message:"This is the first message", date:new Date(),"id": 1, isShow:true},
+    {title:"2nd announcement", message:"This is the second message", date:new Date(), "id": 2,isShow:true},
+    {title:"3rd announcement", message:"This is the third message", date:new Date(), "id": 3, isShow:true},
+    {title:"1st announcement", message:"This is the first message", date:new Date(),"id": 1, isShow:true},
+    {title:"2nd announcement", message:"This is the second message", date:new Date(), "id": 2,isShow:true},
+    {title:"3rd announcement", message:"This is the third message", date:new Date(), "id": 3, isShow:true},
   ]
   get toasts(){
     return this._toasts.filter(f => f.isShow);

@@ -70,16 +70,38 @@
                 <div class="card card-body">
                     <h5 class="card-title">Assign Training</h5>
                     <form>
+                        
                         <br>
                         <div class="form-group">
-                            <label for="trainingi-title">Title</label>
-                            <input type="text" class="form-control" id="trainingi-title" name="trainingi-title" [(ngModel)]="newTrainingForm.title">
+                            <label for="trainingi-title">Training</label>
+                            <select class="form-select" aria-label="Default select example" name="assignTrainingId" [(ngModel)]="assignTrainingForm.training_id">
+                                <option *ngFor="let course of courseList" value="{{course.id}}">{{course.title}}</option>
+                            </select>
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <br>
+                        <div class="form-group">
+                            <label>Employee</label> 
+                            <input type="checkbox" class="form-check-input" id="select-all-emp" name="select-all-emp" (click)="onSelectAllCheckBox($event)">
+                            
+                            <div class="form-check mx-2" *ngFor="let emp of employeeList; let i=index;">
+                                <input class="form-check-input" type="checkbox" value="{{emp.id}}" id="assignTrainingEmployee-{{emp.id}}" name="assignTrainingEmployee-{{emp.id}}" [(ngModel)]="assignTrainingForm.emp_id[i].assigned" (change)="onCheckBoxChange($event)">
+                                <label class="form-check-label" for="assignTrainingEmployee-{{emp.id}}">{{emp.name}}</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="assign-training-deadline">Deadline</label>
+                            <input type="datetime-local" class="form-control" id="assign-training-deadline" name="assign-training-deadline" [(ngModel)]="assignTrainingForm.deadline" [min]="todaysDate" [value]="todaysDate">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+
+
+                        
+                        <br>
                         <div class="form-group w-100 d-flex justify-content-end">
-                            <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Cancel</button>
-                            <button class="btn btn-dark" type="button" (click)="createTraining()">Create</button>
+                            <!-- <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Cancel</button> -->
+                            <button class="btn btn-dark" type="button" (click)="assignTraining()">Assign</button>
                         </div>
                     </form>
                   </div>
@@ -111,6 +133,7 @@
                             </div>
                             <div class="d-flex flex-column">
                                 <span>Modules : {{course.urls.length}}</span>
+                                <span>Deadline : {{course.deadline | date: 'yyyy/MM/dd HH:mm:ss'}}</span>
                                 <span *ngIf="course.completed">
                                     <img src="assets/Images/green-tick.svg" height="16" alt="done" >
                                     Great Work! You have passed all requirements and can view your course certificate now.

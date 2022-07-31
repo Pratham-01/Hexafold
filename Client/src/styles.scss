@@ -10,14 +10,16 @@ html,body{
     -ms-overflow-style: none; 
 }
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .headings {
     color:#253858;
 }
 .subtitle{
     color:#42526E;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 .avatar-img{
     border-radius: 50%;
@@ -47,4 +49,13 @@ textarea {
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 1rem;
+}
+
+.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main{
+    margin-top: 64px;
+}
+
+.form-check-input:checked {
+    background-color: #212529;
+    border-color: #212529;
 }
