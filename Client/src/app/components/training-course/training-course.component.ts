@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
@@ -20,8 +21,20 @@ export class TrainingCourseComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private trainingService: TrainingService,
-    private datePipe: DatePipe
-  ) { }
+    private datePipe: DatePipe,
+    private authService : AuthenticationService
+
+  ) {
+    // Function to throw unsigned user out
+    this.authService.currentUser$.subscribe((user:any) => {
+      if(user){
+        // console.log(user);
+      }else{
+        this.router.navigate(["home"]);
+        this.authService.navigationSubject.next("home");
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.trainingId = this.activatedRoute.snapshot.paramMap.get('course_id');

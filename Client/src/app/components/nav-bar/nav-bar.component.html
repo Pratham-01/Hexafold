@@ -26,6 +26,14 @@
             </a>
           </li>
           <li class="nav-item text-center mx-2 mx-lg-1">
+            <a class="nav-link" [ngClass]="activeTab == 'dashboard' ? 'active' : ''" (click)="changeTab('dashboard')" aria-current="page" routerLink = "/dashboard">
+              <div>
+                <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
+              </div>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1">
             <a class="nav-link" [ngClass]="activeTab == 'chat' ? 'active' : ''" (click)="changeTab('chat')" routerLink = "/chat">
               <div>
                 <!-- <i class="far fa-envelope fa-lg mb-1"></i> -->
@@ -81,13 +89,16 @@
   
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
-          <li class="nav-item text-center mx-2 mx-lg-1 d-flex">
-            <a class="navbar-brand" href="#">{{user_name}}</a>
+          <li class="nav-item text-center mx-2 mx-lg-1 d-flex" *ngIf="user$ | async as user">
+            <a class="navbar-brand" href="#">Welcome {{user.email}}</a>
           </li>
           <li class="nav-item text-center mx-2 mx-lg-1">
-            <button class="btn btn-primary" (click)="logout()">
+            <ng-container *ngIf="authService.currentUser$ | async as user">
+              <button class="btn btn-primary" (click)="logout()">
                 Logout
             </button>
+            </ng-container>
+            
           </li>
         </ul>
   

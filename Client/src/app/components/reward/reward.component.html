@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="buttons">
+    <button class="btn redeem">Redeem Points</button>
+    <button class="btn balance">Balance</button>
+  </div>
+  <div class="items">
+    <div class="wrapper" *ngFor="let item of items">
+      <div class="product-img">
+        <img [src]="item.img" height="420" width="300">
+      </div>
+      <div class="product-info">
+        <div class="product-text">
+          <h1>{{item.title}}</h1>
+          <h2>by studio and friends</h2>
+          <p>{{item.description}}</p>
+        </div>
+        <div class="product-price-btn">
+          <p style="margin-top: 10px;"><span>{{item.price}}</span>$</p>
+          <button type="button">buy now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
@@ -21,8 +22,20 @@ export class TrainingHomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private trainingService: TrainingService
-  ) { }
+    private trainingService: TrainingService,
+    private authService : AuthenticationService
+
+  ) {
+    // Function to throw unsigned user out
+    this.authService.currentUser$.subscribe((user:any) => {
+      if(user){
+        // console.log(user);
+      }else{
+        this.router.navigate(["home"]);
+        this.authService.navigationSubject.next("home");
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.today = new Date();
