@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -10,12 +11,16 @@ export class FeatureCostPopupComponent implements OnInit {
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public feature: any
+    @Inject(MAT_DIALOG_DATA) public feature: any,
+    private dialogRef: DialogRef
   ) { }
 
   ngOnInit(): void {
     this.feature = this.feature.feature;
-    
+  }
+
+  onClosePopup(){
+    this.dialogRef.close();
   }
 
 }
