@@ -1,22 +1,5 @@
 {
-  "name": "hexafold",
-  "version": "1.0.0",
-  "description": "Workplace",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mansimar-011/Hexafold.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mansimar-011/Hexafold/issues"
-  },
-  "homepage": "https://github.com/mansimar-011/Hexafold#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    
   }
 }
