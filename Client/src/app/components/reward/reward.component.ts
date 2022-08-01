@@ -43,7 +43,7 @@ export class RewardComponent implements OnInit {
 
   openBuyRewardPopup(item:any){
     let dialogRef = this.dialog.open(BuyRewardPopupComponent, {
-      height: '75%',
+      height: '72%',
       width: '70%',
       data: {data:item}
     });
