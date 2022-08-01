@@ -49,7 +49,7 @@ import { ApiUrls } from './api_urls';
     CommunityComponent,
     RewardComponent,
     SafePipe,
-    LoginComponent
+    LoginComponent,
     SafePipe,
 
 

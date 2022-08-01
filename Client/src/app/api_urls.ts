@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiUrls {
 
-    address = "http://localhost:8080/";
+    address = "https://hexafold-api.herokuapp.com/";
 
     // COMMUNITY APIS
     getCommunityPosts = this.address + 'communityPosts';
