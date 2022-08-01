@@ -34,6 +34,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApiUrls } from './api_urls';
+import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/buy-reward-popup.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ApiUrls } from './api_urls';
     SafePipe,
     LoginComponent,
     SafePipe,
+    BuyRewardPopupComponent,
 
 
   ],

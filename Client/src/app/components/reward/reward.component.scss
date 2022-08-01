@@ -1,50 +1,35 @@
-.container{
-    margin-top: 100px;
+.reward-main{
+  padding: 1rem;
 }
 
-.redeem{
-    
-    background-color: #00B8D9;
-    padding: 20px;
-    width: 10vw;
-}
-
-.balance{
-
-    background-color: #00B8D9;
-    padding: 20px;
-    width: 10vw;
-}
-
-.buttons{
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
+.top-bar{
+  margin: 1rem;
 }
 
 .items{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-around;
+
+
+    .wrapper {
+      padding: 3rem;
+      min-height: 420px;
+      border-radius: 7px;
+      
+      .inner-wrapper{
+        -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        border-radius: 7px;
+      }
+    }
 }
 
-.wrapper {
-  margin-top: 20px;
-  margin-bottom: 20px;
-    height: 420px;
-    width: 600px;
-    border-radius: 7px 7px 7px 7px;
-    /* VIA CSS MATIC https://goo.gl/cIbnS */
-    -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-  }
+
   
   .product-img {
-    float: left;
-    height: 420px;
-    width: 300px;
+    border-radius: 7px;
+    img{
+      height: calc(420px - 6rem);
+    }
   }
   
   .product-img img {
@@ -53,16 +38,12 @@
   
   .product-info {
     float: left;
-    height: 420px;
-    width: 300px;
-    border-radius: 0 7px 10px 7px;
+    // height: 420px;
+    // width: 300px;
+    border-radius: 7px 7px 10px 7px;
     background-color: #ffffff;
   }
   
-  .product-text {
-    height: 300px;
-    width: 300px;
-  }
   
   .product-text h1 {
     margin: 0 0 0 38px;
@@ -87,7 +68,7 @@
   }
   
   .product-text p {
-    height: 125px;
+    // height: 125px;
     margin: 0 0 0 38px;
     font-family: 'Playfair Display', serif;
     color: #8d8d8d;
@@ -98,8 +79,8 @@
   }
   
   .product-price-btn {
-    height: 103px;
-    width: 300px;
+    // height: 103px;
+    // width: 300px;
     margin-top: 17px;
     position: relative;
   }
@@ -108,7 +89,7 @@
     display: inline-block;
     position: absolute;
     top: -13px;
-    height: 50px;
+    // height: 50px;
     font-family: 'Trocchi', serif;
     margin: 0 0 0 38px;
     font-size: 28px;
@@ -118,7 +99,7 @@
   
   span {
     display: inline-block;
-    height: 50px;
+    // height: 50px;
     font-family: 'Suranna', serif;
     font-size: 34px;
   }
@@ -126,8 +107,8 @@
   .product-price-btn button {
     float: right;
     display: inline-block;
-    height: 50px;
-    width: 152px;
+    // height: 50px;
+    // width: 152px;
     margin: 0 40px 0 16px;
     box-sizing: border-box;
     border: transparent;
@@ -138,11 +119,7 @@
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: #ffffff;
-    background-color: #9cebd5;
     cursor: pointer;
     outline: none;
   }
   
-  .product-price-btn button:hover {
-    background-color: #79b0a1;
-  }
