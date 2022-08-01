@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CommunityService } from 'src/app/services/community.service';
 import { ToastComponent } from '../toast/toast.component';
 @Component({
   selector: 'app-community',
@@ -30,7 +31,8 @@ export class CommunityComponent implements OnInit {
 
   constructor(
     private router: Router, 
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private communityService : CommunityService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -42,8 +44,22 @@ export class CommunityComponent implements OnInit {
       }
     })
   }
-
+  
   ngOnInit(): void {
+
+    this.getPosts();
+
+  }
+
+  getPosts(){
+    this.communityService.getCommunityPosts().subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+      
+    })
   }
 
 }

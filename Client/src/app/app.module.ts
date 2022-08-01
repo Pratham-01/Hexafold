@@ -32,6 +32,9 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HotToastModule } from '@ngneat/hot-toast';
 
+import { HttpClientModule } from '@angular/common/http';
+import { ApiUrls } from './api_urls';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +50,9 @@ import { HotToastModule } from '@ngneat/hot-toast';
     RewardComponent,
     SafePipe,
     LoginComponent
+    SafePipe,
+
+
   ],
   imports: [
     BrowserModule,
@@ -65,9 +71,12 @@ import { HotToastModule } from '@ngneat/hot-toast';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     HotToastModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    ApiUrls
+
   ],
   bootstrap: [AppComponent]
 })
