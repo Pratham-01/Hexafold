@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,14 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-
+ 
+  user$ = this.authService.currentUser$;
   navbarBoolean:any = false;
   user_name:any = "Pushpit Jain"
   activeTab:any = "home";
   tabs = ["dashboard", "chat", "community", "training", "rewards"]
 
   constructor(
-    private router: Router
+    private router: Router, public authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,10 @@ export class NavBarComponent implements OnInit {
   }
 
   logout(){
-    this.router.navigate(["home/"]);
+    this.authService.logout().subscribe(()=>{
+      this.router.navigate(["home/"]);
+    })
+    
     // this.navbarBoolean = false;
   }
 

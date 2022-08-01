@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  
   projectList:any = [
     {"title": "Project 1", "id": 1},
     {"title": "Project 2", "id": 2},
@@ -21,7 +23,7 @@ export class DashboardComponent implements OnInit {
   card_bg_colors = ['#221d1c', '#4b3842', '#9192a2', '#595565', '#343d3f']
 
   constructor(
-    private router: Router
+    private router: Router, private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {

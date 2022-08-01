@@ -7,9 +7,11 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
 import { TrainingCourseComponent } from './components/training-course/training-course.component';
 import { TrainingHomeComponent } from './components/training-home/training-home.component';
 import { RewardComponent } from './components/reward/reward.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'community', component: CommunityComponent },
   { path: 'home', component: HomeComponent },
