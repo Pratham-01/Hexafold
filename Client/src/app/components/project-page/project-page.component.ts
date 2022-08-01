@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HomeComponent } from '../home/home.component';
 import { FeatureCostPopupComponent } from '../popups/feature-cost-popup/feature-cost-popup.component';
 
@@ -17,8 +18,19 @@ export class ProjectPageComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private authService : AuthenticationService
+  ) {
+    // Function to throw unsigned user out
+    this.authService.currentUser$.subscribe((user:any) => {
+      if(user){
+        // console.log(user);
+      }else{
+        this.router.navigate(["home"]);
+        this.authService.navigationSubject.next("home");
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id');

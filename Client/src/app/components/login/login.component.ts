@@ -17,7 +17,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
   })
   
-  constructor(private authService: AuthenticationService, private router: Router,private toast: HotToastService) { }
+  constructor(
+    private authService: AuthenticationService, 
+    private router: Router,
+    private toast: HotToastService
+    ) { }
 
   ngOnInit(): void {
   }
@@ -44,6 +48,7 @@ export class LoginComponent implements OnInit {
         error: 'There was an error'
       })
     ).subscribe(() => {
+      this.authService.navigationSubject.next("dashboard");
       this.router.navigate(['/dashboard']);
     });
 

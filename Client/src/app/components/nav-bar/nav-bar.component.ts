@@ -13,7 +13,7 @@ export class NavBarComponent implements OnInit {
   navbarBoolean:any = false;
   user_name:any = "Pushpit Jain"
   activeTab:any = "home";
-  tabs = ["dashboard", "chat", "community", "training", "rewards"]
+  tabs = ["home","dashboard", "chat", "community", "training", "rewards"]
 
   constructor(
     private router: Router, public authService: AuthenticationService
@@ -22,6 +22,11 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     // this.navbarBoolean = (window.location.href.split("/").pop() == "home" || window.location.href.split("/").pop() == "login") ;
     this.showTab(window.location.href)
+
+
+    this.authService.navigationSubject.subscribe((data:any) => {
+      this.changeTab(data)
+    })
   }
 
   showTab(locn:any){
@@ -30,10 +35,9 @@ export class NavBarComponent implements OnInit {
       let j = locn.indexOf(this.tabs[i]);
       if (j>-1){
         currTab = this.tabs[i]; break;
-      }else currTab="dashboard";
+      }else currTab="home";
     }
     switch(currTab){
-      case "dashboard": this.activeTab = "home"; break;
       case currTab: this.activeTab = currTab; break;
       default: this.activeTab = "home"; break;
     }
