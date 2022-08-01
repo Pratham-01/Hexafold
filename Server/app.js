@@ -24,4 +24,4 @@ app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
 //Tasks
 app.post('/addTask', jsonParser, api.addTask);
 
-server = app.listen(8080);
+server = app.listen(process.env.PORT || 8080);
