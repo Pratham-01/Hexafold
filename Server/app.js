@@ -1,8 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const cors = require('cors');
+var api = require('./api/api');
+
 var jsonParser = bodyParser.json();
 const app = express();
-var api = require('./api/api');
+app.use(cors())
 
 app.get('/user/:email', api.getUserByEmail);
 
