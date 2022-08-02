@@ -35,6 +35,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiUrls } from './api_urls';
 import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/buy-reward-popup.component';
+import { CreateProjectPopupComponent } from './components/popups/create-project-popup/create-project-popup.component';
+import { AddFeaturePopupComponent } from './components/popups/add-feature-popup/add-feature-popup.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/bu
     LoginComponent,
     SafePipe,
     BuyRewardPopupComponent,
+    CreateProjectPopupComponent,
+    AddFeaturePopupComponent,
 
 
   ],

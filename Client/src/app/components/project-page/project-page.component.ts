@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 import { HomeComponent } from '../home/home.component';
+import { AddFeaturePopupComponent } from '../popups/add-feature-popup/add-feature-popup.component';
 import { FeatureCostPopupComponent } from '../popups/feature-cost-popup/feature-cost-popup.component';
 
 @Component({
@@ -78,13 +79,37 @@ export class ProjectPageComponent implements OnInit {
     this.projectData.progress = (doneFeaturesCount / acceptedFeaturesCount)*100;
   }
 
-  openAcceptFeaturePopup(feature:any){
+  openAddFeaturePopup(){
+    let dialogRef = this.dialog.open(AddFeaturePopupComponent, {
+      height: '60%',
+      width: '500px',
+    });
+  }
+
+  onFeatureReject(feature:any){
+    // TODO delete call
+  }
+
+  onFeatureAccept(feature:any){
+    // TODO if super user
+    this.openFeatureCostPopup(feature);
+    //else if client
+    this.acceptFeature(feature);
+  }
+  openFeatureCostPopup(feature:any){
     let dialogRef = this.dialog.open(FeatureCostPopupComponent, {
       height: '250px',
-      width: '300px',
+      width: '400px',
       data: {feature:feature}
     });
   }
+  acceptFeature(feature:any){
+    // TODO PATCH CALL
+  }
+  
+
+  
+
 
 
 }

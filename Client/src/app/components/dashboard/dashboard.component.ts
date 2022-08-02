@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ShowcaseService } from 'src/app/services/showcase.service';
 import { UserClientService } from 'src/app/services/user-client.service';
+import { CreateProjectPopupComponent } from '../popups/create-project-popup/create-project-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +32,9 @@ export class DashboardComponent implements OnInit {
     private router: Router, 
     private authService: AuthenticationService,
     private userClientService: UserClientService,
-    private showcaseService: ShowcaseService
+    private showcaseService: ShowcaseService,
+    private dialog: MatDialog,
+
   ) {
 
     // Function to throw unsigned user out
@@ -60,6 +64,15 @@ export class DashboardComponent implements OnInit {
   goToProject(project_id:any){
     this.router.navigate(["projects/", project_id])
   }
+  openCreateNewProjectPopup(){
+    let dialogRef = this.dialog.open(CreateProjectPopupComponent, {
+      height: '60%',
+      width: '50%',
+      panelClass: "scrollable"
+    });
+  }
+  
+  
 
   // GET DATA CALLS
 
@@ -69,7 +82,7 @@ export class DashboardComponent implements OnInit {
         console.log(response);
         console.log(response[0]["_id"]);
         
-        // this.getUserProjects(response[0]["_id"]);
+        this.getUserProjects(response[0]["_id"]);
 
       }
     }, (error:any)=>{
@@ -80,7 +93,7 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getClientData(email).subscribe((response:any) => {
       if(response){
         console.log(response);
-        // this.getClientProjects(response[0]["_id"]);
+        this.getClientProjects(response[0]["_id"]);
 
       }
     }, (error:any)=>{
