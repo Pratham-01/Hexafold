@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ShowcaseService } from 'src/app/services/showcase.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +28,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private router: Router, 
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userClientService: UserClientService,
+    private showcaseService: ShowcaseService
   ) {
 
     // Function to throw unsigned user out
@@ -41,14 +45,78 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUserData("prathamjajodia1@gmail.com");
+    this.getClientData("abcd@gmail.com");
+    this.getShowcasePosts();
   }
 
+  // INTERACTIONS
+
   getCardBorder(){
-    return "1.5rem solid "+ this.card_bg_colors[Math.floor(Math.random()*this.card_bg_colors.length)]
+    return "1.5rem solid #221d1c"
+    // return "1.5rem solid "+ this.card_bg_colors[Math.floor(Math.random()*this.card_bg_colors.length)]
   }
 
   goToProject(project_id:any){
     this.router.navigate(["projects/", project_id])
   }
+
+  // GET DATA CALLS
+
+  getUserData(email:any){
+    this.userClientService.getUserData(email).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        console.log(response[0]["_id"]);
+        
+        // this.getUserProjects(response[0]["_id"]);
+
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+  getClientData(email:any){
+    this.userClientService.getClientData(email).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        // this.getClientProjects(response[0]["_id"]);
+
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+
+  getUserProjects(userId:any){
+    this.userClientService.getUserProjects(userId).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+  getClientProjects(clientId:any){
+    this.userClientService.getClientProjects(clientId).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+  getShowcasePosts(){
+    this.showcaseService.getShowcasePosts().subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+
+
+
 
 }

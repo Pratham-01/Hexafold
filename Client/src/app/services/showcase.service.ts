@@ -1,13 +1,12 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { throwError, Observable, catchError } from 'rxjs';
 import { ApiUrls } from '../api_urls';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommunityService {
+export class ShowcaseService {
 
   constructor(
     private http: HttpClient,
@@ -20,8 +19,8 @@ export class CommunityService {
     }
   }
 
-  getCommunityPosts(): Observable<any>{
-    let url = this.apiUrls.getCommunityPosts;
+  getShowcasePosts(): Observable<any>{
+    let url = this.apiUrls.getShowcasePosts;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -31,8 +30,8 @@ export class CommunityService {
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
   }
 
-  addCommunityPosts(body:any): Observable<any>{
-    let url = this.apiUrls.addCommunityPosts;
+  addShowcasePost(body:any): Observable<any>{
+    let url = this.apiUrls.addShowcasePost;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -42,8 +41,8 @@ export class CommunityService {
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
-  updateCommunityPosts(body:any): Observable<any>{
-    let url = this.apiUrls.updateCPLikeComment;
+  updateShowcasePosts(body:any): Observable<any>{
+    let url = this.apiUrls.updateSPLikeComment;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -52,5 +51,4 @@ export class CommunityService {
     // console.log(url);
     return this.http.patch(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
-
 }
