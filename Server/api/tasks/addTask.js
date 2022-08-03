@@ -8,7 +8,8 @@ exports.addTask = async (req, res) => {
 		var featureTitle = req.body.featureTitle;
 		var post = {
 			priority: req.body.priority,
-			task_Title: req.body.task_Title,
+			taskTitle: req.body.task_Title,
+			description: req.body.description,
 			startDateTime: req.body.startDateTime,
 			deadline: req.body.deadline,
 			asignee: req.body.assignee,

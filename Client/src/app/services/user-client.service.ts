@@ -19,6 +19,13 @@ export class UserClientService {
     }
   }
 
+  getLoggedInUserEmail(){
+    return sessionStorage.getItem("email");
+  }
+  getLoggedInUserType(){
+    return sessionStorage.getItem("type");
+  }
+
   // ================================= USER ================================= 
 
   getUserData(email:any): Observable<any>{
@@ -85,6 +92,17 @@ export class UserClientService {
 
   addTask(body:any): Observable<any>{
     let url = this.apiUrls.addTask;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  addFeature(body:any): Observable<any>{
+    let url = this.apiUrls.addFeature;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

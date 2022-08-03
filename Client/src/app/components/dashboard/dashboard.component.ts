@@ -17,13 +17,13 @@ export class DashboardComponent implements OnInit {
 
   
   projectList:any = [
-    {"title": "Project 1", "id": 1},
-    {"title": "Project 2", "id": 2},
-    {"title": "Project 3", "id": 3},
-    {"title": "Project 4", "id": 4},
-    {"title": "Project 5", "id": 5},
-    {"title": "Project 6", "id": 6},
-    {"title": "Project 7", "id": 7},
+    // {"title": "Project 1", "id": 1},
+    // {"title": "Project 2", "id": 2},
+    // {"title": "Project 3", "id": 3},
+    // {"title": "Project 4", "id": 4},
+    // {"title": "Project 5", "id": 5},
+    // {"title": "Project 6", "id": 6},
+    // {"title": "Project 7", "id": 7},
   ]
   showcasePostList:any = [
     {title:"Project 1", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   // card_bg_colors = ['#B3F5FF', '#B3D4FF', '#C0B6F2']
   card_bg_colors = ['#221d1c', '#4b3842', '#9192a2', '#595565', '#343d3f']
   user$ = this.authService.currentUser$;
+  userType:any;
 
   constructor(
     private router: Router, 
@@ -56,8 +57,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserData("prathamjajodia1@gmail.com");
-    this.getClientData("abcd@gmail.com");
+    this.userType = this.userClientService.getLoggedInUserType();
+    if (this.userType == "client"){
+      this.getClientData("abcd@gmail.com");
+    }else if (this.userType == "user"){
+      this.getUserData("prathamjajodia1@gmail.com");
+    }
     this.getShowcasePosts();
   }
 
@@ -94,8 +99,7 @@ export class DashboardComponent implements OnInit {
   getUserData(email:any){
     this.userClientService.getUserData(email).subscribe((response:any) => {
       if(response){
-        console.log(response);
-        console.log(response[0]["_id"]);
+        console.log("User data: ", response);
         
         this.getUserProjects(response[0]["_id"]);
 
@@ -107,7 +111,7 @@ export class DashboardComponent implements OnInit {
   getClientData(email:any){
     this.userClientService.getClientData(email).subscribe((response:any) => {
       if(response){
-        console.log(response);
+        console.log("Client data: ", response);
         this.getClientProjects(response[0]["_id"]);
 
       }
@@ -119,7 +123,14 @@ export class DashboardComponent implements OnInit {
   getUserProjects(userId:any){
     this.userClientService.getUserProjects(userId).subscribe((response:any) => {
       if(response){
-        console.log(response);
+        console.log("User projects: ", response);
+        this.projectList = response;
+        this.projectList.forEach((p:any) => {
+          p.total_cost = 0;
+          p.features.forEach((f:any) => {
+            p.total_cost += f.cost;
+          });
+        })
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -128,7 +139,15 @@ export class DashboardComponent implements OnInit {
   getClientProjects(clientId:any){
     this.userClientService.getClientProjects(clientId).subscribe((response:any) => {
       if(response){
-        console.log(response);
+        console.log("Client projects: ", response);
+        this.projectList = response;
+        this.projectList.forEach((p:any) => {
+          p.total_cost = 0;
+          p.features.forEach((f:any) => {
+            p.total_cost += f.cost;
+          });
+        })
+        
       }
     }, (error:any)=>{
       console.log("Error : ", error);
