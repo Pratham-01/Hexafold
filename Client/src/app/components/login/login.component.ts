@@ -60,6 +60,8 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem("email", <string>email);
     });
 
+    
+
 
   }
 }
