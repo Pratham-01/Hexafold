@@ -1,5 +1,8 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { response } from 'express';
+import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
   selector: 'app-add-feature-popup',
@@ -11,18 +14,21 @@ export class AddFeaturePopupComponent implements OnInit {
   newFeatureForm:any;
 
   constructor(
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef,
+    @Inject(MAT_DIALOG_DATA) public projectData: any,
+    private userClientService:UserClientService
+
   ) { }
 
   ngOnInit(): void {
     this.newFeatureForm = {
-      title : "",
-      description : "",
-      accepted : false,
-      status : "pending",
-      tasks : [],
-      cost : 0
-      // missing : start_date
+      projectId : this.projectData["_id"],
+      featureTitle : "",
+      accepted : "No",
+      cost : 0,
+      status : "TODO",
+      start_date : new Date().toISOString().split("T")[0],
+      deadline : 0,
     }
   }
 
@@ -32,6 +38,12 @@ export class AddFeaturePopupComponent implements OnInit {
 
   addFeature(){
     console.log(this.newFeatureForm);
+    this.userClientService.addFeature(this.newFeatureForm).subscribe((response:any) => {
+      if(response){
+        console.log("Feature added : ", response);
+        
+      }
+    })
     this.onClosePopup();
   }
 

@@ -56,6 +56,7 @@ import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/bu
 import { CreateProjectPopupComponent } from './components/popups/create-project-popup/create-project-popup.component';
 import { AddFeaturePopupComponent } from './components/popups/add-feature-popup/add-feature-popup.component';
 import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-post-popup/add-showcase-post-popup.component';
+import { AddTaskPopupComponent } from './components/popups/add-task-popup/add-task-popup.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-
     CreateProjectPopupComponent,
     AddFeaturePopupComponent,
     AddShowcasePostPopupComponent,
+    AddTaskPopupComponent,
 
   ],
   imports: [

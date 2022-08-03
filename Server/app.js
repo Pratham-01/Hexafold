@@ -31,6 +31,9 @@ app.get('/client', api.getClients);
 app.post('/createClient', jsonParser, api.createClient);
 app.post('/addFeature', jsonParser, api.addFeature);
 app.put('/updateStatus', jsonParser, api.updateStatus);
+<<<<<<< HEAD
 app.post('/createUser', jsonParser, api.createUser);
+=======
+>>>>>>> 1d8aa93d7915c5ce665b9163cf22af68dfb4aa14
 
 server = app.listen(process.env.PORT || 8080);
