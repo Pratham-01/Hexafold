@@ -20,9 +20,9 @@ import {
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin),},
   { path: 'sign-up', component: SignUpComponent},
+  { path: 'login/:type', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'community', component: CommunityComponent },
   { path: 'home', component: HomeComponent },

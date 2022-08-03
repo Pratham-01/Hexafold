@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
@@ -16,14 +16,20 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
+
+  type:any;
   
   constructor(
     private authService: AuthenticationService, 
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private activatedRouter: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
+    this.type = this.activatedRouter.snapshot.paramMap.get('type');
+    console.log(this.type);
+    
   }
 
   get email() {
@@ -50,6 +56,8 @@ export class LoginComponent implements OnInit {
     ).subscribe(() => {
       this.authService.navigationSubject.next("dashboard");
       this.router.navigate(['/dashboard']);
+      sessionStorage.setItem("type", this.type);
+      sessionStorage.setItem("email", <string>email);
     });
 
     

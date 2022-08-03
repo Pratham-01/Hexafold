@@ -52,6 +52,10 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ApiUrls } from './api_urls';
+import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/buy-reward-popup.component';
+import { CreateProjectPopupComponent } from './components/popups/create-project-popup/create-project-popup.component';
+import { AddFeaturePopupComponent } from './components/popups/add-feature-popup/add-feature-popup.component';
+import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-post-popup/add-showcase-post-popup.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +77,10 @@ import { ApiUrls } from './api_urls';
     ProfileComponent,
     SignUpComponent,
     SafePipe,
+    BuyRewardPopupComponent,
+    CreateProjectPopupComponent,
+    AddFeaturePopupComponent,
+    AddShowcasePostPopupComponent,
 
   ],
   imports: [

@@ -1,8 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const cors = require('cors');
+var api = require('./api/api');
+
 var jsonParser = bodyParser.json();
 const app = express();
-var api = require('./api/api');
+app.use(cors());
 
 app.get('/user/:email', api.getUserByEmail);
 
@@ -23,5 +26,7 @@ app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
 
 //Tasks
 app.post('/addTask', jsonParser, api.addTask);
+app.get('/user', api.getUsers);
+app.get('/client', api.getClients);
 
 server = app.listen(process.env.PORT || 8080);

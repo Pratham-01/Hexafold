@@ -5,7 +5,7 @@
 html,body{
     font-family: Charlie Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     overflow-x: hidden;
-    ::-webkit-scrollbar { width: 0 !important }
+    ::-webkit-scrollbar { width: 0 }
     overflow: -moz-scrollbars-none; 
     -ms-overflow-style: none; 
 }
@@ -51,11 +51,20 @@ textarea {
     padding: 1rem;
 }
 
-.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main{
+.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main, .reward-main{
     margin-top: 64px;
 }
 
 .form-check-input:checked {
     background-color: #212529;
     border-color: #212529;
+}
+
+img.close-popup-icon{
+    filter: opacity(0.3) drop-shadow(0 0 0 black);
+}
+
+.scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
 }

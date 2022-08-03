@@ -26,26 +26,26 @@
                 <form>
                     <br>
                     <div class="form-group">
-                        <label for="trainingi-title">Title</label>
-                        <input type="text" class="form-control" id="trainingi-title" name="trainingi-title" [(ngModel)]="newTrainingForm.title">
+                        <label for="training-title">Title</label>
+                        <input type="text" class="form-control" id="training-title" name="training-title" [(ngModel)]="newTrainingForm.title">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="trainingi-reward">Reward Points</label>
-                        <input type="number" class="form-control" id="trainingi-reward" min="0" name="trainingi-reward" [(ngModel)]="newTrainingForm.reward_points">
+                        <label for="training-reward">Reward Points</label>
+                        <input type="number" class="form-control" id="training-reward" min="0" name="training-reward" [(ngModel)]="newTrainingForm.reward_points">
                         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="training-content">Content</label>
-                        <textarea class="form-control" id="training-content" rows="5" name="trainingi-content" [(ngModel)]="newTrainingForm.content"></textarea>
+                        <textarea class="form-control" id="training-content" rows="5" name="training-content" [(ngModel)]="newTrainingForm.content"></textarea>
                     </div>
                     <br>
                     <div class="form-group">
                         <label>URLs</label>
                         <div *ngFor="let url of newTrainingForm.urls; let i=index;" class="url-inputs d-flex align-items-center">
-                            <input type="url" class="form-control" id="trainingi-url-{{i}}" min="0" name="trainingi--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
+                            <input type="url" class="form-control" id="training-url-{{i}}" min="0" name="training--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
                             <img src="assets/Images/minus-icon.svg" type="button" alt="Remove" height="20" (click)="removeNewTrainingUrl(i)" class="remove-icon">
                         </div>
                         <br *ngIf="newTrainingForm.urls.length==0">
@@ -60,7 +60,9 @@
               </div>
             </div>
         </div>
+        
         <br>
+
         <div class="assugnTrainingSection">
             <div [collapse]="assignNewTraining" > 
                 <!-- <button class="btn btn-dark" id="assignTrainingButton" (click)="openCollapsedSection('an')"> Assign Training </button>  -->
@@ -73,8 +75,8 @@
                         
                         <br>
                         <div class="form-group">
-                            <label for="trainingi-title">Training</label>
-                            <select class="form-select" aria-label="Default select example" name="assignTrainingId" [(ngModel)]="assignTrainingForm.training_id">
+                            <label for="training-title">Training</label>
+                            <select class="form-select" aria-label="Default select example" name="assigntrainingd" [(ngModel)]="assignTrainingForm.training_id">
                                 <option *ngFor="let course of courseList" value="{{course.id}}">{{course.title}}</option>
                             </select>
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->

@@ -1,24 +1,29 @@
-<div class="container">
-  <div class="buttons">
-    <button class="btn redeem">Redeem Points</button>
-    <button class="btn balance">Balance</button>
+<div class="reward-main">
+
+  <div class="top-bar">
+    <h2 class="headings">Redeem Points</h2>
+    <h5 class="subtitle">Balance : 50</h5>
   </div>
-  <div class="items">
-    <div class="wrapper" *ngFor="let item of items">
-      <div class="product-img">
-        <img [src]="item.img" height="420" width="300">
-      </div>
-      <div class="product-info">
-        <div class="product-text">
-          <h1>{{item.title}}</h1>
-          <h2>by studio and friends</h2>
-          <p>{{item.description}}</p>
+
+  <div class="items row">
+    <div class="wrapper col-md-6 col-sm-12" *ngFor="let item of items">
+      <div class="inner-wrapper row h-100 w-100">
+        <div class="product-img col-md-4 col-sm-12 p-0">
+          <img [src]="item.img" >
         </div>
-        <div class="product-price-btn">
-          <p style="margin-top: 10px;"><span>{{item.price}}</span>$</p>
-          <button type="button">buy now</button>
+        <div class="product-info col-md-8 col-sm-12">
+          <div class="product-text">
+            <h1>{{item.title}}</h1>
+            <h2>by studio and friends</h2>
+            <p>{{item.description}}</p>
+          </div>
+          <div class="product-price-btn">
+            <p style="margin-top: 10px;"><span>{{item.price | currency}}</span></p>
+            <button type="button" class="btn btn-dark" (click)="openBuyRewardPopup(item)">buy now</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { BuyRewardPopupComponent } from '../popups/buy-reward-popup/buy-reward-popup.component';
 
 @Component({
   selector: 'app-reward',
@@ -21,7 +23,9 @@ export class RewardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService : AuthenticationService
+    private authService : AuthenticationService,
+    private dialog: MatDialog,
+
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -35,6 +39,14 @@ export class RewardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  openBuyRewardPopup(item:any){
+    let dialogRef = this.dialog.open(BuyRewardPopupComponent, {
+      height: '72%',
+      width: '70%',
+      data: {data:item}
+    });
   }
 
 }

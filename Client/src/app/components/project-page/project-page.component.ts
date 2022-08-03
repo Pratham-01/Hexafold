@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 import { HomeComponent } from '../home/home.component';
+import { AddFeaturePopupComponent } from '../popups/add-feature-popup/add-feature-popup.component';
 import { FeatureCostPopupComponent } from '../popups/feature-cost-popup/feature-cost-popup.component';
 
 @Component({
@@ -19,7 +21,8 @@ export class ProjectPageComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private authService : AuthenticationService
+    private authService : AuthenticationService,
+    private userClientService: UserClientService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -35,12 +38,21 @@ export class ProjectPageComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id');
     // console.log(this.projectId);
-    this.getProjectData();
+    this.getProjectData("62e1266d7c60d579052a6ccc");
     
   }
 
-  getProjectData(){
-    // TODO : GET CALL
+  getProjectData(projectId:any){
+
+    this.userClientService.getParticularProjects(projectId).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+    
+
     this.projectData = {
       "id" : this.projectId,
       "title": "Project "+this.projectId,
@@ -67,13 +79,37 @@ export class ProjectPageComponent implements OnInit {
     this.projectData.progress = (doneFeaturesCount / acceptedFeaturesCount)*100;
   }
 
-  openAcceptFeaturePopup(feature:any){
+  openAddFeaturePopup(){
+    let dialogRef = this.dialog.open(AddFeaturePopupComponent, {
+      height: '60%',
+      width: '500px',
+    });
+  }
+
+  onFeatureReject(feature:any){
+    // TODO delete call
+  }
+
+  onFeatureAccept(feature:any){
+    // TODO if super user
+    this.openFeatureCostPopup(feature);
+    //else if client
+    this.acceptFeature(feature);
+  }
+  openFeatureCostPopup(feature:any){
     let dialogRef = this.dialog.open(FeatureCostPopupComponent, {
       height: '250px',
-      width: '300px',
+      width: '400px',
       data: {feature:feature}
     });
   }
+  acceptFeature(feature:any){
+    // TODO PATCH CALL
+  }
+  
+
+  
+
 
 
 }
