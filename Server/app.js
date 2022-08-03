@@ -5,7 +5,7 @@ var api = require('./api/api');
 
 var jsonParser = bodyParser.json();
 const app = express();
-app.use(cors())
+app.use(cors());
 
 app.get('/user/:email', api.getUserByEmail);
 
@@ -26,5 +26,7 @@ app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
 
 //Tasks
 app.post('/addTask', jsonParser, api.addTask);
+app.get('/user', api.getUsers);
+app.get('/client', api.getClients);
 
 server = app.listen(process.env.PORT || 8080);
