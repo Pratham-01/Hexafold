@@ -4,10 +4,10 @@ var ObjectId = require('mongodb').ObjectId;
 exports.updateCPLikeComment = async (req, res) => {
 	try {
 		console.log('Request received for updating Like/Comment for Community post');
-        post_id = req.body.post_id;
-        user = req.body.user;
-        type = req.body.type;
-        content = req.body.content;
+        var post_id = req.body.post_id;
+        var user = req.body.user;
+        var type = req.body.type;
+        var content = req.body.content;
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
 			if (err) throw err;

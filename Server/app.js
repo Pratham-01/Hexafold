@@ -24,8 +24,13 @@ app.get('/showcasePosts', api.getShowcasePosts);
 app.post('/addShowcasePost', jsonParser, api.addShowcasePost);
 app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
 
-//Tasks
 app.post('/addTask', jsonParser, api.addTask);
+app.post('/updateTask', jsonParser, api.updateTask);
+
+app.get('/getTraining/:training_id', api.getTraining);
+app.post('/addTraining', jsonParser, api.addTraining);
+app.put('/updateTrainingStatus', jsonParser, api.updateTrainingStatus);
+
 app.get('/user', api.getUsers);
 app.get('/client', api.getClients);
 app.post('/createClient', jsonParser, api.createClient);

@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-var constants = require('../../constants/constantVariables');
+var constants = require('../../../constants/constantVariables')
 
 exports.addTask = async (req, res) => {
 	try {
@@ -12,7 +12,7 @@ exports.addTask = async (req, res) => {
 			description: req.body.description,
 			startDateTime: req.body.startDateTime,
 			deadline: req.body.deadline,
-			asignee: req.body.assignee,
+			asignor: req.body.assignor, //pushpit ko batana h
 			status: req.body.status,
 			assignedEmployee: req.body.assignedEmployee,
 			rewardsPoints: req.body.rewardPoints ? req.body.rewardPoints : 0,

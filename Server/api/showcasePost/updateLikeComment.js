@@ -35,9 +35,8 @@ exports.updateSPLikeComment = async (req, res) => {
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('showcase_post')
-				.updateOne(myquery, newvalues, function(err, res) {
+				.updateOne(myquery, newvalues, function(err, result) {
 					if (err) throw err;
-					console.log("Like/Comment Updated Successfully", result);
 					res.status(200).send({message: 'Like/Comment Updated Successfully'})
 					db.close();
 				});
