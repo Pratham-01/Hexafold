@@ -1,19 +1,14 @@
+const createUser = require('./user/createUser');
 const getUserByEmail = require('./user/getUserByEmail');
+const getUsers = require('./user/getUsers');
 
-const getUserChats = require('./chat/getUserChats');
+const createClient = require('./client/createClient');
 const getClientByEmail = require('./client/getClientByEmail');
-const getChat = require('./chat/getChat');
+const getClients = require('./client/getClients');
 
 const getTraining = require('./training/getTraining');
 const addTraining = require('./training/addTraining');
 const updateTrainingStatus = require('./training/updateTrainingStatus');
-
-const getProject = require('./project/getProject');
-const addTask = require('./project/userProjects/addTask');
-const updateTask = require('./project/userProjects/updateTask');
-
-const getClientProjects = require('./project/clientProjects/getClientProjects');
-const getUserProjects = require('./project/userProjects/getUserProjects');
 
 const getCommunityPosts = require('./communityPost/getCommunityPosts');
 const addCommunityPost = require('./communityPost/addCommunityPost');
@@ -23,19 +18,33 @@ const getShowcasePosts = require('./showcasePost/getShowcasePosts');
 const addShowcasePost = require('./showcasePost/addShowcasePost');
 const updateSPLikeComment = require('./showcasePost/updateLikeComment');
 
-const getUsers = require('./user/getUsers');
-const getClients = require('./client/getClients');
-const createClient = require('./client/createClient');
+const getClientProjects = require('./project/clientProjects/getClientProjects');
+
+const getUserProjects = require('./project/userProjects/getUserProjects');
+const createProject = require('./project/userProjects/createProject');
+const addTask = require('./project/userProjects/addTask');
+const updateTask = require('./project/userProjects/updateTask');
+
 const addFeature = require('./project/addFeature');
-const updateStatus = require('./tasks/updateStatus');
-const createUser = require('./user/createUser');
-const createProject = require('./project/createProject');
+const getProject = require('./project/getProject');
+
+const getRewards = require('./reward/getRewards');
+const createReward = require('./reward/createReward');
+const redeemReward = require('./reward/redeemReward');
+const updateRewardStatus = require('./reward/updateRewardStatus');
 
 module.exports = {
+	...createUser,
 	...getUserByEmail,
+	...getUsers,
+
+	...createClient,
 	...getClientByEmail,
-	...getProject,
-	...getClientProjects,
+	...getClients,
+
+	...getTraining,
+	...addTraining,
+	...updateTrainingStatus,
 
 	...getCommunityPosts,
 	...addCommunityPost,
@@ -45,18 +54,18 @@ module.exports = {
 	...addShowcasePost,
 	...updateSPLikeComment,
 
+	...getClientProjects,
+
 	...getUserProjects,
+	...createProject,
 	...addTask,
 	...updateTask,
-	...addTraining,
-	...getTraining,
-	...updateTrainingStatus,
-
-	...getUsers,
-	...getClients,
-	...createClient,
+	
 	...addFeature,
-	...updateStatus,
-	...createUser,
-	...createProject,
+	...getProject,
+
+	...getRewards,
+	...createReward,
+	...redeemReward,
+	...updateRewardStatus
 };

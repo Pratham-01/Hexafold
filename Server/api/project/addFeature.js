@@ -21,7 +21,7 @@ exports.addFeature = async (req, res) => {
 
 			var dbo = db.db('hexafold');
 			dbo.collection('project').updateOne(
-				{ _id: new ObjectId('62e1266d7c60d579052a6ccc') },
+				{ _id: new ObjectId(projectId) },
 				{ $push: { features: post } },
 
 				function (err, result) {
