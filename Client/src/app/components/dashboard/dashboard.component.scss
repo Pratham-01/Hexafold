@@ -24,3 +24,22 @@ button{
 // .card-side-design{
 //     background-color: ;
 // }
+
+.showcase-section{
+
+    .post{
+        margin: 2rem;
+        height: calc(100vh - 100px);
+        .heading-container{
+            margin: 1rem 0;
+        }
+        .content-container{
+            margin: 1rem 0;
+            height: calc(100% - 40px);
+        }
+        img{
+            height: 100%;
+        }
+    }
+
+}

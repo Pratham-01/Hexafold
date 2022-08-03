@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ShowcaseService } from 'src/app/services/showcase.service';
 import { UserClientService } from 'src/app/services/user-client.service';
+import { AddShowcasePostPopupComponent } from '../popups/add-showcase-post-popup/add-showcase-post-popup.component';
 import { CreateProjectPopupComponent } from '../popups/create-project-popup/create-project-popup.component';
 
 @Component({
@@ -23,6 +24,12 @@ export class DashboardComponent implements OnInit {
     {"title": "Project 5", "id": 5},
     {"title": "Project 6", "id": 6},
     {"title": "Project 7", "id": 7},
+  ]
+  showcasePostList:any = [
+    {title:"Project 1", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
+    {title:"Project 2", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
+    {title:"Project 3", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
+    {title:"Project 4", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."}
   ]
   // card_bg_colors = ['#B3F5FF', '#B3D4FF', '#C0B6F2']
   card_bg_colors = ['#221d1c', '#4b3842', '#9192a2', '#595565', '#343d3f']
@@ -67,6 +74,14 @@ export class DashboardComponent implements OnInit {
   openCreateNewProjectPopup(){
     let dialogRef = this.dialog.open(CreateProjectPopupComponent, {
       height: '60%',
+      width: '50%',
+      panelClass: "scrollable"
+    });
+  }
+
+  openCreateNewShowcasePostPopup(){
+    let dialogRef = this.dialog.open(AddShowcasePostPopupComponent, {
+      height: '75%',
       width: '50%',
       panelClass: "scrollable"
     });
@@ -127,7 +142,14 @@ export class DashboardComponent implements OnInit {
     }, (error:any)=>{
       console.log("Error : ", error);
     })
+
+    this.showcasePostList.forEach((post:any) => {
+      post.content = post.content.split("\n");
+    });
+
   }
+
+  // POST PATCH CALLS
 
 
 
