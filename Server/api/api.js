@@ -25,6 +25,9 @@ const updateSPLikeComment = require('./showcasePost/updateLikeComment');
 const addTask = require('./tasks/addTask');
 const getUsers = require('./user/getUsers');
 const getClients = require('./client/getClients');
+const createClient = require('./client/createClient');
+const addFeature = require('./project/addFeature');
+const updateStatus = require('./tasks/updateStatus');
 
 module.exports = {
 	...getUserByEmail,
@@ -44,4 +47,7 @@ module.exports = {
 	...addTask,
 	...getUsers,
 	...getClients,
+	...createClient,
+	...addFeature,
+	...updateStatus,
 };
