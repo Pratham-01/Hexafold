@@ -29,6 +29,7 @@ const createClient = require('./client/createClient');
 const addFeature = require('./project/addFeature');
 const updateStatus = require('./tasks/updateStatus');
 const createUser = require('./user/createUser');
+const createProject = require('./project/createProject');
 
 module.exports = {
 	...getUserByEmail,
@@ -52,4 +53,5 @@ module.exports = {
 	...addFeature,
 	...updateStatus,
 	...createUser,
+	...createProject,
 };
