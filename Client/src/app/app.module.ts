@@ -31,6 +31,24 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { ChatComponent } from './components/chat/chat.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+
+// --------------------------------------------------------------------------------
+
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { MatListModule } from '@angular/material/list';
+import {} from '@angular/material/form-field';
+import {} from '@angular/material/input';
+
+import { DateDisplayPipe } from './pipes/date-display.pipe';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +64,11 @@ import { HotToastModule } from '@ngneat/hot-toast';
     CommunityComponent,
     RewardComponent,
     SafePipe,
-    LoginComponent
+    LoginComponent,
+    DateDisplayPipe,
+    ChatComponent,
+    ProfileComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +86,16 @@ import { HotToastModule } from '@ngneat/hot-toast';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
+    provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
+    MatAutocompleteModule,
+    MatMenuModule,
+    MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatDividerModule,
   ],
   providers: [
     DatePipe

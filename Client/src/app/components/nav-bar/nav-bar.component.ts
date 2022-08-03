@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
+import { HotToastService } from '@ngneat/hot-toast';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
   tabs = ["dashboard", "chat", "community", "training", "rewards"]
 
   constructor(
-    private router: Router, public authService: AuthenticationService
+    private router: Router, public authService: AuthenticationService,private toast: HotToastService
   ) { }
 
   ngOnInit(): void {
@@ -45,11 +45,15 @@ export class NavBarComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout().subscribe(()=>{
-      this.router.navigate(["home/"]);
-    })
-    
-    // this.navbarBoolean = false;
+    this.authService.logout().pipe(
+      this.toast.observe({
+        success: 'Logged out Succesfully!',
+        loading: 'Loggin out...',
+        error: 'There was an error'
+      })
+    ).subscribe(() => {
+      this.router.navigate(['/home']);
+    });
   }
 
 }
