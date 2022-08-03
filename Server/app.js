@@ -28,8 +28,9 @@ app.put('/updateSPLikeComment', jsonParser, api.updateSPLikeComment);
 app.post('/addTask', jsonParser, api.addTask);
 app.get('/user', api.getUsers);
 app.get('/client', api.getClients);
-app.post('./createClient', jsonParser, api.createClient);
-app.post('./addFeature', jsonParser, api.addFeature);
-app.put('./updateStatus', jsonParser, api.updateStatus);
+app.post('/createClient', jsonParser, api.createClient);
+app.post('/addFeature', jsonParser, api.addFeature);
+app.put('/updateStatus', jsonParser, api.updateStatus);
+app.post('/createUser', jsonParser, api.createUser);
 
 server = app.listen(process.env.PORT || 8080);
