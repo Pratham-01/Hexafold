@@ -50,6 +50,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { ApiUrls } from './api_urls';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +71,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     DateDisplayPipe,
     ChatComponent,
     ProfileComponent,
-    SignUpComponent
+    SignUpComponent,
+    SafePipe,
+
   ],
   imports: [
     BrowserModule,
@@ -96,9 +101,12 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatDividerModule,
+    HttpClientModule,
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    ApiUrls
+
   ],
   bootstrap: [AppComponent]
 })

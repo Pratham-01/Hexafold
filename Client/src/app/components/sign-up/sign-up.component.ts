@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
 
     const { name, email, password } = this.signUpForm.value;
     this.authService
-      .signUp(email || '', password!)
+      .signUp((email == undefined ? '' : email), password!)
       .pipe(
         switchMap(({ user: { uid } }) =>
           this.usersService.addUser({ uid, email , displayName: name! })
