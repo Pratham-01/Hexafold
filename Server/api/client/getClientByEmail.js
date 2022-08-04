@@ -10,6 +10,7 @@ exports.getClientByEmail = async (req, res) => {
 			.find({ email: email })
 			.toArray((err, result) => {
 				if (err) throw err;
+				db.close();
 				res.send(result);
 			});
 	});

@@ -13,6 +13,7 @@ exports.getProject = async (req, res) => {
 			.toArray((err, result) => {
 				if (err) throw err;
 				console.log(result);
+				db.close();
 				res.send(result);
 			});
 	});

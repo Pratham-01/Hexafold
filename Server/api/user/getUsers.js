@@ -11,6 +11,7 @@ exports.getUsers = async (req, res) => {
 			.find()
 			.toArray((err, result) => {
 				if (err) throw err;
+				db.close();
 				res.send(result);
 			});
 	});
