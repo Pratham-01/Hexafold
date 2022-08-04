@@ -17,4 +17,4 @@ export class GeneralService {
       panelClass: "bottomSnackbar"
     });
   }
-}
+ }

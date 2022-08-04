@@ -60,8 +60,10 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem("email", <string>email);
     });
 
-    
 
+  }
 
+  onNavigateToSignUp(){
+    this.router.navigate(["sign-up", this.type]);
   }
 }

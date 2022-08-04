@@ -63,9 +63,10 @@ export class CommunityComponent implements OnInit {
       if(response){
         console.log(response);
         this.postsData = response;
+        this.announcements = []; this.communityPosts = [];
         this.postsData.forEach((post:any) => {
-            if(post.post_type == "announcement") this.announcements.push(post);
-            else if(post.post_type == "community") this.communityPosts.push(post);
+            if(post["post_type"] == "announcement") this.announcements.push(post);
+            else if(post["post_type"] == "community") this.communityPosts.push(post);
         });
       }
     }, (error:any)=>{
@@ -75,7 +76,7 @@ export class CommunityComponent implements OnInit {
 
   onCreatePost(type:any){
     let dialogRef = this.dialog.open(AddCommunityPostPopupComponent, {
-      height: '60%',
+      // height: '60%',
       width: '50%',
       panelClass: "scrollable",
       data: {post_type: type}

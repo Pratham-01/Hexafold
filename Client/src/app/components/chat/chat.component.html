@@ -1,4 +1,5 @@
 <div class="container">
+    
     <div class="chat-list mat-elevation-z5">
       <div class="search-input">
         <mat-form-field>
@@ -25,7 +26,7 @@
           <img
             matListAvatar
             [src]="
-              chat.chatPic ? chat.chatPic : 'assets/images/image-placeholder.png'
+              chat.chatPic ? chat.chatPic : 'assets/Images/image-placeholder.png'
             "
           />
           <p mat-line class="chat-title">
@@ -39,6 +40,7 @@
         </mat-list-option>
       </mat-selection-list>
     </div>
+
     <div class="messages mat-elevation-z5">
       <div
         class="messages-header"
@@ -48,7 +50,7 @@
           [src]="
             selectedChat.chatPic
               ? selectedChat.chatPic
-              : 'assets/images/image-placeholder.png'
+              : 'assets/Images/image-placeholder.png'
           "
         />
         <h2>{{ selectedChat.chatName }}</h2>
