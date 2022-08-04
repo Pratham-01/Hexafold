@@ -1,115 +1,125 @@
 <div class="training-home-main">
 
-    <h2 class="headings">
-        Training
-    </h2>
+    <div class="container">
+        <h2 class="headings">
+            Training
+        </h2>
 
-    <div class="training-static">
-        <p class="substitle">
-            lets train these baakas
-            <br>
-            these idiotas
-            <br>you idiota
-        </p>
-    </div>
-    
-    <div class="create-assign-trainings">
-        
-        <div class="createNewTrainingSection">
-            <div [collapse]="createNewTraining" > 
-                <!-- <button class="btn btn-dark" id="createNewTrainingButton" (click)="openCollapsedSection('cn')"> Create New Training &nbsp; + </button>  -->
-                <button class="btn btn-dark" id="createNewTrainingButton"> Create New Training &nbsp; + </button> 
-            </div>
-            <div collapseContent  #createNewTraining="collapseContent" class="ca-content create-training" >
-              <div class="card card-body">
-                <h5 class="card-title">New Training</h5>
-                <form>
-                    <br>
-                    <div class="form-group">
-                        <label for="training-title">Title</label>
-                        <input type="text" class="form-control" id="training-title" name="training-title" [(ngModel)]="newTrainingForm.title">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="training-reward">Reward Points</label>
-                        <input type="number" class="form-control" id="training-reward" min="0" name="training-reward" [(ngModel)]="newTrainingForm.reward_points">
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="training-content">Content</label>
-                        <textarea class="form-control" id="training-content" rows="5" name="training-content" [(ngModel)]="newTrainingForm.content"></textarea>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label>URLs</label>
-                        <div *ngFor="let url of newTrainingForm.urls; let i=index;" class="url-inputs d-flex align-items-center">
-                            <input type="url" class="form-control" id="training-url-{{i}}" min="0" name="training--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
-                            <img src="assets/Images/minus-icon.svg" type="button" alt="Remove" height="20" (click)="removeNewTrainingUrl(i)" class="remove-icon">
-                        </div>
-                        <br *ngIf="newTrainingForm.urls.length==0">
-                        <img src="assets/Images/plus-icon.png" (click)="addNewTrainingUrl()" height="20" type="button" alt="Add">
-                    </div>
-                    <br>
-                    <div class="form-group w-100 d-flex justify-content-end">
-                        <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Reset</button>
-                        <button class="btn btn-dark" type="button" (click)="createTraining()">Create</button>
-                    </div>
-                </form>
-              </div>
-            </div>
+        <div class="training-static">
+            <p class="substitle">
+                lets train these baakas
+                <br>
+                these idiotas
+                <br>you idiota
+            </p>
         </div>
         
-        <br>
-
-        <div class="assugnTrainingSection">
-            <div [collapse]="assignNewTraining" > 
-                <!-- <button class="btn btn-dark" id="assignTrainingButton" (click)="openCollapsedSection('an')"> Assign Training </button>  -->
-                <button class="btn btn-dark" id="assignTrainingButton"> Assign Training </button> 
-            </div>
-            <div collapseContent  #assignNewTraining="collapseContent"  class="ca-content assign-training">
-                <div class="card card-body">
-                    <h5 class="card-title">Assign Training</h5>
+        <div class="create-assign-trainings">
+            
+            <div class="createNewTrainingSection">
+                <div [collapse]="createNewTraining" > 
+                    <!-- <button class="btn btn-dark" id="createNewTrainingButton" (click)="openCollapsedSection('cn')"> Create New Training &nbsp; + </button>  -->
+                    <button class="btn btn-dark" id="createNewTrainingButton"> Create New Training &nbsp; + </button> 
+                </div>
+                <div collapseContent  #createNewTraining="collapseContent" class="ca-content create-training" >
+                  <div class="card card-body">
+                    <h5 class="card-title">New Training</h5>
                     <form>
-                        
                         <br>
                         <div class="form-group">
-                            <label for="training-title">Training</label>
-                            <select class="form-select" aria-label="Default select example" name="assigntrainingd" [(ngModel)]="assignTrainingForm.training_id">
-                                <option *ngFor="let course of courseList" value="{{course.id}}">{{course.title}}</option>
-                            </select>
+                            <label for="training-title">Title</label>
+                            <input type="text" class="form-control" id="training-title" name="training-title" [(ngModel)]="newTrainingForm.title">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Employee</label> 
-                            <input type="checkbox" class="form-check-input" id="select-all-emp" name="select-all-emp" (click)="onSelectAllCheckBox($event)">
-                            
-                            <div class="form-check mx-2" *ngFor="let emp of employeeList; let i=index;">
-                                <input class="form-check-input" type="checkbox" value="{{emp.id}}" id="assignTrainingEmployee-{{emp.id}}" name="assignTrainingEmployee-{{emp.id}}" [(ngModel)]="assignTrainingForm.emp_id[i].assigned" (change)="onCheckBoxChange($event)">
-                                <label class="form-check-label" for="assignTrainingEmployee-{{emp.id}}">{{emp.name}}</label>
+                            <label for="training-reward">Reward Points</label>
+                            <input type="number" class="form-control" id="training-reward" min="0" name="training-reward" [(ngModel)]="newTrainingForm.reward_points">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="training-content">Content</label>
+                            <textarea class="form-control" id="training-content" rows="5" name="training-content" [(ngModel)]="newTrainingForm.content"></textarea>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>URLs</label>
+                            <div *ngFor="let url of newTrainingForm.urls; let i=index;" class="url-inputs d-flex align-items-center">
+                                <input type="url" class="form-control" id="training-url-{{i}}" min="0" name="training--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
+                                <img src="assets/Images/minus-icon.svg" type="button" alt="Remove" height="20" (click)="removeNewTrainingUrl(i)" class="remove-icon">
                             </div>
+                            <br *ngIf="newTrainingForm.urls.length==0">
+                            <img src="assets/Images/plus-icon.png" (click)="addNewTrainingUrl()" height="20" type="button" alt="Add">
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="assign-training-deadline">Deadline</label>
-                            <input type="datetime-local" class="form-control" id="assign-training-deadline" name="assign-training-deadline" [(ngModel)]="assignTrainingForm.deadline" [min]="todaysDate" [value]="todaysDate">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                        </div>
-
-
-                        
                         <br>
                         <div class="form-group w-100 d-flex justify-content-end">
-                            <!-- <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Cancel</button> -->
-                            <button class="btn btn-dark" type="button" (click)="assignTraining()">Assign</button>
+                            <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Reset</button>
+                            <button class="btn btn-dark" type="button" (click)="createTraining()">Create</button>
                         </div>
                     </form>
                   </div>
+                </div>
             </div>
+            
+            <br>
+    
+            <div class="assugnTrainingSection">
+                <div [collapse]="assignNewTraining" > 
+                    <!-- <button class="btn btn-dark" id="assignTrainingButton" (click)="openCollapsedSection('an')"> Assign Training </button>  -->
+                    <button class="btn btn-dark" id="assignTrainingButton"> Assign Training </button> 
+                </div>
+                <div collapseContent  #assignNewTraining="collapseContent"  class="ca-content assign-training">
+                    <div class="card card-body">
+                        <h5 class="card-title">Assign Training</h5>
+                        <form>
+                            
+                            <br>
+                            <div class="form-group">
+                                <label for="training-title">Training</label>
+                                <select class="form-select" aria-label="Default select example" name="assigntrainingd" [(ngModel)]="assignTrainingForm.training_id">
+                                    <option *ngFor="let course of courseList" value="{{course.id}}">{{course.title}}</option>
+                                </select>
+                                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Employee</label> 
+                                <input type="checkbox" class="form-check-input" id="select-all-emp" name="select-all-emp" (click)="onSelectAllCheckBox($event)">
+                                
+                                <div class="form-check mx-2" *ngFor="let emp of employeeList; let i=index;">
+                                    <input class="form-check-input" type="checkbox" value="{{emp.id}}" id="assignTrainingEmployee-{{emp.id}}" name="assignTrainingEmployee-{{emp.id}}" [(ngModel)]="assignTrainingForm.emp_id[i].assigned" (change)="onCheckBoxChange($event)">
+                                    <label class="form-check-label" for="assignTrainingEmployee-{{emp.id}}">{{emp.name}}</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="assign-training-deadline">Deadline</label>
+                                <input type="datetime-local" class="form-control" id="assign-training-deadline" name="assign-training-deadline" [(ngModel)]="assignTrainingForm.deadline" [min]="todaysDate" [value]="todaysDate">
+                                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                            </div>
+    
+    
+                            
+                            <br>
+                            <div class="form-group w-100 d-flex justify-content-end">
+                                <!-- <button class="btn btn-secondary" type="button" (click)="resetNewTrainingData()" style="margin-right:1rem">Cancel</button> -->
+                                <button class="btn btn-dark" type="button" (click)="assignTraining()">Assign</button>
+                            </div>
+                        </form>
+                      </div>
+                </div>
+            </div>
+            
         </div>
-        
+    </div>
+
+    
+    
+    <div *ngFor="let t of userData.trainings">
+        {{t.training}}
+        {{t.status}}
+        {{t.deadline}}
     </div>
 
     <div class="employee-trainings">
@@ -118,6 +128,7 @@
             <div class="tab substitle" (click)="changeTrainingTab('in-progress')" [ngStyle]="currentTrainingTab=='in-progress' ? {'border-bottom':'5px solid #343a40'} : {'border-bottom':'0px'}">In Progress</div>
             <div class="tab substitle" (click)="changeTrainingTab('completed')" [ngStyle]="currentTrainingTab=='completed' ? {'border-bottom':'5px solid #343a40'} : {'border-bottom':'0px'}">Completed</div>
         </div>
+
         <div class="trainings-list">
             <div *ngFor="let course of trainingData" class="d-flex flex-column align-items-center w-100">
                 <div class="card col-md-9 col-sm-10" *ngIf="currentTrainingTab == 'in-progress' ? !course.completed : course.completed" (click)="openTraining(course)">

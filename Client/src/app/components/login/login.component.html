@@ -9,7 +9,7 @@
         <mat-error *ngIf="email?.errors?.['email']">Please enter correct email</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password"/>
+        <input matInput placeholder="Password" formControlName="password" type="password"/>
         <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Login</button>

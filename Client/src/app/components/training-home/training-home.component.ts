@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TrainingService } from 'src/app/services/training.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
   selector: 'app-training-home',
@@ -10,21 +11,23 @@ import { TrainingService } from 'src/app/services/training.service';
 })
 export class TrainingHomeComponent implements OnInit {
 
+  userData:any;
   trainingData:any;
-  currentTrainingTab:any = "in-progress";
-  newTrainingForm:any;
-  assignTrainingForm:any;
-  collapseOpenStatus:any = '';
   courseList:any;
   employeeList:any;
+
   today:any;
   todaysDate:any;
+  currentTrainingTab:any = "in-progress";
+  
+  newTrainingForm:any;
+  assignTrainingForm:any;
 
   constructor(
     private router: Router,
     private trainingService: TrainingService,
-    private authService : AuthenticationService
-
+    private authService : AuthenticationService,
+    private userClientService: UserClientService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -39,9 +42,7 @@ export class TrainingHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.today = new Date();
-
     this.getTodaysDate();
-    console.log(this.todaysDate);
     
     this.getTrainingDataForEmployee();
 
@@ -63,17 +64,28 @@ export class TrainingHomeComponent implements OnInit {
       {id:4, assignee: "Super user", title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ'], assigned_date: this.today, deadline: tomorrow, completed: false},
     ];    
     // this.trainingService.setCurrUserTrainings(this.trainingData);
+
+    this.userClientService.getUserData("prathamjajodia1@gmail.com").subscribe((response:any) => {
+      if(response){
+        this.userData = response[0];
+      }
+    })
+
   }
 
   // Manager / Super-User
   getCourseList(){
-    // GET all Courses available
+    // TODO GET all Courses available
+    
     this.courseList = [
         {id:1, title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ']},
         {id:2, title:"Introduction to Automata", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 35, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ','https://youtu.be/yw04QD1LaB0']},
         {id:3, title:"Introduction to OS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 25, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ', 'https://youtu.be/yw04QD1LaB0']},
         {id:4, title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ']},
     ]
+
+
+
   }
 
   getEmployeeData(){
@@ -98,23 +110,16 @@ export class TrainingHomeComponent implements OnInit {
 
   changeTrainingTab(tab:any){
     this.currentTrainingTab = tab;
-    // let list = document.getElementById("trainings-list") as HTMLElement;
-    // list.scrollTop = 0;
   }
 
-  // openCollapsedSection(section:any){
-  //   if (this.collapseOpenStatus == section){
-  //     this.collapseOpenStatus = '';
-  //   }else{
-  //       this.collapseOpenStatus = section;
-  //   }
-  // }
 
   getTodaysDate(){
     var now = new Date();
     now.setDate(now.getDate()+1)
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     this.todaysDate = now.toISOString().split(":").slice(0,2).join(":");
+    console.log(this.todaysDate);
+    
   }
 
   onCheckBoxChange(event:any){
@@ -127,8 +132,6 @@ export class TrainingHomeComponent implements OnInit {
       else checkbox.checked = true;
       console.log(index);
       console.log(this.assignTrainingForm.emp_id);
-      
-      
     }
 
   }

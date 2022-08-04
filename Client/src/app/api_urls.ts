@@ -48,9 +48,9 @@ export class ApiUrls {
     updateTrainingStatus = this.address + "updateTrainingStatus";   // put 
 
     // Rewards   - pending
-    getRewards = this.address + 'rewards';  //done
-    addReward = this.address + 'createReward';  //done
-    redeemReward = this.address + 'redeemReward';
+    getRewards = this.address + 'rewards';  // done
+    addReward = this.address + 'createReward';  // done
+    redeemReward = this.address + 'redeemReward'; // pending : getUserDataCall
     updateRewardStatus = this.address + 'updateRewardStatus';
 
 

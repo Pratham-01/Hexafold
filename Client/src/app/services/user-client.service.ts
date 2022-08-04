@@ -29,6 +29,8 @@ export class UserClientService {
   // ================================= USER ================================= 
 
   getUserData(email:any): Observable<any>{
+    
+    if(email == "") email = this.getLoggedInUserEmail();
     let url = this.apiUrls.getUserByEmail.replace("{email}", email);
     const httpOptions = {
       headers: new HttpHeaders({
@@ -53,6 +55,8 @@ export class UserClientService {
 
   // ================================= CLIENT ================================= 
   getClientData(email:any): Observable<any>{
+
+    if(email == "") email = this.getLoggedInUserEmail();
     let url = this.apiUrls.getClientByEmail.replace("{email}", email);
     const httpOptions = {
       headers: new HttpHeaders({
