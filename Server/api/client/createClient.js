@@ -16,8 +16,8 @@ exports.createClient = async (req, res) => {
 			dbo.collection('client').insertOne(post, function (err, result) {
 				if (err) throw err;
 				console.log('New Client Added', result);
-				res.status(200).send({ message: 'New Client Added' });
 				db.close();
+				res.status(200).send({ message: 'New Client Added' });
 			});
 		});
 	} catch (err) {

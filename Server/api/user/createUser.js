@@ -16,8 +16,8 @@ exports.createUser = async (req, res) => {
 			dbo.collection('user').insertOne(post, function (err, result) {
 				if (err) throw err;
 				console.log('New User Added', result);
-				res.status(200).send({ message: 'New User Added' });
 				db.close();
+				res.status(200).send({ message: 'New User Added' });
 			});
 		});
 	} catch (err) {

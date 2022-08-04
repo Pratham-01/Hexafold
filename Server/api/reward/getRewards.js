@@ -8,9 +8,10 @@ exports.getRewards = async (req, res) => {
 		var dbo = db.db('hexafold');
 		dbo
 			.collection('reward')
-			.find({status: "active"})
+			.find({ status: 'active' })
 			.toArray((err, result) => {
 				if (err) throw err;
+				db.close();
 				res.send(result);
 			});
 	});
