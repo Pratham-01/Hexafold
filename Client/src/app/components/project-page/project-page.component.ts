@@ -126,5 +126,9 @@ export class ProjectPageComponent implements OnInit {
     // TODO PATCH CALL
   }
 
+  onNavigateToTask(feature:any, task:any){
+    this.router.navigate(["projects/", this.projectData["_id"], feature.featureTitle, task.taskId])
+  }
+
 
 }

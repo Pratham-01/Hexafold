@@ -16,6 +16,7 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
+import { TaskPageComponent } from './components/task-page/task-page.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'rewards', component: RewardComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'training/:course_id', component: TrainingCourseComponent },
+  { path: 'projects/:project_id/:featurTitle/:taskId', component: TaskPageComponent }, //TASK PAGE
   
 
   // { path: 'signin', component: SignInComponent },

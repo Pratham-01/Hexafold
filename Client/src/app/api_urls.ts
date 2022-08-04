@@ -9,12 +9,15 @@ export class ApiUrls {
     // USER / CLIENT
     createClient = this.address + 'createClient';   // pending - post
     getAllClients = this.address + 'client';   // pending
+    getClientByEmail = this.address + "client/{email}";
+
+    createUser = this.address + 'createUser'; // pending
     getAllUsers = this.address + 'user';   // pending
     getUserByEmail = this.address + "user/{email}";
-    getClientByEmail = this.address + "client/{email}";
 
 
     // PROJECT
+    addProject = this.address + 'createProject'; // pending
     getParticularProject = this.address + "project/{projectId}";
     getUserProjects = this.address + "project/user/{userId}";
     getClientProjects = this.address + "project/client/{clientId}";
@@ -34,10 +37,21 @@ export class ApiUrls {
 
     // Tasks
     addTask = this.address + 'addTask';     // pending - post
+    updateTask = this.address + 'updateTask';     // pending - post
 
     // Features
     addFeature = this.address + 'addFeature';       // pending - post
 
+    // Training - pending
+    getParticularTraining = this.address + 'getTraining/{training_id}';
+    addTraining = this.address + "addTraining";
+    updateTrainingStatus = this.address + "updateTrainingStatus";
+
+    // Rewards   - pending
+    getRewards = this.address + 'rewards';
+    addReward = this.address + 'createReward';
+    redeemReward = this.address + 'redeemReward';
+    updateRewardStatus = this.address + 'updateRewardStatus';
 
 
 }

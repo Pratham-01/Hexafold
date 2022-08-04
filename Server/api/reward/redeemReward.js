@@ -3,7 +3,7 @@ var ObjectId = require('mongodb').ObjectId;
 
 exports.redeemReward = async (req, res) => {
 	try {
-		console.log('Request received ton redeem reward');
+		console.log('Request received to redeem reward');
 
         var user = req.body.user;
         var reward_id = req.body.reward_id

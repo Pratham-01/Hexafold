@@ -5,7 +5,7 @@ exports.addTraining = async (req, res) => {
 	try {
 		console.log('Request received for adding Training');
 		var training = {
-			assignor: req.body.assignor,
+			// assignor: req.body.assignor,
 			title: req.body.title,
 			content: req.body.content,
 			reward: req.body.reward ? req.body.reward: 0,

@@ -30,7 +30,7 @@
 
                 <div *ngIf="feature.showContent" class="taskList">
                     <button class="btn btn-dark" (click)="onAddTaskPopup(feature)">Add Task</button>
-                    <div class="card" *ngFor="let task of feature.tasks">
+                    <div class="card" *ngFor="let task of feature.tasks" (click)="onNavigateToTask(feature, task)">
                         {{task.title}}
                     </div>
                 </div>

@@ -1,6 +1,5 @@
-import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-buy-reward-popup',
@@ -11,7 +10,7 @@ export class BuyRewardPopupComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef : DialogRef
+    private dialogRef : MatDialogRef<BuyRewardPopupComponent>
   ) { }
 
   ngOnInit(): void {
