@@ -22,7 +22,10 @@ exports.updateTask = async (req, res) => {
 		}
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			};
 
 			var dbo = db.db('hexafold');
 			dbo.collection('project').updateOne(
@@ -30,10 +33,13 @@ exports.updateTask = async (req, res) => {
 				newvalues,
 				{ arrayFilters: [{ 'ele1.featureTitle': featureTitle }, { 'ele2.title': taskTitle }] },
 				function (err, result) {
-					if (err) throw err;
+					if (err) {
+						res.status(500).send({ errors: err });
+						return;
+					};
 					console.log('Task updated', result);
-					res.status(200).send({ message: 'Task updated' });
 					db.close();
+					res.status(200).send({ message: 'Task updated' });
 				}
 			);
 		});

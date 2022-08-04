@@ -8,13 +8,20 @@ exports.getRandomFact = async (req, res) => {
 
 
 	constants.mongoclient.connect(constants.url, function (err, db) {
-		if (err) throw err;
+		if (err) {
+			res.status(500).send({ errors: err });	   
+ 			return;
+	    };
 		var dbo = db.db('hexafold');
 		dbo
 			.collection('fact')
 			.find( {company_id: new ObjectId(company)} )
 			.toArray((err, result) => {
-				if (err) throw err;
+				if (err) {
+					res.status(500).send({ errors: err });
+			   		return;
+			    };
+
                 randomFact = result[Math.floor(Math.random() * result.length)]
                 console.log(randomFact);
 
@@ -24,13 +31,15 @@ exports.getRandomFact = async (req, res) => {
 						{_id: new ObjectId(company)},
 						{ $inc: { engagement: 1 }},
 						function(err, result2) {
-							if (err) throw err;
+							if (err) {
+				 				res.status(500).send({ errors: err });
+								return;
+			    			};
 
 							db.close();
 							res.send(randomFact);
 						});
 
-                
 			});
 	});
 };

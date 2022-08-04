@@ -7,11 +7,12 @@ exports.updateTrainingStatus = async (req, res) => {
         var training_id = req.body.training_id;
         var user = req.body.user;
         var status = req.body.status;
-
-        console.log("here", training_id, user, status);
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			};
 
             var myquery = {email: user};
             var newvalues = {$set: { 'trainings.$[ele].status': status }};
@@ -21,9 +22,12 @@ exports.updateTrainingStatus = async (req, res) => {
 			dbo
 				.collection('user')
 				.updateOne(myquery, newvalues, arrayFilters, function(err, result) {
-					if (err) throw err;
-					res.status(200).send({message: 'Training Status Updated Successfully'})
+					if (err) {
+						res.status(500).send({ errors: err });
+						return;
+					};
 					db.close();
+					res.status(200).send({message: 'Training Status Updated Successfully'})
 				});
 		});
 	} catch (err) {

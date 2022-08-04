@@ -10,13 +10,20 @@ exports.addFact = async (req, res) => {
 		};
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+   				return;
+			};
 
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('fact')
 				.insertOne(post, function(err, result) {
-					if (err) throw err;
+					if (err) {
+				 		res.status(500).send({ errors: err });
+						return;
+			    	};
+					
 					console.log("New Fact Added", result);
 					db.close();
 					res.status(200).send({message: 'New Fact Added'})

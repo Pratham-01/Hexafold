@@ -7,6 +7,8 @@ const getClientByEmail = require('./client/getClientByEmail');
 const getClients = require('./client/getClients');
 
 const getTraining = require('./training/getTraining');
+const getAllTrainings = require('./training/getAllTrainings');
+const getUserTrainings = require('./training/getUserTrainings');
 const addTraining = require('./training/addTraining');
 const assignTraining = require('./training/assignTraining');
 const updateTrainingStatus = require('./training/updateTrainingStatus');
@@ -27,7 +29,9 @@ const addTask = require('./project/userProjects/addTask');
 const updateTask = require('./project/userProjects/updateTask');
 
 const addFeature = require('./project/addFeature');
+const updateFeatureStatus = require('./project/updateFeatureStatus');
 const getProject = require('./project/getProject');
+const addComment = require('./project/addComment');
 
 const getRewards = require('./reward/getRewards');
 const createReward = require('./reward/createReward');
@@ -49,6 +53,8 @@ module.exports = {
 	...getClients,
 
 	...getTraining,
+	...getAllTrainings,
+	...getUserTrainings,
 	...addTraining,
 	...assignTraining,
 	...updateTrainingStatus,
@@ -69,7 +75,9 @@ module.exports = {
 	...updateTask,
 	
 	...addFeature,
+	...updateFeatureStatus,
 	...getProject,
+	...addComment,
 
 	...getRewards,
 	...createReward,
