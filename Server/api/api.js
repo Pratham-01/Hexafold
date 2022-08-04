@@ -8,6 +8,7 @@ const getClients = require('./client/getClients');
 
 const getTraining = require('./training/getTraining');
 const addTraining = require('./training/addTraining');
+const assignTraining = require('./training/assignTraining');
 const updateTrainingStatus = require('./training/updateTrainingStatus');
 
 const getCommunityPosts = require('./communityPost/getCommunityPosts');
@@ -33,6 +34,11 @@ const createReward = require('./reward/createReward');
 const redeemReward = require('./reward/redeemReward');
 const updateRewardStatus = require('./reward/updateRewardStatus');
 
+const addFact = require('./fact/addFact');
+const getRandomFact = require('./fact/getRandomFact');
+
+
+
 module.exports = {
 	...createUser,
 	...getUserByEmail,
@@ -44,6 +50,7 @@ module.exports = {
 
 	...getTraining,
 	...addTraining,
+	...assignTraining,
 	...updateTrainingStatus,
 
 	...getCommunityPosts,
@@ -67,5 +74,8 @@ module.exports = {
 	...getRewards,
 	...createReward,
 	...redeemReward,
-	...updateRewardStatus
+	...updateRewardStatus,
+	
+	...addFact,
+	...getRandomFact
 };
