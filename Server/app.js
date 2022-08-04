@@ -17,6 +17,7 @@ app.post('/createUser', jsonParser, api.createUser);
 
 app.get('/getTraining/:training_id', api.getTraining);
 app.post('/addTraining', jsonParser, api.addTraining);
+app.post('/assignTraining', jsonParser, api.assignTraining);
 app.put('/updateTrainingStatus', jsonParser, api.updateTrainingStatus);
 
 app.get('/communityPosts', api.getCommunityPosts);
@@ -41,5 +42,8 @@ app.get('/rewards', api.getRewards);
 app.post('/createReward', jsonParser, api.createReward);
 app.post('/redeemReward', jsonParser, api.redeemReward);
 app.put('/updateRewardStatus', jsonParser, api.updateRewardStatus);
+
+app.post('/addFact', jsonParser, api.addFact);
+app.get('/getRandomFact/:company', jsonParser, api.getRandomFact);
 
 server = app.listen(process.env.PORT || 8080);

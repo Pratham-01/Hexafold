@@ -16,12 +16,13 @@ export class AddCommunityPostPopupComponent implements OnInit {
   ) { }
 
   postForm:any;
+  type:any;
 
   ngOnInit(): void {
     console.log(this.data);
-    
+    this.type = this.data.post_type;
     this.postForm = {
-      post_type: this.data.post_type,
+      post_type: this.type,
 			title: "",
 			content: "",
       tags: []

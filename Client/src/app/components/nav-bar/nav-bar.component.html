@@ -4,7 +4,7 @@
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Navbar brand -->
-      <img src="assets/EXAFOLD_incfont.png" height="48" alt="">
+      <img src="assets/onlylogo_hexafold.png" height="48" alt="">
   
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -62,6 +62,14 @@
                 <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
               </div>
               Rewards
+            </a>
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1">
+            <a class="nav-link" [ngClass]="activeTab == 'recreational' ? 'active' : ''" (click)="changeTab('recreational')"  aria-current="page" routerLink = "recreational">
+              <div>
+                <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
+              </div>
+              Recreational
             </a>
           </li>
           
