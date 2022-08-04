@@ -45,11 +45,11 @@ export class ApiUrls {
     // Training - pending
     getParticularTraining = this.address + 'getTraining/{training_id}';
     addTraining = this.address + "addTraining";
-    updateTrainingStatus = this.address + "updateTrainingStatus";
+    updateTrainingStatus = this.address + "updateTrainingStatus";   // put 
 
     // Rewards   - pending
-    getRewards = this.address + 'rewards';
-    addReward = this.address + 'createReward';
+    getRewards = this.address + 'rewards';  //done
+    addReward = this.address + 'createReward';  //done
     redeemReward = this.address + 'redeemReward';
     updateRewardStatus = this.address + 'updateRewardStatus';
 
