@@ -7,7 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { switchMap } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -48,10 +48,16 @@ export class SignUpComponent implements OnInit {
     private authService: AuthenticationService,
     private toast: HotToastService,
     private router: Router,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private activatedRouter: ActivatedRoute
+
   ) {}
 
-  ngOnInit(): void {}
+  type:any;
+
+  ngOnInit(): void {
+    this.type = this.activatedRouter.snapshot.paramMap.get('type');
+  }
 
   get name() {
     return this.signUpForm.get('name');
@@ -88,5 +94,9 @@ export class SignUpComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/home']);
       });
+  }
+
+  onNavigateToLogin(){
+    this.router.navigate(["login", this.type]);
   }
 }

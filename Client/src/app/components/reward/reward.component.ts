@@ -55,6 +55,11 @@ export class RewardComponent implements OnInit {
       data: {data:item},
       panelClass: "scrollable"
     });
+    dialogRef.afterClosed().subscribe((response:any) => {
+      if(response == "success"){
+        // TODO Get user data call
+      }
+    })
   }
 
   getRewards(){

@@ -4,11 +4,10 @@
     margin-top: 10vh;
 
     > .chat-list {
-        width: 40%;
+        width: 30%;
         margin: 16px;
-        background: hsl(232, 45%, 84%);
         border-radius: 16px;
-
+        background: #eee;
         .chat-title {
 
             display: flex;
@@ -31,12 +30,12 @@
     }
 
     > .messages {
-        width: 60%;
+        width: 70%;
         padding: 24px;
         margin: 16px;
         margin-left: 8px;
         border-radius: 16px;
-        background: rgba(0,0,0,0.05);
+        // background: rgba(0,0,0,0.05);
 
         .messages-header {
             display: flex;
@@ -60,6 +59,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            padding: 1rem 0;
 
             overflow: auto;
 
@@ -82,7 +82,7 @@
                     margin-bottom: 16px;
                     border-radius: 8px;
                     width: fit-content;
-
+                    box-shadow: 1px 1px 1px black;
                     position: relative;
 
                     > .chat-time {
@@ -100,7 +100,8 @@
                 justify-content: flex-end;
                 
                 > .chat-bubble {
-                    background: #c5cae9;
+                    background: #eee;
+                    box-shadow: -1px 1px 1px black;
                 }
             }
 

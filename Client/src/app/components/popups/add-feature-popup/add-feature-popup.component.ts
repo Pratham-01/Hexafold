@@ -15,14 +15,16 @@ export class AddFeaturePopupComponent implements OnInit {
 
   constructor(
     private dialogRef: DialogRef,
-    @Inject(MAT_DIALOG_DATA) public projectData: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private userClientService:UserClientService
 
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data.data);
+    
     this.newFeatureForm = {
-      projectId : this.projectData["_id"],
+      projectId : this.data.data["_id"],
       featureTitle : "",
       accepted : "No",
       cost : 0,

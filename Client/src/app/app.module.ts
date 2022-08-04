@@ -60,6 +60,8 @@ import { AddTaskPopupComponent } from './components/popups/add-task-popup/add-ta
 import { TaskPageComponent } from './components/task-page/task-page.component';
 import { CreateRewardsPopupComponent } from './components/popups/create-rewards-popup/create-rewards-popup.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AddCommunityPostPopupComponent } from './components/popups/add-community-post-popup/add-community-post-popup.component';
+import { RecreationalComponent } from './components/recreational/recreational.component';
 
 
 @NgModule({
@@ -89,6 +91,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AddTaskPopupComponent,
     TaskPageComponent,
     CreateRewardsPopupComponent,
+    AddCommunityPostPopupComponent,
+    RecreationalComponent,
 
   ],
   imports: [

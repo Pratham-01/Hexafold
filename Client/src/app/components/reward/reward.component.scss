@@ -10,7 +10,7 @@
 
 
     .wrapper {
-      padding: 3rem;
+      padding: 1.5rem;
       height: 420px;
       border-radius: 7px;
       
@@ -48,8 +48,8 @@
   
   
   .product-text h1 {
-    margin: 0 0 0 38px;
-    padding-top: 3rem;
+    margin: 0 0 0 10px;
+    padding-top: 2rem;
     font-size: 34px;
     color: #474747;
   }
@@ -60,7 +60,7 @@
   }
   
   .product-text h2 {
-    margin: 0 0 0px 38px;
+    margin: 0 0 0px 10px;
     font-size: 13px;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
@@ -71,7 +71,7 @@
   
   .product-description {
     // height: 125px;
-    margin: 0 0 0 38px;
+    margin: 0 0 0 10px;
     font-family: 'Playfair Display', serif;
     color: #8d8d8d;
     line-height: 1.7em;
@@ -87,7 +87,7 @@
   //   position: relative;
   // }
   .product-price-btn{
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
   }
   
   .product-points {
@@ -96,10 +96,11 @@
     // top: -13px;
     // height: 50px;
     font-family: 'Trocchi', serif;
-    margin: 0 0 0 38px;
-    font-size: 28px;
+    margin: 0 0 0 10px;
+    font-size: 20px;
     font-weight: lighter;
     color: #474747;
+    max-width: 50%;
   }
   
   span {

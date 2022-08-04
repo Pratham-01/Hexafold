@@ -41,4 +41,15 @@ export class RewardsService {
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  redeemReward(body:any): Observable<any>{
+    let url = this.apiUrls.redeemReward;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
 }
