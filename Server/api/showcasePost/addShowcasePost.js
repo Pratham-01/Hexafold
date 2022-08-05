@@ -15,16 +15,22 @@ exports.addShowcasePost = async (req, res) => {
 		};
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });   
+				return;
+			};
 
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('showcase_post')
 				.insertOne(post, function(err, result) {
-					if (err) throw err;
+					if (err) {
+				 		res.status(500).send({ errors: err });
+						return;
+			    	};
 					console.log("New Showcase Post Added", result);
-					res.status(200).send({message: 'New Showcase Post Added'})
 					db.close();
+					res.status(200).send({message: 'New Showcase Post Added'})
 				});
 		});
 	} catch (err) {

@@ -5,16 +5,21 @@ exports.assignTraining = async (req, res) => {
 	try {
 		console.log('Request received to assign Training');
 
+        var training_id = req.body.training_id;
         var assignees = req.body.assignees;
-        var userTraining = {};
+        var deadline = req.body.deadline;
+
+        userTraining = {
+            training: training_id,
+            status: "pending",
+            deadline: deadline
+        }
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
-
-            userTraining = {
-                training: req.body.training,
-                status: "pending"
-            }
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+		 	};	
 
 			var dbo = db.db('hexafold');
                 dbo
@@ -23,11 +28,14 @@ exports.assignTraining = async (req, res) => {
                         {email: {$in: assignees }},
                         {$push: {trainings: userTraining}},
                         function(err, result) {
-                        if (err) throw err;
-                        console.log("Training Assigned", result);
-                        db.close();
-                        res.status(200).send({message: 'Training Assigned'})
-                    });			
+                            if (err) {
+                                res.status(500).send({ errors: err });
+                                return;
+                            };	
+                            console.log("Training Assigned", result);
+                            db.close();
+                            res.status(200).send({message: 'Training Assigned'})
+                        });			
 		});
 	} catch (err) {
 		res.status(500).send({errors: err});

@@ -7,6 +7,7 @@ exports.redeemReward = async (req, res) => {
 
         var user = req.body.user;
         var reward_id = req.body.reward_id
+        var points = req.body.points
 
 		var reward = {
 			reward: new ObjectId(reward_id),
@@ -14,19 +15,25 @@ exports.redeemReward = async (req, res) => {
 		};
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			};
 			var dbo = db.db('hexafold');
 
             dbo
                 .collection('user')
                 .updateOne(
                     {email: user},
-                    {$push: {redeemed_rewards: reward}},
+                    {$push: {redeemed_rewards: reward}, $inc: {reward_points: -points}},
                     function(err, result) {
-                    if (err) throw err;
+                        if (err) {
+                            res.status(500).send({ errors: err });
+                            return;
+                        };
                     console.log("Reward Redeemed", result);
-                    res.status(200).send({message: 'Reward Redeemed'})
                     db.close();
+                    res.status(200).send({message: 'Reward Redeemed'})
                 });
 		});
 	} catch (err) {

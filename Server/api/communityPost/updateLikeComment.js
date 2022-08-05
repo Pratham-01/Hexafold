@@ -10,7 +10,10 @@ exports.updateCPLikeComment = async (req, res) => {
         var content = req.body.content;
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+                return;
+			};
 
             var myquery = {_id: new ObjectId(post_id)};
             if (type == 'like'){
@@ -36,10 +39,13 @@ exports.updateCPLikeComment = async (req, res) => {
 			dbo
                 .collection('community_post')
 				.updateOne(myquery, newvalues, function(err, result) {
-					if (err) throw err;
+					if (err) {
+                        res.status(500).send({ errors: err });
+                        return;
+			        };
 					console.log("Like/Comment Updated Successfully", result);
-					res.status(200).send({message: 'Like/Comment Updated Successfully'})
 					db.close();
+					res.status(200).send({message: 'Like/Comment Updated Successfully'})
 				});
 		});
 	} catch (err) {

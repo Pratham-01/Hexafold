@@ -52,6 +52,18 @@ export class TrainingService {
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  getAllTrainings(companyId?:any): Observable<any>{
+    if(!companyId) companyId = sessionStorage.getItem("companyId")
+    let url = this.apiUrls.getAllTrainings.replace("{companyId}", companyId);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
    
 
 }

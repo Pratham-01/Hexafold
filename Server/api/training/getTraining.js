@@ -7,16 +7,23 @@ exports.getTraining = async (req, res) => {
         var training_id = req.params.training_id;
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+		 	};	
 
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('training')
                 .find({ _id: new ObjectId(training_id) })
                 .toArray((err, result) => {
-                    if (err) throw err;
+                    if (err) {
+						res.status(500).send({ errors: err });
+						return;
+					};	
+                    
+					db.close();
                     res.send(result);
-                    db.close();
                 });
 		});
 	} catch (err) {

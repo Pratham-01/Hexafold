@@ -13,11 +13,17 @@ exports.createReward = async (req, res) => {
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			};
 
 			var dbo = db.db('hexafold');
 			dbo.collection('reward').insertOne(reward, function (err, result) {
-				if (err) throw err;
+				if (err) {
+					res.status(500).send({ errors: err });
+					return;
+				};
 				console.log('New Reward Added', result);
 				res.status(200).send({ message: 'New Reward Added' });
 				db.close();

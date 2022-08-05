@@ -31,7 +31,7 @@ export class ApiUrls {
     updateCPLikeComment = this.address + 'updateCPLikeComment';
     
     // Showcase
-    getShowcasePosts = this.address + 'showcasePosts';
+    getShowcasePosts = this.address + 'showcasePosts/{companyId}';
     addShowcasePost = this.address + 'addShowcasePost';
     updateSPLikeComment = this.address + 'updateSPLikeComment';
 
@@ -43,6 +43,7 @@ export class ApiUrls {
     addFeature = this.address + 'addFeature';       // pending - post
 
     // Training - pending
+    getAllTrainings = this.address + "getAllTrainings/{companyId}";
     getParticularTraining = this.address + 'getTraining/{training_id}';
     addTraining = this.address + "addTraining";
     updateTrainingStatus = this.address + "updateTrainingStatus";   // put 
@@ -53,5 +54,8 @@ export class ApiUrls {
     redeemReward = this.address + 'redeemReward'; // pending : getUserDataCall
     updateRewardStatus = this.address + 'updateRewardStatus';
 
+    // FACTS
+    addFact = this.address + "addFact";
+    getRandomFact = this.address + "getRandomFact/{companyId}";
 
 }

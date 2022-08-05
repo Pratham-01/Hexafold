@@ -9,12 +9,15 @@ exports.createProject = async (req, res) => {
 			project_title: req.body.project_title ? req.body.project_title : '',
 			comments: [],
 			features: [],
-			users: [],
+			users: req.body.users,
 			description: req.body.description ? req.body.description : '',
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			}
 
 			var dbo = db.db('hexafold');
 			dbo
@@ -32,10 +35,13 @@ exports.createProject = async (req, res) => {
 									res.status(200).send({ message: 'Project already exists' });
 								} else {
 									dbo.collection('project').insertOne(post, function (err, result) {
-										if (err) throw err;
+										if (err) {
+											res.status(500).send({ errors: err });
+											return;
+										}
 										console.log('New Project Added', result);
-										res.status(200).send({ message: 'New Project Added' });
 										db.close();
+										res.status(200).send({ message: 'New Project Added' });
 									});
 								}
 							});

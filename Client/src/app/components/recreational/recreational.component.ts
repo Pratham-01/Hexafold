@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { response } from 'express';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
@@ -23,7 +24,11 @@ export class RecreationalComponent implements OnInit {
   }
 
   factGenerator(){
-    this.generalService.openMessageSnackBar("Mein toh pagal hu!", "OOHHHHH")
+    this.generalService.getRandomFact(sessionStorage.getItem("companyId")).subscribe((response:any) => {
+      if(response){
+        this.generalService.openMessageSnackBar(response.content, "OOHHHHH")
+      }
+    })
   }
 
 }

@@ -9,6 +9,8 @@ export class TaskPageComponent implements OnInit {
 
   constructor() { }
 
+  priority:any = "Low";
+
   ngOnInit(): void {
   }
 

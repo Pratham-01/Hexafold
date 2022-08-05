@@ -1,5 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, catchError, throwError } from 'rxjs';
+import { ApiUrls } from '../api_urls';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +11,8 @@ export class GeneralService {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private apiUrls: ApiUrls,
+    private http: HttpClient,
 
   ) { }
 
@@ -17,4 +22,40 @@ export class GeneralService {
       panelClass: "bottomSnackbar"
     });
   }
+
+  handleError() {
+    return (err: any) => {
+      return throwError(err);
+    }
+  }
+
+
+  addFact(body:any): Observable<any>{
+    let url = this.apiUrls.addFact;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // {
+    //   company_id: "As",
+    //   content: ""
+    // }
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  getRandomFact(companyId:any): Observable<any>{
+    
+    if(!companyId) companyId = sessionStorage.getItem("companyId");
+
+    let url = this.apiUrls.getRandomFact.replace("{companyId}", companyId);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
  }
