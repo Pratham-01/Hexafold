@@ -1,17 +1,19 @@
+const ObjectId = require('mongodb').ObjectId;
 var constants = require('../../constants/constantVariables');
 
 exports.addShowcasePost = async (req, res) => {
 	try {
 		console.log('Request received for adding showcase post');
 		var post = {
-			post_type: req.body.post_type,
+			// post_type: req.body.post_type,
 			title: req.body.title,
 			content: req.body.content,
-			tags: [], /* change */
-			is_pinned: false,
+			// tags: [], /* change */
+			// is_pinned: false,
 			likes_count: 0,
 			likes: [],
 			comments: [],
+			company_id: new ObjectId(req.body.company_id),
 		};
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {

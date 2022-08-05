@@ -8,7 +8,8 @@ exports.addTraining = async (req, res) => {
 			title: req.body.title,
 			content: req.body.content,
 			reward: req.body.reward ? req.body.reward: 0,
-            urls: req.body.urls
+            urls: req.body.urls,
+			company_id: new ObjectId(req.body.company_id),
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {

@@ -9,7 +9,8 @@ exports.createReward = async (req, res) => {
 			description: req.body.description,
             points: req.body.points,
             image: req.body.image ? req.body.image : '',
-            status: 'active'
+            status: 'active',
+			company_id: new ObjectId(req.body.company_id),
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {

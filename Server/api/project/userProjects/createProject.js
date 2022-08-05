@@ -11,6 +11,7 @@ exports.createProject = async (req, res) => {
 			features: [],
 			users: req.body.users ? req.body.users : '',
 			description: req.body.description ? req.body.description : '',
+			company_id: new ObjectId(req.body.company_id),
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
