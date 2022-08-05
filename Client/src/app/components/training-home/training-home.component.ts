@@ -49,6 +49,7 @@ export class TrainingHomeComponent implements OnInit {
     this.resetNewTrainingData();
     this.getCourseList();
     this.getEmployeeData();
+    this.getAllTrainings();
   }
 
   // =========================================== GET PAGE DATA =========================================== 
@@ -101,6 +102,15 @@ export class TrainingHomeComponent implements OnInit {
 
     this.resetAssignTrainingData();
 
+  }
+
+  getAllTrainings(){
+    this.trainingService.getAllTrainings(sessionStorage.getItem("companyId")).subscribe((response) => {
+      if(response){
+        console.log(response);
+        
+      }
+    })
   }
 
   // =========================================== INTERACTIONS =========================================== 

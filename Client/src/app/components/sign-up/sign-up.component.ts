@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { switchMap } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 import { UsersService } from 'src/app/services/users.service';
 
 export function passwordsMatchValidator(): ValidatorFn {
@@ -49,7 +50,8 @@ export class SignUpComponent implements OnInit {
     private toast: HotToastService,
     private router: Router,
     private usersService: UsersService,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private userClientService: UserClientService
 
   ) {}
 
@@ -92,6 +94,8 @@ export class SignUpComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        if(this.type == "user") this.createUser();
+        else if(this.type == "client") this.createClient();
         this.router.navigate(['/home']);
       });
   }
@@ -99,4 +103,34 @@ export class SignUpComponent implements OnInit {
   onNavigateToLogin(){
     this.router.navigate(["login", this.type]);
   }
+
+  createClient(){
+    const { name, email, password } = this.signUpForm.value;
+    let body:any = {
+      email: email,
+			name: name,
+			password: password,
+			company_id: sessionStorage.getItem("companyId"),
+    }
+    this.userClientService.createClient(body).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    })
+  }
+  createUser(){
+    const { name, email, password } = this.signUpForm.value;
+    let body:any = {
+      email: email,
+			name: name,
+			password: password,
+			company_id: sessionStorage.getItem("companyId"),
+    }
+    this.userClientService.createUser(body).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+      }
+    })
+  }
+
 }

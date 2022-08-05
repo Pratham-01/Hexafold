@@ -1,22 +1,77 @@
 <div class="task-page-main container">
 
     <h2 class="headings my-3">
-        Your Project
+        Project Title
     </h2>
+
+    <p class="breadcrumbs text-muted">
+        project / featureTitle / HS-3
+    </p>
 
     <div class="task-body row">
         <div class="task-content col-md-9 col-sm-12">
 
             <h4 class="headings">Title</h4>
-            <h6 class="text-muted">HS-3</h6>
+            <h6 class="text-muted subheading">HS-3</h6>
 
-            <p class="subtitle">
-                description
-            </p>
+            <div class="description-card card ">
+                <p class="subtitle">
+                    description
+                </p>
+            </div>
 
         </div>
         <div class="task-details col-md-3 col-sm-12">
-            
+            <select name="" id="" class="form-select w-50">
+                <option value="">TODO</option>
+                <option value="">Pending</option>
+                <option value="">Done</option>
+            </select>
+
+            <hr>
+
+            <div class="card">
+                <h4 class="headings card-title">Details</h4>
+
+                <br>
+                <div class="form-group">
+                    <span for="" class="card-text subheading">Assignee</span>
+                    <select name="" id="" class="form-select w-50">
+                        <option value="">Pushpit</option>
+                        <option value="">Pratham</option>
+                        <option value="">Divya</option>
+                    </select>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <span class="card-text subheading">Start Date</span><br>
+                    <span>25-07-2022</span>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <span class="card-text subheading">Deadline</span><br>
+                    <span>05-08-2022</span>
+                </div>
+
+                <br>
+                <div class="form-group">
+                    <span class="card-text subheading">Priority</span><br>
+                    <span [ngClass]="priority == 'High' ? 'red' : (priority == 'Medium' ? 'yellow' : 'green') ">{{priority}}</span>
+                </div>
+                
+                <br>
+                <div class="form-group">
+                    <span class="card-text subheading">Reward</span><br>
+                    <span>20</span>
+                </div>
+
+
+            </div>
+
+
+
         </div>
 
     </div>

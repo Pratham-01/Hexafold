@@ -28,6 +28,17 @@ export class UserClientService {
 
   // ================================= USER ================================= 
 
+  createUser(body:any): Observable<any>{
+    let url = this.apiUrls.createUser;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
   getUserData(email:any): Observable<any>{
     
     if(email == "") email = this.getLoggedInUserEmail();
@@ -54,6 +65,18 @@ export class UserClientService {
 
 
   // ================================= CLIENT ================================= 
+
+  createClient(body:any): Observable<any>{
+    let url = this.apiUrls.createClient;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
   getClientData(email:any): Observable<any>{
 
     if(email == "") email = this.getLoggedInUserEmail();
