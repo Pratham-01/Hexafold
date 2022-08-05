@@ -16,12 +16,14 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
+import { TaskPageComponent } from './components/task-page/task-page.component';
+import { RecreationalComponent } from './components/recreational/recreational.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin),},
-  { path: 'sign-up', component: SignUpComponent},
+  { path: 'sign-up/:type', component: SignUpComponent},
   { path: 'login/:type', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'community', component: CommunityComponent },
@@ -31,6 +33,8 @@ const routes: Routes = [
   { path: 'rewards', component: RewardComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'training/:course_id', component: TrainingCourseComponent },
+  { path: 'projects/:project_id/:featurTitle/:taskId', component: TaskPageComponent }, //TASK PAGE
+  { path: 'recreational', component: RecreationalComponent },
   
 
   // { path: 'signin', component: SignInComponent },

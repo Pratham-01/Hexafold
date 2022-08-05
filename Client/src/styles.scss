@@ -51,7 +51,7 @@ textarea {
     padding: 1rem;
 }
 
-.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main, .reward-main{
+.dashboard-main, .community-main, .project-page-main, .training-home-main, .training-course-main, .reward-main, .task-page-main, .recreational-main{
     margin-top: 64px;
 }
 
@@ -67,4 +67,11 @@ img.close-popup-icon{
 .scrollable {
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.bottomSnackbar{
+    bottom: 0;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) !important;
 }

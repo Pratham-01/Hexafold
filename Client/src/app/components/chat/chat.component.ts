@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   combineLatest,
   map,
@@ -11,6 +12,7 @@ import {
 } from 'rxjs';
 import { Message } from 'src/app/models/chat';
 import { ProfileUser } from 'src/app/models/user-profile';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -54,8 +56,21 @@ export class ChatComponent implements OnInit {
   
     constructor(
       private usersService: UsersService,
-      private chatsService: ChatsService
-    ) {}
+      private chatsService: ChatsService,
+      private router: Router, 
+      private authService: AuthenticationService,
+    ) {
+
+      this.authService.currentUser$.subscribe((user:any) => {
+        if(user){
+          // console.log(user);
+        }else{
+          this.router.navigate(["home"]);
+          this.authService.navigationSubject.next("home");
+        }
+      })
+
+    }
   
     ngOnInit(): void {
       this.messages$ = this.chatListControl.valueChanges.pipe(

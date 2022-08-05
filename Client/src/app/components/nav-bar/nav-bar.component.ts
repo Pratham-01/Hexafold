@@ -57,6 +57,8 @@ export class NavBarComponent implements OnInit {
       })
     ).subscribe(() => {
       this.router.navigate(['/home']);
+      sessionStorage.removeItem("email");
+      sessionStorage.removeItem("type");
     });
   }
 

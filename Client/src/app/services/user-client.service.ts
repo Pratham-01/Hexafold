@@ -19,9 +19,29 @@ export class UserClientService {
     }
   }
 
+  getLoggedInUserEmail(){
+    return sessionStorage.getItem("email");
+  }
+  getLoggedInUserType(){
+    return sessionStorage.getItem("type");
+  }
+
   // ================================= USER ================================= 
 
+  createUser(body:any): Observable<any>{
+    let url = this.apiUrls.createUser;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
   getUserData(email:any): Observable<any>{
+    
+    if(email == "") email = this.getLoggedInUserEmail();
     let url = this.apiUrls.getUserByEmail.replace("{email}", email);
     const httpOptions = {
       headers: new HttpHeaders({
@@ -45,7 +65,21 @@ export class UserClientService {
 
 
   // ================================= CLIENT ================================= 
+
+  createClient(body:any): Observable<any>{
+    let url = this.apiUrls.createClient;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
   getClientData(email:any): Observable<any>{
+
+    if(email == "") email = this.getLoggedInUserEmail();
     let url = this.apiUrls.getClientByEmail.replace("{email}", email);
     const httpOptions = {
       headers: new HttpHeaders({
@@ -85,6 +119,17 @@ export class UserClientService {
 
   addTask(body:any): Observable<any>{
     let url = this.apiUrls.addTask;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  addFeature(body:any): Observable<any>{
+    let url = this.apiUrls.addFeature;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

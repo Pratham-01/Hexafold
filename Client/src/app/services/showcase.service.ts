@@ -19,8 +19,9 @@ export class ShowcaseService {
     }
   }
 
-  getShowcasePosts(): Observable<any>{
-    let url = this.apiUrls.getShowcasePosts;
+  getShowcasePosts(companyId?:any): Observable<any>{
+    if (!companyId) companyId = sessionStorage.getItem("companyId");
+    let url = this.apiUrls.getShowcasePosts.replace("{companyId}", companyId);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

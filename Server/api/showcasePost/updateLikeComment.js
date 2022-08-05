@@ -10,7 +10,10 @@ exports.updateSPLikeComment = async (req, res) => {
         content = req.body.content;
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+                res.status(500).send({ errors: err });
+                return;
+            };
 
             var myquery = {_id: new ObjectId(post_id)};
             if (type == 'like'){
@@ -35,11 +38,13 @@ exports.updateSPLikeComment = async (req, res) => {
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('showcase_post')
-				.updateOne(myquery, newvalues, function(err, res) {
-					if (err) throw err;
-					console.log("Like/Comment Updated Successfully", result);
-					res.status(200).send({message: 'Like/Comment Updated Successfully'})
+				.updateOne(myquery, newvalues, function(err, result) {
+					if (err) {
+                        res.status(500).send({ errors: err });
+                        return;
+                    };
 					db.close();
+					res.status(200).send({message: 'Like/Comment Updated Successfully'})
 				});
 		});
 	} catch (err) {

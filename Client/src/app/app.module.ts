@@ -57,6 +57,13 @@ import { BuyRewardPopupComponent } from './components/popups/buy-reward-popup/bu
 import { CreateProjectPopupComponent } from './components/popups/create-project-popup/create-project-popup.component';
 import { AddFeaturePopupComponent } from './components/popups/add-feature-popup/add-feature-popup.component';
 import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-post-popup/add-showcase-post-popup.component';
+import { AddTaskPopupComponent } from './components/popups/add-task-popup/add-task-popup.component';
+import { TaskPageComponent } from './components/task-page/task-page.component';
+import { CreateRewardsPopupComponent } from './components/popups/create-rewards-popup/create-rewards-popup.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AddCommunityPostPopupComponent } from './components/popups/add-community-post-popup/add-community-post-popup.component';
+import { RecreationalComponent } from './components/recreational/recreational.component';
+
 
 @NgModule({
   declarations: [
@@ -82,6 +89,11 @@ import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-
     CreateProjectPopupComponent,
     AddFeaturePopupComponent,
     AddShowcasePostPopupComponent,
+    AddTaskPopupComponent,
+    TaskPageComponent,
+    CreateRewardsPopupComponent,
+    AddCommunityPostPopupComponent,
+    RecreationalComponent,
 
   ],
   imports: [
@@ -113,6 +125,7 @@ import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-
     MatAutocompleteModule,
     MatDividerModule,
     HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     DatePipe,

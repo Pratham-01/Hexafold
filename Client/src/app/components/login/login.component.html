@@ -9,10 +9,15 @@
         <mat-error *ngIf="email?.errors?.['email']">Please enter correct email</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password"/>
+        <input matInput placeholder="Password" formControlName="password" type="password"/>
         <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Login</button>
     </form>
+
+    <br>
+    <p class="subtitle text-center m-0">Don't have an account ?</p>
+    <p class="subtitle text-center m-0" style="cursor: pointer;" (click)="onNavigateToSignUp()">Sign-up</p>
+
   </div>
 </div>

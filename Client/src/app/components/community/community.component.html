@@ -1,63 +1,71 @@
 <div class="community-main row">
 
     <div class="announcements bg-secondary col-md-3 col-sm-12">
+
         <h2 class="headings text-white position-fixed bg-dark m-0">Important <br> Announcements</h2>
+        
+        <div class="d-flex w-100 justify-content-end">
+            <button class="btn btn-dark m-1" (click)="onCreatePost('announcement')">Post Announcements</button>
+        </div>
+
         <div class="announcements-list">
             <div style="z-index: 1; padding: 1rem 1.5rem;">
-                <div *ngFor="let toast of toasts" class="mt-2">
-                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.message" (closeHit)="toast.isShow = false">
+                <div *ngFor="let toast of announcements" class="mt-2">
+                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.content" (closeHit)="toast.isShow = false" > 
                     </app-toast>
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="community-posts col-md-9 col-sm-12">
-        <h2 class="px-4 headings">Posts</h2>
+        
+        <div class="d-flex w-100 justify-content-between align-items-center px-2">
+            <h2 class="px-4 headings">Posts</h2>
+            <button class="btn btn-dark" (click)="onCreatePost('community')">Post in Community</button>
+        </div>
+
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <div class="container">
             <div class="row">
-                <div class="col-md-10">
+
+                <div class="col-md-10" *ngFor="let post of communityPosts">
                     <div class="post-content">
                         <div class="post-container">
                             <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
                                 class="profile-photo-md pull-left">
                             <div class="post-detail">
                                 <div class="user-info">
-                                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> </h5>
-                                    <p class="text-muted">Published a photo about 3 mins ago</p>
+                                    <h5 class="profile-link"> {{ post.author || "Alex Clark" }} </h5>
+                                    <p class="text-muted">{{ post.postedDate || "23-05-2022" }}</p>
                                 </div>
                                 <div class="reaction">
                                     <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>
-                                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                                    <!-- <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> -->
                                 </div>
                                 <div class="line-divider"></div>
                                 <div class="post-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum. <i
-                                            class="em em-anguished"></i> <i class="em em-anguished"></i> <i
-                                            class="em em-anguished"></i></p>
+                                    <p> {{post.content || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"}}
+                                        <!-- <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i> -->
+                                    </p>
                                 </div>
                                 <div class="line-divider"></div>
                                 <div class="post-comment">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
-                                        class="profile-photo-sm">
-                                    <p><a href="timeline.html" class="profile-link">Diana </a><i
-                                            class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="profile-photo-sm">
+                                    <!-- https://bootdey.com/img/Content/avatar/avatar1.png -->
+                                    <div>
+                                        <span class="text-muted">
+                                            Pratham
+                                        </span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                            aliqua. Ut enim ad minim veniam, quis nostrud 
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="post-comment">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
-                                        class="profile-photo-sm">
-                                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                                </div>
+                                
                                 <div class="post-comment">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
                                         class="profile-photo-sm">
@@ -67,56 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-10">
-                    <div class="post-content">
-                        <div class="post-container">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
-                                class="profile-photo-md pull-left">
-                            <div class="post-detail">
-                                <div class="user-info">
-                                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> </h5>
-                                    <p class="text-muted">Published a photo about 3 mins ago</p>
-                                </div>
-                                <div class="reaction">
-                                    <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>
-                                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                                </div>
-                                <div class="line-divider"></div>
-                                <div class="post-text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                        culpa qui officia deserunt mollit anim id est laborum. <i
-                                            class="em em-anguished"></i> <i class="em em-anguished"></i> <i
-                                            class="em em-anguished"></i></p>
-                                </div>
-                                <div class="line-divider"></div>
-                                <div class="post-comment">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
-                                        class="profile-photo-sm">
-                                    <p><a href="timeline.html" class="profile-link">Diana </a><i
-                                            class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                                </div>
-                                <div class="post-comment">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
-                                        class="profile-photo-sm">
-                                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                                </div>
-                                <div class="post-comment">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
-                                        class="profile-photo-sm">
-                                    <input type="text" class="form-control" placeholder="Post a comment">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
             </div>
         </div>
     </div>

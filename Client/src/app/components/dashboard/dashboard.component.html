@@ -1,4 +1,4 @@
-<div class="dashboard-main">
+<div class="dashboard-main container">
 
   <div class="projects-section">
 
@@ -13,18 +13,22 @@
       </button>
     </div>
 
-    <div class="projects-carousel row">
+    <div class="projects-carousel row" *ngIf="projectList.length > 0">
       <div *ngFor="let project of projectList" style="padding: 1rem;" class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <div class="card d-flex " [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project.id)">
+        <div class="card d-flex " [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project._id)">
           <div class="card-body">
-            <h5 class="card-title">{{project.title}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h5 class="card-title">{{project.title || "Project"}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{project.total_cost | currency}}</h6>
+            <p class="card-text">{{project.description}}</p>
+            <!-- <a href="#" class="card-link">Card link</a> -->
+            <!-- <a href="#" class="card-link">Another link</a> -->
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="projects-carousel-backup w-100 d-flex justify-content-center" *ngIf="projectList.length == 0">
+        <h6 class="text-muted text-center">No Projects Available <br> It may take some time to load projects.</h6>
     </div>
 
 

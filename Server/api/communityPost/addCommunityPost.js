@@ -4,25 +4,33 @@ exports.addCommunityPost = async (req, res) => {
 	try {
 		console.log('Request received for adding community post');
 		var post = {
+			company_id: new ObjectId(req.body.company_id),
 			post_type: req.body.post_type,
 			title: req.body.title,
 			content: req.body.content,
-			tags: [] /* change */,
-			is_pinned: false,
+			// tags: [] /* change */,
+			// is_pinned: false,
 			likes_count: 0,
 			likes: [],
 			comments: [],
+			date_posted: new Date().toISOString().split("Z")[0].split("T").join(" ")
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
-			if (err) throw err;
+			if (err) {
+				res.status(500).send({ errors: err });
+				return;
+			};
 
 			var dbo = db.db('hexafold');
 			dbo.collection('community_post').insertOne(post, function (err, result) {
-				if (err) throw err;
+				if (err) {
+					res.status(500).send({ errors: err });
+				   	return;
+			    };
 				console.log('New Community Post Added', result);
-				res.status(200).send({ message: 'New Community Post Added' });
 				db.close();
+				res.status(200).send({ message: 'New Community Post Added' });
 			});
 		});
 	} catch (err) {

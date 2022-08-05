@@ -1,4 +1,4 @@
-<div class="project-page-main">
+<div class="project-page-main container">
 
     <h2 class="headings">
         {{projectData.title}}
@@ -19,14 +19,22 @@
 
         <h6 class="headings">Current Features</h6>
         <div class="current-features">
-            <div *ngFor="let feature of projectData.features" class="m-2">
-                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted">
-                        <div class="w-50 d-flex align-items-center">{{feature.title}}</div>
+            <div *ngFor="let feature of projectData.features; let i=index;" class="m-2">
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted == 'Yes'" (click)="showContent(i)">
+                        <div class="w-50 d-flex align-items-center">{{feature.featureTitle}}</div>
                         <div class="w-25 d-flex align-items-center">{{feature.cost | currency}}</div>
                         <div class="w-25 d-flex justify-content-end align-items-center">
-                            <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'done'">
+                            <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'Done'">
                         </div>
                 </div>
+
+                <div *ngIf="feature.showContent" class="taskList">
+                    <button class="btn btn-dark" (click)="onAddTaskPopup(feature)">Add Task</button>
+                    <div class="card" *ngFor="let task of feature.tasks" (click)="onNavigateToTask(feature, task)">
+                        {{task.title}}
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -38,8 +46,8 @@
 
         <div class="new-features">
             <div *ngFor="let feature of projectData.features" class="m-2">
-                <div class="card w-100 d-flex flex-row feature-card" *ngIf="!feature.accepted">
-                        <div class="w-50 d-flex align-items-center">{{feature.title}}</div>
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted == 'No'">
+                        <div class="w-50 d-flex align-items-center">{{feature.featureTitle}}</div>
                         <div class="w-25 d-flex align-items-center"></div>
                         <div class="w-25 d-flex justify-content-end align-items-center">
                             <button class="btn btn-secondary m-2" (click)="onFeatureReject(feature)">Reject</button>
