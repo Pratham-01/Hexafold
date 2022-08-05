@@ -4,12 +4,12 @@ exports.addCommunityPost = async (req, res) => {
 	try {
 		console.log('Request received for adding community post');
 		var post = {
+			company_id: new ObjectId(req.body.company_id),
 			post_type: req.body.post_type,
-			company_id: req.body.company_id,
 			title: req.body.title,
 			content: req.body.content,
-			tags: [] /* change */,
-			is_pinned: false,
+			// tags: [] /* change */,
+			// is_pinned: false,
 			likes_count: 0,
 			likes: [],
 			comments: [],
