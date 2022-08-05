@@ -28,18 +28,30 @@ export function passwordsMatchValidator(): ValidatorFn {
   };
 }
 
+interface User {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
+  users: User[] = [
+    {value: '0', viewValue: 'Super User'},
+    {value: '1', viewValue: 'Manager'},
+    {value: '2', viewValue: 'Employee'},
+    {value: '3', viewValue: 'Client'},
+  ];
+
   signUpForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
+      user: new FormControl(''),
     },
     { validators: passwordsMatchValidator() }
   );
@@ -64,20 +76,23 @@ export class SignUpComponent implements OnInit {
   get password() {
     return this.signUpForm.get('password');
   }
+  get user() {
+    return this.signUpForm.get('user');
+  }
 
   get confirmPassword() {
     return this.signUpForm.get('confirmPassword');
   }
 
   submit() {
-    if (!this.signUpForm.valid) return;
+    if (!this.signUpForm.valid) return console.log("not valid");
 
-    const { name, email, password } = this.signUpForm.value;
+    const { name, email, password, user } = this.signUpForm.value;
     this.authService
       .signUp((email == undefined ? '' : email), password!)
       .pipe(
         switchMap(({ user: { uid } }) =>
-          this.usersService.addUser({ uid:uid , email:<string>email , displayName: name! })
+          this.usersService.addUser({ uid:uid , email:<string>email , displayName: name! , user: user!})
         ),
         this.toast.observe({
           success: 'Congrats! You are all signed up',

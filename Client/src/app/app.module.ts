@@ -40,9 +40,10 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
 import {} from '@angular/material/form-field';
 import {} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 import { DateDisplayPipe } from './pipes/date-display.pipe';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -88,10 +89,12 @@ import { AddShowcasePostPopupComponent } from './components/popups/add-showcase-
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule, 
+    
     MatInputModule, 
     MatButtonModule, 
     MatCardModule, 
     MatFormFieldModule,
+    MatSelectModule,
     NgxCollapseModule,
     FormsModule,
     MatToolbarModule,

@@ -6,7 +6,7 @@
     > .chat-list {
         width: 40%;
         margin: 16px;
-        background: hsl(232, 45%, 84%);
+        background: linear-gradient(206.19deg, #DEEBFF 17.41%, #B3D4FF 83.81%);
         border-radius: 16px;
 
         .chat-title {
@@ -109,6 +109,7 @@
         .input-area {
             padding-top: 16px;
             padding-bottom: 8px;
+            
         }
     }
 }
