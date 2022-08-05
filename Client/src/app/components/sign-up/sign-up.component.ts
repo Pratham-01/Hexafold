@@ -39,12 +39,9 @@ interface User {
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  users: User[] = [
-    {value: '0', viewValue: 'Super User'},
-    {value: '1', viewValue: 'Manager'},
-    {value: '2', viewValue: 'Employee'},
-    {value: '3', viewValue: 'Client'},
-  ];
+
+  
+  
 
   signUpForm = new FormGroup(
     {
@@ -68,11 +65,25 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   type:any;
-
+  userArray:any;
   ngOnInit(): void {
     this.type = this.activatedRouter.snapshot.paramMap.get('type');
+    if(this.type == 'user'){
+      this.userArray = [
+        {value: '0', viewValue: 'Super User'},
+        {value: '1', viewValue: 'Manager'},
+        {value: '2', viewValue: 'Employee'}
+      ];
+    }
+    else if(this.type == 'client'){
+      this.userArray = [
+        {value: '3', viewValue: 'Client'}
+      ];
+    }
+    
   }
 
+  
   get name() {
     return this.signUpForm.get('name');
   }

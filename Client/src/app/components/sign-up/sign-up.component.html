@@ -35,7 +35,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>User Type</mat-label>
                 <mat-select required formControlName="user">
-                  <mat-option *ngFor="let user of users" [value]="user.value" >
+                  <mat-option *ngFor="let user of userArray" [value]="user.value" >
                     {{user.viewValue}}
                   </mat-option>
                 </mat-select>
