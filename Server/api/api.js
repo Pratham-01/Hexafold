@@ -1,3 +1,5 @@
+const getCompany = require('./company/getCompany');
+
 const createUser = require('./user/createUser');
 const getUserByEmail = require('./user/getUserByEmail');
 const getUsers = require('./user/getUsers');
@@ -44,6 +46,8 @@ const getRandomFact = require('./fact/getRandomFact');
 
 
 module.exports = {
+	...getCompany,
+
 	...createUser,
 	...getUserByEmail,
 	...getUsers,

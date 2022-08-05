@@ -16,7 +16,7 @@ exports.updateTrainingStatus = async (req, res) => {
 
             var myquery = {email: user};
             var newvalues = {$set: { 'trainings.$[ele].status': status }};
-            var arrayFilters = { arrayFilters: [{ 'ele.training': new ObjectId(training_id) }] };
+            var arrayFilters = { arrayFilters: [{ 'ele.training_id': new ObjectId(training_id) }] };
 
 			var dbo = db.db('hexafold');
 			dbo
