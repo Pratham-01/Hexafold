@@ -22,6 +22,7 @@ export class CreateRewardsPopupComponent implements OnInit {
 			description: "",
       points: 0,
       image: "",
+      company_id: sessionStorage.getItem("companyId")
     }
   }
 

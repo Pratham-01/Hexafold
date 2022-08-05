@@ -63,6 +63,18 @@ export class UserClientService {
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  getAllUsers(companyId:any): Observable<any>{
+    if(!companyId) companyId = sessionStorage.getItem("companyId");
+    let url = this.apiUrls.getAllUsers.replace("{companyId}", companyId);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
 
   // ================================= CLIENT ================================= 
 
@@ -101,6 +113,18 @@ export class UserClientService {
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  getAllClients(companyId:any): Observable<any>{
+    if(!companyId) companyId = sessionStorage.getItem("companyId");
+    let url = this.apiUrls.getAllClients.replace("{companyId}", companyId);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
   // ================================= PROJECT GENERAL ================================= 
   
   getParticularProjects(projectId:any): Observable<any>{
@@ -115,6 +139,18 @@ export class UserClientService {
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  addCommentToProject(body:any): Observable<any>{
+    let url = this.apiUrls.addComment;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+
   // ================================= TASKS ================================= 
 
   addTask(body:any): Observable<any>{
@@ -128,6 +164,18 @@ export class UserClientService {
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  updateTask(body:any): Observable<any>{
+    let url = this.apiUrls.updateTask;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+
   addFeature(body:any): Observable<any>{
     let url = this.apiUrls.addFeature;
     const httpOptions = {
@@ -137,6 +185,17 @@ export class UserClientService {
     };
     // console.log(url);
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  updateFeatureStatus(body:any): Observable<any>{
+    let url = this.apiUrls.updateFeatureStatus;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
 

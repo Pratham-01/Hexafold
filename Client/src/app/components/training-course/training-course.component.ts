@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { response } from 'express';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TrainingService } from 'src/app/services/training.service';
 
@@ -38,20 +39,44 @@ export class TrainingCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.trainingId = this.activatedRoute.snapshot.paramMap.get('course_id');
+    console.log(this.trainingId);
+    
     // this.trainingData = this.trainingService.getParticularCurrUserTrainings(this.trainingId);
     this.getTrainingData();
     console.log("Incoming data : ", this.trainingData)
   }
 
   getTrainingData(){
-    var today = new Date(), tomorrow = new Date();
-    tomorrow.setDate(today.getDate()+10);
-    this.trainingData = {id:1, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://www.youtube.com/embed/tgbNymZ7vqY', 'https://www.youtube.com/embed/hwPyJ_wkE6Q'], assigned_date: today, deadline: tomorrow, completed: true};
+    this.trainingService.getParticularTraining(this.trainingId).subscribe((response:any) => {
+      if(response){
+        this.trainingData = response[0];
+        if(!this.trainingData.status) this.trainingData.status = "pending";
+      }
+    })
+    // var today = new Date(), tomorrow = new Date();
+    // tomorrow.setDate(today.getDate()+10);
+    // this.trainingData = {id:1, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://www.youtube.com/embed/tgbNymZ7vqY', 'https://www.youtube.com/embed/hwPyJ_wkE6Q'], assigned_date: today, deadline: tomorrow, completed: true};
   }
 
   changeCourseTab(index:any){
     this.activeCourseTab = index;
     this.trainingData.urls[this.activeCourseTab - 1]
+  }
+
+  onCompleteCourse(){
+    var body:any = {
+      training_id : this.trainingData["_id"],
+      user : "prathamjajodia1@gmail.com", //sessionStorage.getItem("email"),
+      status : "done"
+    }
+
+    this.trainingService.updateTrainingStatus(body).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        
+      }
+    })
+    
   }
 
 }

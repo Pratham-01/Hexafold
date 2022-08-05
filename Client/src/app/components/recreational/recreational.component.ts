@@ -15,6 +15,7 @@ export class RecreationalComponent implements OnInit {
 
   activitiesList:any = ["Fun Facts", "Ackinator Game"];
   activeTab = 0;
+  disableBtnBoolean:any = false;
 
   ngOnInit(): void {
   }
@@ -24,9 +25,11 @@ export class RecreationalComponent implements OnInit {
   }
 
   factGenerator(){
+    this.disableBtnBoolean = true;
     this.generalService.getRandomFact(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response){
-        this.generalService.openMessageSnackBar(response.content, "OOHHHHH")
+        this.generalService.openMessageSnackBar(response.content, "OOHHHHH");
+        this.disableBtnBoolean = false;
       }
     })
   }

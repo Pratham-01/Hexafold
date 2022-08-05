@@ -10,6 +10,7 @@ exports.createProject = async (req, res) => {
 			comments: [],
 			features: [],
 			users: req.body.users,
+			deadline: req.body.deadline,
 			description: req.body.description ? req.body.description : '',
 			company_id: new ObjectId(req.body.company_id),
 		};

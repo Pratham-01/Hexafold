@@ -20,8 +20,11 @@ export class CommunityService {
     }
   }
 
-  getCommunityPosts(): Observable<any>{
-    let url = this.apiUrls.getCommunityPosts;
+  getCommunityPosts(companyId:any, post_type:any): Observable<any>{
+
+    if(!companyId) companyId = sessionStorage.getItem("companyId");
+
+    let url = this.apiUrls.getCommunityPosts.replace("{companyId}",companyId).replace("{post_type}",post_type);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

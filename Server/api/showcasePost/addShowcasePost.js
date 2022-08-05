@@ -8,12 +8,14 @@ exports.addShowcasePost = async (req, res) => {
 			// post_type: req.body.post_type,
 			title: req.body.title,
 			content: req.body.content,
+			img: req.body.img,
 			// tags: [], /* change */
 			// is_pinned: false,
 			likes_count: 0,
 			likes: [],
 			comments: [],
 			company_id: new ObjectId(req.body.company_id),
+			date_posted: new Date().toISOString().split("Z")[0].split("T").join(" ")
 		};
 		
 		constants.mongoclient.connect(constants.url, function (err, db) {

@@ -7,6 +7,8 @@ var jsonParser = bodyParser.json();
 const app = express();
 app.use(cors());
 
+app.get('getCompany/:id', api.getCompany);
+
 app.get('/allClients/:company', api.getClients);
 app.get('/client/:email', api.getClientByEmail);
 app.post('/createClient', jsonParser, api.createClient);

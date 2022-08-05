@@ -25,7 +25,7 @@ export class AddCommunityPostPopupComponent implements OnInit {
       post_type: this.type,
 			title: "",
 			content: "",
-      tags: []
+      company_id: sessionStorage.getItem("companyId")
     }
   }
 

@@ -47,7 +47,7 @@ export class TrainingHomeComponent implements OnInit {
     this.getTrainingDataForEmployee();
 
     this.resetNewTrainingData();
-    this.getCourseList();
+    // this.getCourseList();
     this.getEmployeeData();
     this.getAllTrainings();
   }
@@ -56,27 +56,27 @@ export class TrainingHomeComponent implements OnInit {
 
   // Employee
   getTrainingDataForEmployee(){
-    var tomorrow = new Date();
-    tomorrow.setDate(this.today.getDate()+10);
-    this.trainingData = [
-      {id:1, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ'], assigned_date: this.today, deadline: tomorrow, completed: true},
-      {id:2, assignee: "Super user", title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ','https://youtu.be/yw04QD1LaB0'], assigned_date: this.today, deadline: tomorrow, completed: false},
-      {id:3, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ', 'https://youtu.be/yw04QD1LaB0'], assigned_date: this.today, deadline: tomorrow, completed: true},
-      {id:4, assignee: "Super user", title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ'], assigned_date: this.today, deadline: tomorrow, completed: false},
-    ];    
-    // this.trainingService.setCurrUserTrainings(this.trainingData);
-
-    this.userClientService.getUserData("prathamjajodia1@gmail.com").subscribe((response:any) => {
+    
+    this.trainingService.getUserTrainings("prathamjajodia1@gmail.com").subscribe((response:any) => {
       if(response){
-        this.userData = response[0];
+        console.log("Training data : ", response);
+        this.trainingData = response;
       }
     })
+    
+    // var tomorrow = new Date();
+    // tomorrow.setDate(this.today.getDate()+10);
+    // this.trainingData = [
+    //   {id:1, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ'], assigned_date: this.today, deadline: tomorrow, completed: true},
+    //   {id:2, assignee: "Super user", title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ','https://youtu.be/yw04QD1LaB0'], assigned_date: this.today, deadline: tomorrow, completed: false},
+    //   {id:3, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ', 'https://youtu.be/yw04QD1LaB0'], assigned_date: this.today, deadline: tomorrow, completed: true},
+    //   {id:4, assignee: "Super user", title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ'], assigned_date: this.today, deadline: tomorrow, completed: false},
+    // ];    
 
   }
 
   // Manager / Super-User
   getCourseList(){
-    // TODO GET all Courses available
     
     this.courseList = [
         {id:1, title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ']},
@@ -84,8 +84,6 @@ export class TrainingHomeComponent implements OnInit {
         {id:3, title:"Introduction to OS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 25, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ', 'https://youtu.be/yw04QD1LaB0']},
         {id:4, title:"Introduction to DBMS", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 30, urls: ['https://youtu.be/yw04QD1LaB0', 'https://youtu.be/TdbQ2CX3jCQ']},
     ]
-
-
 
   }
 
@@ -108,14 +106,14 @@ export class TrainingHomeComponent implements OnInit {
     this.trainingService.getAllTrainings(sessionStorage.getItem("companyId")).subscribe((response) => {
       if(response){
         console.log(response);
-        
+        this.courseList = response;
       }
     })
   }
 
   // =========================================== INTERACTIONS =========================================== 
   openTraining(training:any){
-    this.router.navigate(["training/",training.id])
+    this.router.navigate(["training/",training.training_id])
   }
 
   changeTrainingTab(tab:any){
@@ -160,8 +158,9 @@ export class TrainingHomeComponent implements OnInit {
     this.newTrainingForm = {
       title : "",
       content: "",
-      reward_points: 0,
-      urls: []
+      reward: 0,
+      urls: [],
+      company_id: sessionStorage.getItem("companyId")
     }
   }
   addNewTrainingUrl(){
@@ -171,8 +170,31 @@ export class TrainingHomeComponent implements OnInit {
     this.newTrainingForm.urls.splice(i,1);
   }
   createTraining(){
-    console.log(this.newTrainingForm);
+    let tmpUrls:any = [];
+    this.newTrainingForm.urls.forEach((url:any) => {
+      let code:any = "";
+      if(url.includes("watch")){
+        let tmpUrl = new URL(url);
+        let parameters = new URLSearchParams(tmpUrl.search);
+        code = parameters.get("v");
+      }else{
+        let arr = url.split("/");
+        code = arr[arr.length - 1];
+      }
+      tmpUrls.push("https://www.youtube.com/embed/" + code);
+    });
+    this.newTrainingForm.urls = tmpUrls;
+    // console.log(this.newTrainingForm);
     // TODO POST Call
+
+    this.trainingService.addTraining(this.newTrainingForm).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        
+      }
+    })
+
+
     this.resetNewTrainingData();
   }
 
