@@ -7,6 +7,15 @@ exports.createUser = async (req, res) => {
 		var post = {
 			email: req.body.email,
 			password: req.body.password,
+			name: req.body.name,
+			position: req.body.position,
+			user_type: req.body.userType,
+			manager: req.body.manager ? new ObjectId(req.body.manager) : '',
+			company_id: new ObjectId(req.body.company_id),
+			reward_points: 0,
+			trainings: [],
+			redeem_rewards: [],
+			phone_number: req.body.phone_number,
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {
