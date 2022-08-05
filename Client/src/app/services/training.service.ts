@@ -64,6 +64,31 @@ export class TrainingService {
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  getUserTrainings(email:any): Observable<any>{
+
+    if(!email) email = sessionStorage.getItem("email");
+    let url = this.apiUrls.getUserTrainings.replace("{email}", email);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+
+  updateTrainingStatus(body:any): Observable<any>{
+
+    let url = this.apiUrls.updateTrainingStatus;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
    
 
 }

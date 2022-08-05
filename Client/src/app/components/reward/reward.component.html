@@ -5,7 +5,7 @@
       <h2 class="headings">Redeem Points</h2>
       <button class="btn btn-dark" (click)="onAddReward()">Create Reward &nbsp; +</button>
     </div>
-    <h5 class="subtitle">Balance : {{currBalance}}</h5>
+    <h5 class="subtitle">Balance : {{userData.reward_points}}</h5>
   </div>
 
   <div class="items row">
@@ -27,7 +27,7 @@
               <p class="product-description">{{item.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <p style="margin-top: 10px;" class="product-points"><span>{{item.points}} Points</span></p>
-                <button type="button" class="btn btn-dark" (click)="openBuyRewardPopup(item)" [disabled]="item.points > currBalance">buy now</button>
+                <button type="button" class="btn btn-dark" (click)="openBuyRewardPopup(item)" [disabled]="item.points > userData.reward_points">buy now</button>
               </div>
             </div>
 

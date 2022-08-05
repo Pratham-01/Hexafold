@@ -34,7 +34,7 @@
                         <br>
                         <div class="form-group">
                             <label for="training-reward">Reward Points</label>
-                            <input type="number" class="form-control" id="training-reward" min="0" name="training-reward" [(ngModel)]="newTrainingForm.reward_points">
+                            <input type="number" class="form-control" id="training-reward" min="0" name="training-reward" [(ngModel)]="newTrainingForm.reward">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
                         <br>
@@ -44,9 +44,9 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>URLs</label>
+                            <label>Youtube URLs</label>
                             <div *ngFor="let url of newTrainingForm.urls; let i=index;" class="url-inputs d-flex align-items-center">
-                                <input type="url" class="form-control" id="training-url-{{i}}" min="0" name="training--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
+                                <input type="text" class="form-control" id="training-url-{{i}}" min="0" name="training--url-{{i}}" [(ngModel)]="newTrainingForm.urls[i]">
                                 <img src="assets/Images/minus-icon.svg" type="button" alt="Remove" height="20" (click)="removeNewTrainingUrl(i)" class="remove-icon">
                             </div>
                             <br *ngIf="newTrainingForm.urls.length==0">
@@ -115,12 +115,6 @@
     </div>
 
     
-    
-    <div *ngFor="let t of userData.trainings">
-        {{t.training}}
-        {{t.status}}
-        {{t.deadline}}
-    </div>
 
     <div class="employee-trainings">
 
@@ -139,17 +133,17 @@
                         <div class="training-description col-md-9 col-sm-12 d-flex flex-column justify-content-between">
                             <div>
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="headings">{{course.title}}</h5>
-                                    <div class="reward">{{course.reward_points}}</div>
+                                    <h5 class="headings">{{course.title || "Course"}}</h5>
+                                    <div class="reward">{{course.reward || "NA"}}</div>
                                 </div>
-                                <p class="subtitle">Nice Garry Nice</p>
+                                <p class="subtitle">{{course.content || ""}}</p>
                             </div>
                             <div class="d-flex flex-column">
-                                <span>Modules : {{course.urls.length}}</span>
-                                <span>Deadline : {{course.deadline | date: 'yyyy/MM/dd HH:mm:ss'}}</span>
+                                <span>Modules : {{course.urls.length || "NA"}}</span>
+                                <span>Deadline : {{course.deadline | date: 'yyyy/MM/dd'}}</span>
                                 <span *ngIf="course.completed">
                                     <img src="assets/Images/green-tick.svg" height="16" alt="done" >
-                                    Great Work! You have passed all requirements and can view your course certificate now.
+                                    Great Work! You have completed the assigned training!
                                 </span>
                             </div>
                         </div>

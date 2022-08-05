@@ -19,8 +19,9 @@ export class RewardsService {
     }
   }
 
-  getRewards(): Observable<any>{
-    let url = this.apiUrls.getRewards;
+  getRewards(companyId:any): Observable<any>{
+    if(!companyId) companyId = sessionStorage.getItem("companyId");
+    let url = this.apiUrls.getRewards.replace("{companyId}",companyId);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

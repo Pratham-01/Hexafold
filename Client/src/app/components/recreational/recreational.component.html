@@ -18,7 +18,7 @@
         <div class="activity-content-section col-md-9 col-sm-12">
             
             <div class="activity-content d-flex justify-content-center align-items-center" *ngIf="activeTab == 0">
-                <button class="btn btn-dark" (click)="factGenerator()">
+                <button class="btn btn-dark" (click)="factGenerator()" [disabled]="disableBtnBoolean">
                     Click me
                 </button>
             </div>

@@ -15,7 +15,7 @@ export class CommunityComponent implements OnInit {
   isToast:boolean = false;
   isToast1:boolean = false;
   isToast2:boolean = false;
-  postsData:any;
+  // postsData:any;
   announcements:any;
   communityPosts:any;
 
@@ -54,20 +54,26 @@ export class CommunityComponent implements OnInit {
   
   ngOnInit(): void {
 
-    this.getPosts();
+    this.getAnnouncementPosts(); 
+    this.getCommunityPosts(); 
 
   }
 
-  getPosts(){
-    this.communityService.getCommunityPosts().subscribe((response:any) => {
+  getAnnouncementPosts(){
+    this.communityService.getCommunityPosts(sessionStorage.getItem("companyId"), "announcement").subscribe((response:any) => {
       if(response){
         console.log(response);
-        this.postsData = response;
-        this.announcements = []; this.communityPosts = [];
-        this.postsData.forEach((post:any) => {
-            if(post["post_type"] == "announcement") this.announcements.push(post);
-            else if(post["post_type"] == "community") this.communityPosts.push(post);
-        });
+        this.announcements = response;
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
+  }
+  getCommunityPosts(){
+    this.communityService.getCommunityPosts(sessionStorage.getItem("companyId"), "community").subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        this.communityPosts = response;
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -83,7 +89,10 @@ export class CommunityComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((response:any) => {
-      if(response == "success") this.getPosts();
+      if(response == "success") {
+        this.getAnnouncementPosts();
+        this.getCommunityPosts();
+      }
       
     });
   }

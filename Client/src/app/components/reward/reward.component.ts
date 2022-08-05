@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { RewardsService } from 'src/app/services/rewards.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 import { BuyRewardPopupComponent } from '../popups/buy-reward-popup/buy-reward-popup.component';
 import { CreateRewardsPopupComponent } from '../popups/create-rewards-popup/create-rewards-popup.component';
 
@@ -23,14 +24,15 @@ export class RewardComponent implements OnInit {
   // ]
   rewardsList:any = [];
   currBalance:any = 2000;
-
+  userData:any;
 
   constructor(
     private router: Router,
     private authService : AuthenticationService,
     private rewardsService : RewardsService,
     private dialog: MatDialog,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private userClientService: UserClientService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -45,6 +47,7 @@ export class RewardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRewards();
+    this.getUserData("prathamjajodia1@gmail.com");
   }
 
   openBuyRewardPopup(item:any){
@@ -63,11 +66,22 @@ export class RewardComponent implements OnInit {
   }
 
   getRewards(){
-    this.rewardsService.getRewards().subscribe((response:any) => {
+    this.rewardsService.getRewards(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response){
         console.log("Rewards: ", response);
         this.rewardsList = response;
       }
+    })
+  }
+
+  getUserData(email:any){
+    this.userClientService.getUserData(email).subscribe((response:any) => {
+      if(response){
+        console.log("User data: ", response);
+        this.userData = response[0];
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
     })
   }
 
