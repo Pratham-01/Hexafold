@@ -25,15 +25,31 @@ exports.createUser = async (req, res) => {
 			};
 
 			var dbo = db.db('hexafold');
-			dbo.collection('user').insertOne(post, function (err, result) {
-				if (err) {
-					res.status(500).send({ errors: err });
-					return;
-				};
-				console.log('New User Added', result);
-				db.close();
-				res.status(200).send({ message: 'New User Added' });
-			});
+			
+
+			dbo
+				.collection('user')
+				.find({ email: post.email })
+				.toArray((err, result) => {
+					if (err) {
+						res.status(500).send({ errors: err });
+						return;
+					};
+					
+					if (result.length != 0) {
+						res.status(200).send({ message: 'User already exists' });
+					} else {
+						dbo.collection('user').insertOne(post, function (err, result) {
+							if (err) {
+								res.status(500).send({ errors: err });
+								return;
+							};
+							console.log('New User Added', result);
+							db.close();
+							res.status(200).send({ message: 'New User Added' });
+						});
+					}
+				});
 		});
 	} catch (err) {
 		res.status(500).send({ errors: err });

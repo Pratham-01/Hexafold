@@ -22,7 +22,7 @@ app.post('/addTraining', jsonParser, api.addTraining);
 app.post('/assignTraining', jsonParser, api.assignTraining);
 app.put('/updateTrainingStatus', jsonParser, api.updateTrainingStatus);
 
-app.get('/communityPosts/:company', api.getCommunityPosts);
+app.get('/communityPosts/:company/:post_type', api.getCommunityPosts);
 app.post('/addCommunityPost', jsonParser, api.addCommunityPost);
 app.put('/updateCPLikeComment', jsonParser, api.updateCPLikeComment);
 
