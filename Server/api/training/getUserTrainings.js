@@ -23,37 +23,40 @@ exports.getUserTrainings = async (req, res) => {
                         return;
                     };
 
-                    var trainings = result[0].trainings;
-                    console.log(trainings);
+                    if (result.length != 0) {
+                        var trainings = result[0].trainings;
+                        console.log(trainings);
 
-                    // trainings.forEach(training => {
-                    for (let i in trainings) {
-                        
-                        dbo
-                        .collection('training')
-                        .find({ _id: new ObjectId(trainings[i].training_id) })
-                        .toArray((err, result2) => {
-                                if (err) {
-				                    res.status(500).send({ errors: err });
-                                    return;
-                                };
-                                
-                                result_trainings.push({
-                                    training_id: trainings[i].training_id,
-                                    status: trainings[i].status,
-                                    deadline: trainings[i].deadline,
-                                    title: result2[0].title,
-                                    reward: result2[0].reward,
-                                    content: result2[0].content,
-                                    urls: result2[0].urls,
-                                })
-                                console.log(result_trainings);
+                        // trainings.forEach(training => {
+                        for (let i in trainings) {
+                            
+                            dbo
+                            .collection('training')
+                            .find({ _id: new ObjectId(trainings[i].training_id) })
+                            .toArray((err, result2) => {
+                                    if (err) {
+                                        res.status(500).send({ errors: err });
+                                        return;
+                                    };
+                                    
+                                    result_trainings.push({
+                                        training_id: trainings[i].training_id,
+                                        status: trainings[i].status,
+                                        deadline: trainings[i].deadline,
+                                        title: result2[0].title,
+                                        reward: result2[0].reward,
+                                        content: result2[0].content,
+                                        urls: result2[0].urls,
+                                    })
 
-                                if ((i+1) == trainings.length){
-                                    db.close();
-                                    res.send(result_trainings);
-                                }
-                            });
+                                    if ((Number(i) + 1) == trainings.length){
+                                        db.close();
+                                        res.send(result_trainings);
+                                    }
+                                });
+                            }
+                    } else {
+                        res.send(result_trainings);
                     }
 
                     
