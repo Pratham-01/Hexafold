@@ -37,11 +37,11 @@
                                 class="profile-photo-md pull-left">
                             <div class="post-detail">
                                 <div class="user-info">
-                                    <h5 class="profile-link"> {{ post.author || "Alex Clark" }} </h5>
+                                    <h5 class="profile-link"> {{ post.user || "User 1" }} </h5>
                                     <p class="text-muted">{{ post.postedDate || "23-05-2022" }}</p>
                                 </div>
                                 <div class="reaction">
-                                    <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>
+                                    <a class="btn text-green" (click)="like(post)"><i class="fa fa-thumbs-up"></i> {{post.likes_count}}</a>
                                     <!-- <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> -->
                                 </div>
                                 <div class="line-divider"></div>
@@ -50,26 +50,30 @@
                                         <!-- <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i> -->
                                     </p>
                                 </div>
+
                                 <div class="line-divider"></div>
-                                <div class="post-comment">
+
+                                
+                                <div class="post-comment" *ngFor="let comment of post.comments">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="profile-photo-sm">
                                     <!-- https://bootdey.com/img/Content/avatar/avatar1.png -->
                                     <div>
-                                        <span class="text-muted">
-                                            Pratham
-                                        </span>
+                                        <span class="text-muted">{{comment.user}}</span>
+                                        <br>
+                                        <span class="text-muted" style="font-size: smaller;">{{comment.timestamp}}</span>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud 
+                                            {{comment.content}}
                                         </p>
                                     </div>
                                 </div>
                                 
-                                <div class="post-comment">
+                                <div class="post-comment ">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
                                         class="profile-photo-sm">
-                                    <input type="text" class="form-control" placeholder="Post a comment">
+                                    <input type="text" class="form-control" placeholder="Post a comment" name="comment-input" [(ngModel)]="commentInput">
+                                    <div class="d-flex w-25 justify-content-end">
+                                        <button class="btn btn-dark w-75" (click)="postComment(post)">Post</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

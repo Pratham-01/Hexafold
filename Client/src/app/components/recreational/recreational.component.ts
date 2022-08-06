@@ -31,6 +31,9 @@ export class RecreationalComponent implements OnInit {
         this.generalService.openMessageSnackBar(response.content, "OOHHHHH");
         this.disableBtnBoolean = false;
       }
+    }, (error:any) => {
+      console.log(error);
+      this.disableBtnBoolean = false;
     })
   }
 
