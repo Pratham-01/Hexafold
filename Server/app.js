@@ -51,5 +51,6 @@ app.put('/updateRewardStatus', jsonParser, api.updateRewardStatus);
 
 app.post('/addFact', jsonParser, api.addFact);
 app.get('/getRandomFact/:company', jsonParser, api.getRandomFact);
+app.put('/userProjects', jsonParser, api.removeFeature);
 
 server = app.listen(process.env.PORT || 8080);

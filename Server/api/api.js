@@ -42,8 +42,7 @@ const updateRewardStatus = require('./reward/updateRewardStatus');
 
 const addFact = require('./fact/addFact');
 const getRandomFact = require('./fact/getRandomFact');
-
-
+const removeFeature = require('./project/removeFeature');
 
 module.exports = {
 	...getCompany,
@@ -77,7 +76,7 @@ module.exports = {
 	...createProject,
 	...addTask,
 	...updateTask,
-	
+
 	...addFeature,
 	...updateFeatureStatus,
 	...getProject,
@@ -87,7 +86,8 @@ module.exports = {
 	...createReward,
 	...redeemReward,
 	...updateRewardStatus,
-	
+
 	...addFact,
-	...getRandomFact
+	...getRandomFact,
+	...removeFeature,
 };
