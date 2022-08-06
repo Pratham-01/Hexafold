@@ -78,7 +78,7 @@ export class TaskPageComponent implements OnInit {
   onTaskStatusUpdate(){
     let body:any =  {
       projectId: this.projectData["_id"],
-      feature_title: this.featureData.featur_title,
+      feature_title: this.featureData.feature_title,
       task_title: this.taskData.task_title,
       type: "status",
       status: this.taskData.status,
@@ -100,7 +100,7 @@ export class TaskPageComponent implements OnInit {
   onTaskAssigneeUpdate(){
     let body:any =  {
       projectId: this.projectData["_id"],
-      feature_title: this.featureData.featur_title,
+      feature_title: this.featureData.feature_title,
       task_title: this.taskData.task_title,
       type: "assignee",
       status: '',
