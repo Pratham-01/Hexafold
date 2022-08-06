@@ -143,6 +143,8 @@ export class SignUpComponent implements OnInit {
         console.log(response);
       }
     })
+    sessionStorage.setItem("type", "client");
+    sessionStorage.setItem("email", <string>email);
   }
   createUser(){
     const { name, email, password, confirmPassword, user } = this.signUpForm.value;
@@ -162,6 +164,10 @@ export class SignUpComponent implements OnInit {
         console.log(response);
       }
     })
+
+    sessionStorage.setItem("type", "user");
+    sessionStorage.setItem("email", <string>email);
   }
+
 
 }

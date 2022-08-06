@@ -66,6 +66,7 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(['/home']);
       sessionStorage.removeItem("email");
       sessionStorage.removeItem("type");
+      sessionStorage.removeItem("companyId");
     });
   }
 

@@ -18,6 +18,7 @@ export class CommunityComponent implements OnInit {
   // postsData:any;
   announcements:any;
   communityPosts:any;
+  commentInput:any;
 
   // announcements:Array<any> = [
     // {title:"1st announcement", message:"This is the first message", date:new Date(),"id": 1, isShow:true},
@@ -97,4 +98,47 @@ export class CommunityComponent implements OnInit {
     });
   }
 
-}
+  postComment(post:any){
+    let body:any = {
+      post_id : post["_id"],
+      user : sessionStorage.getItem("email")?.split("@")[0],
+      type : "comment",
+      content : this.commentInput,
+    }
+    this.communityService.updateCommunityPosts(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        body.timestamp = new Date().toLocaleString();
+        post.comments.push(body);
+      }
+    }, (error:any) => {
+      console.log(error);
+    });
+    this.commentInput = "";
+  }
+
+  like(post:any){
+    let body:any = {
+      post_id : post["_id"],
+      user : sessionStorage.getItem("email"),
+      type : "like",
+      content : (post.likes.findIndex((l:any) => l == sessionStorage.getItem("email")) > -1 ? "sub" : "add" ),
+    }
+    this.communityService.updateCommunityPosts(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        if(body.content == "add") {
+          post.likes.push(sessionStorage.getItem("email"));
+          post.likes_count = post.likes_count + 1;
+        }else{
+          post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
+          post.likes_count = post.likes_count - 1;
+        }
+      }
+    }, (error:any) => {
+      console.log(error);
+    });
+  }
+
+
+} 

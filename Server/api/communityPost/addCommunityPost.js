@@ -14,7 +14,7 @@ exports.addCommunityPost = async (req, res) => {
 			likes_count: 0,
 			likes: [],
 			comments: [],
-			date_posted: new Date().toISOString().split("Z")[0].split("T").join(" ")
+			date_posted: new Date().toLocaleString()
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {

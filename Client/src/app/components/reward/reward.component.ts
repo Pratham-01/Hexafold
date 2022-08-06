@@ -46,8 +46,13 @@ export class RewardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRewards();
-    this.getUserData("prathamjajodia1@gmail.com");
+    if(sessionStorage.getItem("email"))
+    {
+      this.getUserData(sessionStorage.getItem("email"));
+    }
+    if(sessionStorage.getItem("companyId")){
+      this.getRewards();
+    }
   }
 
   openBuyRewardPopup(item:any){

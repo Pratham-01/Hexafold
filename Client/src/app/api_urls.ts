@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class ApiUrls {
 
     address = "https://hexafold-api.herokuapp.com/";
+    // address = "localhost:8080/";
 
     // USER / CLIENT
     getAllClients = this.address + 'allClients/{companyId}';   // pending

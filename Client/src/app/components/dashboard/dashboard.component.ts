@@ -61,12 +61,15 @@ export class DashboardComponent implements OnInit {
     if (this.userType == "client"){
       this.getClientData("abcd@gmail.com");
     }else if (this.userType == "user"){
-      this.getUserData("prathamjajodia1@gmail.com");
+      this.getUserData(sessionStorage.getItem("email"));
     }
-    this.getShowcasePosts();
   }
 
   // INTERACTIONS
+
+  onNavigateToSignUp(type:any){
+    this.router.navigate(["sign-up", type])
+  }
 
   getCardBorder(){
     return "1.5rem solid #221d1c"
@@ -100,8 +103,9 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getUserData(email).subscribe((response:any) => {
       if(response){
         console.log("User data: ", response);
-        
         this.getUserProjects(response[0]["_id"]);
+        sessionStorage.setItem("companyId", response[0]["company_id"]);
+        this.getShowcasePosts();
 
       }
     }, (error:any)=>{
@@ -113,6 +117,8 @@ export class DashboardComponent implements OnInit {
       if(response){
         console.log("Client data: ", response);
         this.getClientProjects(response[0]["_id"]);
+        sessionStorage.setItem("companyId", response[0]["company_id"]);
+        this.getShowcasePosts();
 
       }
     }, (error:any)=>{
@@ -154,7 +160,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   getShowcasePosts(){
-    this.showcaseService.getShowcasePosts().subscribe((response:any) => {
+    this.showcaseService.getShowcasePosts(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response){
         console.log(response);
       }
