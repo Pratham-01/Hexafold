@@ -4,7 +4,7 @@ var constants = require('../../../constants/constantVariables');
 exports.addTask = async (req, res) => {
 	try {
 		console.log('Request received for adding a task to a task');
-		var projectId = req.body.projectId;
+		var projectId = new ObjectId(req.body.projectId);
 		var feature_title = req.body.feature_title;
 		var post = {
 			priority: req.body.priority,
@@ -42,7 +42,7 @@ exports.addTask = async (req, res) => {
 						res.status(200).send({ message: 'Task already exists' });
 					} else {
 						dbo.collection('project').updateOne(
-							{ _id: new ObjectId(projectId) },
+							{ _id: projectId },
 							{
 								$push: { 'features.$[ele].tasks': post },
 							},

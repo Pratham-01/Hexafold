@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId;
 exports.updateCPLikeComment = async (req, res) => {
 	try {
 		console.log('Request received for updating Like/Comment for Community post');
-        var post_id = req.body.post_id;
+        var post_id = new ObjectId(req.body.post_id);
         var user = req.body.user;
         var type = req.body.type;
         var content = req.body.content;
@@ -15,7 +15,7 @@ exports.updateCPLikeComment = async (req, res) => {
                 return;
 			};
 
-            var myquery = {_id: new ObjectId(post_id)};
+            var myquery = {_id: post_id};
             if (type == 'like'){
                 if (content == 'add') {
                     var newvalues = {$push: { "likes": user }, $inc: { likes_count: 1 } };

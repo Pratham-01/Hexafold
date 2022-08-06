@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId;
 exports.updateTask = async (req, res) => {
 	try {
 		console.log('Request received for updating status of a task');
-		var projectId = req.body.projectId;
+		var projectId = new ObjectId(req.body.projectId);
 		var featureTitle = req.body.featureTitle;
 		var taskTitle = req.body.taskTitle;
 		var type = req.body.type;
@@ -29,7 +29,7 @@ exports.updateTask = async (req, res) => {
 
 			var dbo = db.db('hexafold');
 			dbo.collection('project').updateOne(
-				{ _id: new ObjectId(projectId) },
+				{ _id: projectId },
 				newvalues,
 				{ arrayFilters: [{ 'ele1.featureTitle': featureTitle }, { 'ele2.title': taskTitle }] },
 				function (err, result) {

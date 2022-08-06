@@ -28,7 +28,6 @@ exports.getUserTrainings = async (req, res) => {
 
                     // trainings.forEach(training => {
                     for (let i in trainings) {
-                        console.log("in");
                         
                         dbo
                         .collection('training')

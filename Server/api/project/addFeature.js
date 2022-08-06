@@ -4,7 +4,7 @@ var constants = require('../../constants/constantVariables');
 exports.addFeature = async (req, res) => {
 	try {
 		console.log('Request received for adding a feature');
-		var projectId = req.body.projectId;
+		var projectId = new ObjectId(req.body.projectId);
 		var post = {
 			manager_acceptance: false,
 			client_acceptance: false,
@@ -39,7 +39,7 @@ exports.addFeature = async (req, res) => {
 						res.status(200).send({ message: 'Feature already exists' });
 					} else {
 						dbo.collection('project').updateOne(
-							{ _id: new ObjectId(projectId) },
+							{ _id: projectId },
 							{ $push: { features: post } },
 
 							function (err, result) {

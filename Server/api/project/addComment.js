@@ -1,11 +1,10 @@
 var constants = require('../../constants/constantVariables');
 var ObjectId = require('mongodb').ObjectId;
-var Timestamp = require('mongodb').Timestamp;
 
 exports.addComment = async (req, res) => {
 	try {
 		console.log('Request received for adding Comment');
-		var project_id = req.body.project_id;
+		var project_id = new ObjectId(req.body.project_id);
 
 		var comment = {
 			user_type: req.body.user_type,
@@ -24,7 +23,7 @@ exports.addComment = async (req, res) => {
 
             dbo
 				.collection('project')
-				.updateOne({_id: new ObjectId(project_id)}, 
+				.updateOne({_id: project_id}, 
 				{$push : {comments: comment}},
 				function(err, result) {
 					if (err) {

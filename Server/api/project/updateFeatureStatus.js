@@ -4,7 +4,7 @@ var constants = require('../../constants/constantVariables');
 exports.updateFeatureStatus = async (req, res) => {
 	try {
 		console.log('Request received for update status of feature');
-		var projectId = req.body.projectId;
+		var projectId = new ObjectId(req.body.projectId);
 		var featureTitle = req.body.featureTitle;
 		var user_type = req.body.user_type;
 		var status = req.body.status;
@@ -30,7 +30,7 @@ exports.updateFeatureStatus = async (req, res) => {
             }
 			var dbo = db.db('hexafold');
 			dbo.collection('project').updateOne(
-				{ _id: new ObjectId(projectId) },
+				{ _id: projectId },
 				upadteValues,
 				{ arrayFilters: [{ 'ele.title': featureTitle }] },
 				function (err, result) {

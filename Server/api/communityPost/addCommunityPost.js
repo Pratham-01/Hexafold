@@ -1,4 +1,5 @@
 var constants = require('../../constants/constantVariables');
+var ObjectId = require('mongodb').ObjectId;
 
 exports.addCommunityPost = async (req, res) => {
 	try {
