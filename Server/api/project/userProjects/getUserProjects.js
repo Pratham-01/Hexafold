@@ -13,6 +13,7 @@ exports.getUserProjects = async (req, res) => {
 			dbo
 				.collection('project')
 				.find({ users: { $in: [email] } })
+				.sort({ deadline: 1 })
 				.toArray((err, result) => {
 					if (err) {
 						res.status(500).send({ errors: err });
