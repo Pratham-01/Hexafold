@@ -12,7 +12,7 @@ exports.getUserProjects = async (req, res) => {
 			var dbo = db.db('hexafold');
 			dbo
 				.collection('project')
-				.find({ users: email })
+				.find({$in : { users: email }})
 				.toArray((err, result) => {
 					if (err) {
 						res.status(500).send({ errors: err });

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form-container mat-elevation-z5">
-        <h1>Sign Up a New User!</h1>
+        <h1>Sign Up a New {{type | titlecase}}!</h1>
         <form [formGroup]="signUpForm" (ngSubmit)="submit()">
             <mat-form-field>
                 <input matInput placeholder="Name" formControlName="name" />
@@ -41,7 +41,7 @@
                 </mat-select>
               </mat-form-field>
             <div class="center margin-top">
-                <button mat-raised-button color="primary" type="submit">
+                <button mat-raised-button class="btn btn-dark" type="submit">
                     Sign Up!
                 </button>
             </div>

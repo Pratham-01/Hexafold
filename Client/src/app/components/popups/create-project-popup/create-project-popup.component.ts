@@ -53,11 +53,11 @@ export class CreateProjectPopupComponent implements OnInit {
       if (elem.assigned) tmpClient.push(elem.id);
     });
     let tmpUser:any = [];
-    this.projectForm.user.forEach((elem:any) => {
+    this.projectForm.users.forEach((elem:any) => {
       if (elem.assigned) tmpUser.push(elem.id);
     });
     this.projectForm.clients = tmpClient;
-    this.projectForm.user = tmpUser;
+    this.projectForm.users = tmpUser;
     console.log(this.projectForm);
 
     this.userClientService.addProject(this.projectForm).subscribe((response:any) => {
@@ -75,8 +75,8 @@ export class CreateProjectPopupComponent implements OnInit {
   getAllEmployees(){
     this.userClientService.getAllUsers(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response) {
-        console.log("Emp list: ", response);
         this.UserList = response;
+        console.log("Emp list: ", this.UserList);
       this.generateProjectForm();
 
       }
