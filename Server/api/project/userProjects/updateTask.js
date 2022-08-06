@@ -14,9 +14,9 @@ exports.updateTask = async (req, res) => {
 		console.log('hello', projectId, featureTitle, taskTitle, type, taskAssignee, taskStatus);
 
 		if (type == 'status') {
-			var newvalues = { $set: { 'features.tasks.status': taskStatus } };
+			var newvalues = { $set: { 'features.$[ele1].tasks.$[ele2].status': taskStatus } };
 		} else if (type == 'assignee') {
-			var newvalues = { $set: { 'features.tasks.assignedEmployee': taskAssignee } };
+			var newvalues = { $set: { 'features.$[ele1].tasks.$[ele2].assignedEmployee': taskAssignee } };
 		} else {
 			res.status(400).send({ message: 'Invalid type' });
 		}
