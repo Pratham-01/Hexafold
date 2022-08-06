@@ -30,7 +30,7 @@ export class BuyRewardPopupComponent implements OnInit {
 
   redeemRewards(){
     var body:any = {
-      user: "prathamjajodia1@gmail.com",// sessionStorage.getItem("email"),
+      user: sessionStorage.getItem("email"),
       reward_id: this.data["_id"],
       price: parseInt(this.data["points"])
     }
