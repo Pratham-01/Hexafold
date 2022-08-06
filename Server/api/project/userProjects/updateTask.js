@@ -5,18 +5,18 @@ exports.updateTask = async (req, res) => {
 	try {
 		console.log('Request received for updating status of a task');
 		var projectId = new ObjectId(req.body.projectId);
-		var featureTitle = req.body.featureTitle;
-		var taskTitle = req.body.taskTitle;
+		var feature_title = req.body.feature_title;
+		var task_title = req.body.task_title;
 		var type = req.body.type;
-
-		var taskStatus = req.body.taskStatus ? req.body.taskStatus : '';
-		var taskAssignee = req.body.taskAssignee ? req.body.taskAssignee : '';
-		console.log("hello", projectId, featureTitle, taskTitle, type, taskAssignee, taskStatus);
+		
+		var status = req.body.status ? req.body.status : '';
+		var assignedEmployee = req.body.assignedEmployee ? req.body.assignedEmployee : '';
+		console.log("hello", projectId, feature_title, task_title, type, assignedEmployee, status);
 		
 		if (type == 'status'){
-			var newvalues = {$set: { 'features.$[ele1].tasks.$[ele2].status': taskStatus }};
+			var newvalues = {$set: { 'features.$[ele1].tasks.$[ele2].status': status }};
 		} else if (type == 'assignee') {
-			var newvalues = {$set: { 'features.$[ele1].tasks.$[ele2].assignedEmployee': taskAssignee }};
+			var newvalues = {$set: { 'features.$[ele1].tasks.$[ele2].assignedEmployee': assignedEmployee }};
 		} else {
 			res.status(400).send({message: 'Invalid type'})
 		}
@@ -31,7 +31,7 @@ exports.updateTask = async (req, res) => {
 			dbo.collection('project').updateOne(
 				{ _id: projectId },
 				newvalues,
-				{ arrayFilters: [{ 'ele1.featureTitle': featureTitle }, { 'ele2.title': taskTitle }] },
+				{ arrayFilters: [{ 'ele1.feature_title': feature_title }, { 'ele2.task_title': task_title }] },
 				function (err, result) {
 					if (err) {
 						res.status(500).send({ errors: err });

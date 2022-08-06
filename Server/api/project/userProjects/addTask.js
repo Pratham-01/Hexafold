@@ -13,7 +13,7 @@ exports.addTask = async (req, res) => {
 			startDateTime: req.body.startDateTime,
 			deadline: req.body.deadline,
 			// asignor: req.body.assignor, //pushpit ko batana h
-			status: 'pending',
+			status: 'TODO',
 			assignedEmployee: req.body.assignedEmployee,
 			reward_points: req.body.reward_points ? req.body.reward_points : 0,
 		};

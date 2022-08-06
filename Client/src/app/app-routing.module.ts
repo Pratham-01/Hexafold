@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'rewards', component: RewardComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'training/:course_id', component: TrainingCourseComponent },
-  { path: 'projects/:project_id/:featurTitle/:taskId', component: TaskPageComponent }, //TASK PAGE
+  { path: 'projects/:project_id/:featur_title/:task_title', component: TaskPageComponent }, //TASK PAGE
   { path: 'recreational', component: RecreationalComponent },
   
 
