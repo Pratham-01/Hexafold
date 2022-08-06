@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { TrainingService } from 'src/app/services/training.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 
@@ -27,7 +28,8 @@ export class TrainingHomeComponent implements OnInit {
     private router: Router,
     private trainingService: TrainingService,
     private authService : AuthenticationService,
-    private userClientService: UserClientService
+    private userClientService: UserClientService,
+    private generalService: GeneralService,
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -89,16 +91,23 @@ export class TrainingHomeComponent implements OnInit {
 
   getEmployeeData(){
     // GET all of the employee's data
-    this.employeeList = [
-      {id: 1, name: "Pushpit"},
-      {id: 2, name: "Photon"},
-      {id: 3, name: "Divya"},
-      {id: 4, name: "Yash"},
-      {id: 5, name: "Pratham"},
-      {id: 6, name: "Mansimar"},
-    ];
+    // this.employeeList = [
+    //   {id: 1, name: "Pushpit"},
+    //   {id: 2, name: "Photon"},
+    //   {id: 3, name: "Divya"},
+    //   {id: 4, name: "Yash"},
+    //   {id: 5, name: "Pratham"},
+    //   {id: 6, name: "Mansimar"},
+    // ];
 
-    this.resetAssignTrainingData();
+    this.userClientService.getAllUsers(sessionStorage.getItem("companyId")).subscribe((response:any) => {
+      if(response){
+        console.log("Emp list : " , response);
+        this.employeeList = response;
+        this.resetAssignTrainingData();
+      }
+    })
+
 
   }
 
@@ -185,7 +194,6 @@ export class TrainingHomeComponent implements OnInit {
     });
     this.newTrainingForm.urls = tmpUrls;
     // console.log(this.newTrainingForm);
-    // TODO POST Call
 
     this.trainingService.addTraining(this.newTrainingForm).subscribe((response:any) => {
       if(response){
@@ -207,13 +215,28 @@ export class TrainingHomeComponent implements OnInit {
       emp_id : []
     }
     this.employeeList.forEach((emp:any) => {
-      this.assignTrainingForm.emp_id.push({id: emp.id, assigned:false})
+      this.assignTrainingForm.emp_id.push({id: emp["email"], assigned:false})
     });
+    this.onCheckBoxChange({target: {checked: false}})
   }
 
   assignTraining(){
-    console.log(this.assignTrainingForm);
-    
+    let tmparr:any = [];
+    this.assignTrainingForm.emp_id.forEach((el:any) => {
+      if (el.assigned) tmparr.push(el.id);
+    });
+    this.assignTrainingForm.assignees = tmparr;
+    // console.log(this.assignTrainingForm);
+
+    this.trainingService.assignTraining(this.assignTrainingForm).subscribe((response:any) => {
+      if(response){
+        console.log(response);
+        this.generalService.openMessageSnackBar(response.message, "ok");
+      }
+    })
+
+    this.resetAssignTrainingData();
+
   }
 
 

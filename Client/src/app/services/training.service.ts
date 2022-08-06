@@ -89,6 +89,18 @@ export class TrainingService {
     // console.log(url);
     return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
+
+
+  assignTraining(body:any): Observable<any>{
+    let url = this.apiUrls.assignTraining;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
    
 
 }

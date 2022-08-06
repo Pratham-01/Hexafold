@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -16,13 +17,19 @@ export class NavBarComponent implements OnInit {
   tabs = ["home","dashboard", "chat", "community", "training", "rewards"]
 
   constructor(
-    private router: Router, public authService: AuthenticationService,private toast: HotToastService
+    private router: Router, public authService: AuthenticationService,private toast: HotToastService,
   ) { }
 
   ngOnInit(): void {
     // this.navbarBoolean = (window.location.href.split("/").pop() == "home" || window.location.href.split("/").pop() == "login") ;
     this.showTab(window.location.href)
-
+    this.user$.subscribe((res:any) => {
+      if(res) {
+        console.log(res);
+    // debugger
+      }
+    })
+    
 
     this.authService.navigationSubject.subscribe((data:any) => {
       this.changeTab(data)

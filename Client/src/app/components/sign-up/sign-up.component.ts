@@ -145,13 +145,18 @@ export class SignUpComponent implements OnInit {
     })
   }
   createUser(){
-    const { name, email, password } = this.signUpForm.value;
+    const { name, email, password, confirmPassword, user } = this.signUpForm.value;
     let body:any = {
       email: email,
 			name: name,
 			password: password,
 			company_id: sessionStorage.getItem("companyId"),
+      position: "",
+      user_type: this.userArray[this.userArray.findIndex((x:any) => x.value == user)].viewValue
+
     }
+    console.log(body);
+    
     this.userClientService.createUser(body).subscribe((response:any) => {
       if(response){
         console.log(response);

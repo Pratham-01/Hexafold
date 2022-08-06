@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="training-title">Training</label>
                                 <select class="form-select" aria-label="Default select example" name="assigntrainingd" [(ngModel)]="assignTrainingForm.training_id">
-                                    <option *ngFor="let course of courseList" value="{{course.id}}">{{course.title}}</option>
+                                    <option *ngFor="let course of courseList" value="{{course['_id']}}">{{course.title}}</option>
                                 </select>
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
@@ -95,7 +95,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="assign-training-deadline">Deadline</label>
-                                <input type="datetime-local" class="form-control" id="assign-training-deadline" name="assign-training-deadline" [(ngModel)]="assignTrainingForm.deadline" [min]="todaysDate" [value]="todaysDate">
+                                <input type="date" class="form-control" id="assign-training-deadline" name="assign-training-deadline" [(ngModel)]="assignTrainingForm.deadline" [min]="todaysDate" [value]="todaysDate">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
     

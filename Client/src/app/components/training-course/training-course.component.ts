@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TrainingService } from 'src/app/services/training.service';
+import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
   selector: 'app-training-course',
@@ -15,6 +16,7 @@ export class TrainingCourseComponent implements OnInit {
 
   trainingId:any;
   trainingData:any;
+  userData:any;
   activeCourseTab = 0;
 
   constructor(
@@ -23,7 +25,8 @@ export class TrainingCourseComponent implements OnInit {
     private dialog: MatDialog,
     private trainingService: TrainingService,
     private datePipe: DatePipe,
-    private authService : AuthenticationService
+    private authService : AuthenticationService,
+    private userClientService : UserClientService
 
   ) {
     // Function to throw unsigned user out
@@ -43,6 +46,7 @@ export class TrainingCourseComponent implements OnInit {
     
     // this.trainingData = this.trainingService.getParticularCurrUserTrainings(this.trainingId);
     this.getTrainingData();
+    
     console.log("Incoming data : ", this.trainingData)
   }
 
@@ -50,12 +54,26 @@ export class TrainingCourseComponent implements OnInit {
     this.trainingService.getParticularTraining(this.trainingId).subscribe((response:any) => {
       if(response){
         this.trainingData = response[0];
-        if(!this.trainingData.status) this.trainingData.status = "pending";
+        // if(!this.trainingData.status) this.trainingData.status = "pending";
+        this.getUserData("prathamjajodia1@gmail.com");
       }
     })
-    // var today = new Date(), tomorrow = new Date();
-    // tomorrow.setDate(today.getDate()+10);
-    // this.trainingData = {id:1, assignee: "Manager 1", title:"Introduction to Cloud Computing", content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", reward_points: 20, urls: ['https://www.youtube.com/embed/tgbNymZ7vqY', 'https://www.youtube.com/embed/hwPyJ_wkE6Q'], assigned_date: today, deadline: tomorrow, completed: true};
+  }
+
+  getUserData(email:any){
+    this.userClientService.getUserData(email).subscribe((response:any) => {
+      if(response){
+        // console.log("User data: ", response);
+        this.userData = response[0];
+        let index = this.userData.trainings.findIndex((x:any) => x["training_id"] == this.trainingData["_id"]);
+        this.trainingData.status = this.userData.trainings[index].status;
+        this.trainingData.deadline = this.userData.trainings[index].deadline;
+        console.log(this.trainingData);
+        
+      }
+    }, (error:any)=>{
+      console.log("Error : ", error);
+    })
   }
 
   changeCourseTab(index:any){

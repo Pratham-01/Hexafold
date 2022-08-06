@@ -10,7 +10,7 @@ exports.assignTraining = async (req, res) => {
         var deadline = req.body.deadline;
 
         userTraining = {
-            training: new ObjectId(training_id),
+            training_id: new ObjectId(training_id),
             status: "pending",
             deadline: deadline
         }
