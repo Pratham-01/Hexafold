@@ -98,11 +98,22 @@ export class ProjectPageComponent implements OnInit {
   }
 
   onFeatureReject(feature:any){
-    // TODO delete call
+    let body:any = {
+      projectId: this.projectData["_id"],
+      feature_title: feature.feature_title
+    }
+    this.userClientService.removeFeature(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        this.generalService.openMessageSnackBar("Feature Rejected Successfully", "OK")
+      }
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error Occured", "OK")
+    });
   }
 
   onFeatureAccept(feature:any){
-    // TODO if super user
     if(sessionStorage.getItem("type") == 'user'){
       this.openFeatureCostPopup(feature);
     }else if (sessionStorage.getItem("type") == 'client')
@@ -128,7 +139,7 @@ export class ProjectPageComponent implements OnInit {
     this.userClientService.updateFeatureStatus(body).subscribe((response:any) => {
       if(response) {
         console.log(response);
-        this.generalService.openMessageSnackBar("Feature Rejected Successfully", "OK")
+        this.generalService.openMessageSnackBar("Feature Accepted Successfully", "OK")
       }
     }, (error:any) => {
       console.log(error);
