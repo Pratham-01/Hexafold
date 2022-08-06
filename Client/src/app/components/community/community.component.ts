@@ -124,16 +124,18 @@ export class CommunityComponent implements OnInit {
       type : "like",
       content : (post.likes.findIndex((l:any) => l == sessionStorage.getItem("email")) > -1 ? "sub" : "add" ),
     }
+    
+    if(body.content == "add") {
+      post.likes.push(sessionStorage.getItem("email"));
+      post.likes_count = post.likes_count + 1;
+    }else{
+      post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
+      post.likes_count = post.likes_count - 1;
+    }
+
     this.communityService.updateCommunityPosts(body).subscribe((response:any) => {
       if(response) {
         console.log(response);
-        if(body.content == "add") {
-          post.likes.push(sessionStorage.getItem("email"));
-          post.likes_count = post.likes_count + 1;
-        }else{
-          post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
-          post.likes_count = post.likes_count - 1;
-        }
       }
     }, (error:any) => {
       console.log(error);

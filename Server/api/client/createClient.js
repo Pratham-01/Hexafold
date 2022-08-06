@@ -8,7 +8,7 @@ exports.createClient = async (req, res) => {
 			name: req.body.name,
 			password: req.body.password,
 			company: req.body.company ? req.body.company : '',
-			company_id: req.body.company_id,
+			company_id: new ObjectId(req.body.company_id),
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {

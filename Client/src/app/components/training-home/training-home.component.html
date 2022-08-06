@@ -139,7 +139,7 @@
 
         <div class="trainings-list">
             <div *ngFor="let course of trainingData" class="d-flex flex-column align-items-center w-100">
-                <div class="card col-md-9 col-sm-10" *ngIf="currentTrainingTab == 'in-progress' ? !course.completed : course.completed" (click)="openTraining(course)">
+                <div class="card col-md-9 col-sm-10" *ngIf="currentTrainingTab == 'in-progress' ? (course.status == 'pending') : (course.status == 'done')" (click)="openTraining(course)">
                     <div class="row w-100 m-0">
                         <div class="training-image col-md-3 col-sm-12 d-flex justify-content-center">
                             <img src="assets/Images/training-dummy-img.jpg" alt="">
@@ -155,7 +155,7 @@
                             <div class="d-flex flex-column">
                                 <span>Modules : {{course.urls.length || "NA"}}</span>
                                 <span>Deadline : {{course.deadline | date: 'yyyy/MM/dd'}}</span>
-                                <span *ngIf="course.completed">
+                                <span *ngIf="course.status == 'done'">
                                     <img src="assets/Images/green-tick.svg" height="16" alt="done" >
                                     Great Work! You have completed the assigned training!
                                 </span>
