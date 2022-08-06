@@ -28,7 +28,7 @@
       <div *ngFor="let project of projectList" style="padding: 1rem;" class="col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="card d-flex " [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project._id)">
           <div class="card-body">
-            <h5 class="card-title">{{project.title || "Project"}}</h5>
+            <h5 class="card-title">{{project.project_title || "Project"}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{project.total_cost | currency}}</h6>
             <p class="card-text">{{project.description}}</p>
             <!-- <a href="#" class="card-link">Card link</a> -->

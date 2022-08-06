@@ -59,7 +59,7 @@ export class TrainingHomeComponent implements OnInit {
   // Employee
   getTrainingDataForEmployee(){
     
-    this.trainingService.getUserTrainings("prathamjajodia1@gmail.com").subscribe((response:any) => {
+    this.trainingService.getUserTrainings(sessionStorage.getItem("email")).subscribe((response:any) => {
       if(response){
         console.log("Training data : ", response);
         this.trainingData = response;

@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userType = this.userClientService.getLoggedInUserType();
     if (this.userType == "client"){
-      this.getClientData("abcd@gmail.com");
+      this.getClientData(sessionStorage.getItem("email"));
     }else if (this.userType == "user"){
       this.getUserData(sessionStorage.getItem("email"));
     }
@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getUserData(email).subscribe((response:any) => {
       if(response){
         console.log("User data: ", response);
-        this.getUserProjects(response[0]["_id"]);
+        this.getUserProjects(response[0]["email"]);
         sessionStorage.setItem("companyId", response[0]["company_id"]);
         this.getShowcasePosts();
 
@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getClientData(email).subscribe((response:any) => {
       if(response){
         console.log("Client data: ", response);
-        this.getClientProjects(response[0]["_id"]);
+        this.getClientProjects(response[0]["email"]);
         sessionStorage.setItem("companyId", response[0]["company_id"]);
         this.getShowcasePosts();
 

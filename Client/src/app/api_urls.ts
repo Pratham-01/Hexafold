@@ -33,6 +33,7 @@ export class ApiUrls {
     // Features
     addFeature = this.address + 'addFeature';       // pending - post
     updateFeatureStatus = this.address + 'updateFeatureStatus';       // pending - put
+    removeFeature = this.address + 'removeFeature';
 
     // COMMUNITY APIS
     getCommunityPosts = this.address + 'communityPosts/{companyId}/{post_type}';

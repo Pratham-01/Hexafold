@@ -25,12 +25,12 @@ export class AddFeaturePopupComponent implements OnInit {
     
     this.newFeatureForm = {
       projectId : this.data.data["_id"],
-      featureTitle : "",
+      feature_title : "",
       accepted : "No",
       cost : 0,
-      status : "TODO",
-      start_date : new Date().toISOString().split("T")[0],
-      deadline : 0,
+      // status : "TODO",
+      // start_date : new Date().toISOString().split("T")[0],
+      // deadline : 0,
     }
   }
 

@@ -1,7 +1,7 @@
 <div class="project-page-main container">
 
     <h2 class="headings">
-        {{projectData.title}}
+        {{projectData.project_title}}
     </h2>
 
     <div class="progress-report">
@@ -20,8 +20,8 @@
         <h6 class="headings">Current Features</h6>
         <div class="current-features">
             <div *ngFor="let feature of projectData.features; let i=index;" class="m-2">
-                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted == 'Yes'" (click)="showContent(i)">
-                        <div class="w-50 d-flex align-items-center">{{feature.featureTitle}}</div>
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.manager_acceptance && feature.client_acceptance" (click)="showContent(i)">
+                        <div class="w-50 d-flex align-items-center">{{feature.feature_title}}</div>
                         <div class="w-25 d-flex align-items-center">{{feature.cost | currency}}</div>
                         <div class="w-25 d-flex justify-content-end align-items-center">
                             <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'Done'">
@@ -30,12 +30,22 @@
 
                 <div *ngIf="feature.showContent" class="taskList">
                     <button class="btn btn-dark" (click)="onAddTaskPopup(feature)">Add Task</button>
-                    <div class="card" *ngFor="let task of feature.tasks" (click)="onNavigateToTask(feature, task)">
-                        {{task.title}}
+                    <div  *ngFor="let task of feature.tasks" (click)="onNavigateToTask(feature, task)">
+                        
+                        <div class="card w-100 d-flex flex-row">
+                            <div class="w-50 d-flex align-items-center">{{task.task_title}}</div>
+                            <div class="w-25 d-flex align-items-center">{{task.status}}</div>
+                            <div class="w-25 d-flex align-items-center" [ngClass]="task.priority == 'High' ? 'red' : (task.priority == 'Medium' ? 'yellow' : 'green') ">{{task.priority}}</div>
+                            
+                    </div>
+
                     </div>
                 </div>
 
             </div>
+        </div>
+        <div class="d-flex w-100 justify-content-center" *ngIf="projectData.features.length == 0">
+            No Features Available
         </div>
 
         <div class="d-flex justify-content-between align-items-end">
@@ -46,8 +56,8 @@
 
         <div class="new-features">
             <div *ngFor="let feature of projectData.features" class="m-2">
-                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.accepted == 'No'">
-                        <div class="w-50 d-flex align-items-center">{{feature.featureTitle}}</div>
+                <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.manager_acceptance == false || feature.client_acceptance == false">
+                        <div class="w-50 d-flex align-items-center">{{feature.feature_title}}</div>
                         <div class="w-25 d-flex align-items-center"></div>
                         <div class="w-25 d-flex justify-content-end align-items-center">
                             <button class="btn btn-secondary m-2" (click)="onFeatureReject(feature)">Reject</button>
@@ -64,9 +74,9 @@
             <h5 class="headings">Troubleshooting</h5>
             <div class="new-comment">
                 <p class="subtitle">Add Comment</p>
-                <textarea name="" id="" class="w-100 text-muted" rows="5" draggable="false"></textarea>
+                <textarea name="pcomment" id="" class="w-100 text-muted" rows="5" draggable="false" [(ngModel)]="pcomment"></textarea>
                 <div class="d-flex justify-content-end w-100">
-                    <button class="btn btn-dark">Post</button>
+                    <button class="btn btn-dark" (click)="postComment()">Post</button>
                 </div>
             </div>
 
@@ -77,8 +87,11 @@
                         <img src="assets/Images/avatar.png" height="32" alt="" class="avatar-img">
                     </div>
                     <div class="comment-body d-flex flex-column">
-                        <span class="comment-user-name">{{comment.user}}</span>
-                        <span class="comment-description">{{comment.description}}</span>
+                        <span class="comment-user-name">{{comment.email}}</span> 
+                        <span class="comment-date">
+                            {{comment.timestamp | date:"dd-MM-YYYY HH:mm:SS"}}
+                        </span>
+                        <span class="comment-description">{{comment.content}}</span>
                     </div>
                 </div>
             </div>

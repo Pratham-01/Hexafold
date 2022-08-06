@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 import { HomeComponent } from '../home/home.component';
 import { AddFeaturePopupComponent } from '../popups/add-feature-popup/add-feature-popup.component';
@@ -17,13 +18,15 @@ export class ProjectPageComponent implements OnInit {
 
   projectId:any;
   projectData:any;
+  pcomment:any;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private authService : AuthenticationService,
-    private userClientService: UserClientService
+    private userClientService: UserClientService,
+    private generalService: GeneralService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -39,7 +42,7 @@ export class ProjectPageComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id');
     // console.log(this.projectId);
-    this.getProjectData("62e1266d7c60d579052a6ccc");
+    this.getProjectData(this.projectId);
     
   }
 
@@ -95,14 +98,27 @@ export class ProjectPageComponent implements OnInit {
   }
 
   onFeatureReject(feature:any){
-    // TODO delete call
+    let body:any = {
+      projectId: this.projectData["_id"],
+      feature_title: feature.feature_title
+    }
+    this.userClientService.removeFeature(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        this.generalService.openMessageSnackBar("Feature Rejected Successfully", "OK")
+      }
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error Occured", "OK")
+    });
   }
 
   onFeatureAccept(feature:any){
-    // TODO if super user
-    this.openFeatureCostPopup(feature);
+    if(sessionStorage.getItem("type") == 'user'){
+      this.openFeatureCostPopup(feature);
+    }else if (sessionStorage.getItem("type") == 'client')
     //else if client
-    this.acceptFeature(feature);
+    this.acceptClientFeature(feature);
   }
   
   
@@ -110,24 +126,59 @@ export class ProjectPageComponent implements OnInit {
     let dialogRef = this.dialog.open(FeatureCostPopupComponent, {
       height: '250px',
       width: '400px',
-      data: {feature:feature}
+      data: {feature:feature, projectData: this.projectData}
     });
+  }
+  acceptClientFeature(feature:any){
+    let body:any = {
+      projectId : this.projectData["_id"],
+      feature_title: feature.feature_title,
+      user_type : 'client',
+      status : true,
+    }
+    this.userClientService.updateFeatureStatus(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        this.generalService.openMessageSnackBar("Feature Accepted Successfully", "OK")
+      }
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error Occured", "OK")
+    });
+
   }
   
   onAddTaskPopup(feature:any){
     let dialogRef = this.dialog.open(AddTaskPopupComponent, {
       height: '75%',
       width: '50%',
-      data: {featureTitle:feature.featureTitle, projectId : this.projectData["_id"]}
+      data: {feature_title:feature.feature_title, projectId : this.projectData["_id"]}
     });
   }
   
-  acceptFeature(feature:any){
-    // TODO PATCH CALL
-  }
 
   onNavigateToTask(feature:any, task:any){
-    this.router.navigate(["projects/", this.projectData["_id"], feature.featureTitle, task.taskId])
+    this.router.navigate(["projects/", this.projectData["_id"], feature.feature_title, task.task_title])
+  }
+
+  postComment(){
+    let body:any = {
+      project_id: this.projectData["_id"],
+      email: sessionStorage.getItem("email"),
+			content: this.pcomment,
+      user_type: ""
+    }
+    this.pcomment = "";
+    this.userClientService.addCommentToProject(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        body.timestamp = new Date().toISOString();
+        this.projectData.comments.push(body);
+      }
+    }, (error:any) => {
+      console.log(error);
+    });
+
   }
 
 
