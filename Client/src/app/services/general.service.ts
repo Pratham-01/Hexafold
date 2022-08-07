@@ -25,6 +25,12 @@ export class GeneralService {
       panelClass: "bottomSnackbar"
     });
   }
+  openFactSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{
+      duration: 3000,
+      panelClass: "factSnackbar"
+    });
+  }
 
   handleError() {
     return (err: any) => {

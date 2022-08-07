@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { TrainingService } from 'src/app/services/training.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 
@@ -26,7 +27,8 @@ export class TrainingCourseComponent implements OnInit {
     private trainingService: TrainingService,
     private datePipe: DatePipe,
     private authService : AuthenticationService,
-    private userClientService : UserClientService
+    private userClientService : UserClientService,
+    private generalService : GeneralService,
 
   ) {
     // Function to throw unsigned user out
@@ -54,7 +56,6 @@ export class TrainingCourseComponent implements OnInit {
     this.trainingService.getParticularTraining(this.trainingId).subscribe((response:any) => {
       if(response){
         this.trainingData = response[0];
-        // if(!this.trainingData.status) this.trainingData.status = "pending";
         this.getUserData(sessionStorage.getItem("email"));
       }
     })
@@ -89,11 +90,14 @@ export class TrainingCourseComponent implements OnInit {
     }
 
     this.trainingService.updateTrainingStatus(body).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
-        
+        this.generalService.openMessageSnackBar("Course Completed Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
     
   }
 

@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from 'src/app/services/general.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CreateProjectPopupComponent implements OnInit {
 
   constructor(
     private dialogRef: DialogRef,
-    private userClientService: UserClientService
+    private userClientService: UserClientService,
+    private generalService: GeneralService,
   ) { }
 
   projectForm:any;
@@ -61,11 +63,13 @@ export class CreateProjectPopupComponent implements OnInit {
     console.log(this.projectForm);
 
     this.userClientService.addProject(this.projectForm).subscribe((response:any) => {
-        if(response) {
-          console.log(response);
-        }
-      }, (error:any) => {
-        console.log(error);
+      if(response) {
+        console.log(response);
+        this.generalService.openMessageSnackBar("Project Created Successfully", "Ok");
+      }
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
     });
     
     this.onClosePopup();

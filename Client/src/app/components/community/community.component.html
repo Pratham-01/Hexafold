@@ -10,8 +10,8 @@
 
         <div class="announcements-list">
             <div style="z-index: 1; padding: 1rem 1.5rem;">
-                <div *ngFor="let toast of announcements" class="mt-2">
-                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.content" (closeHit)="onAnnouncementDelete(toast)" > 
+                <div *ngFor="let toast of announcements; let i=index;" class="mt-2">
+                    <app-toast [title]="toast.title" [date]="toast.date_posted" [message]="toast.content" (closeHit)="onAnnouncementDelete(toast,i)" > 
                     </app-toast>
                 </div>
             </div>

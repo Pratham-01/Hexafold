@@ -78,3 +78,16 @@ img.close-popup-icon{
     left: 50%;
     transform: translateX(-50%) !important;
 }
+.factSnackbar{
+    bottom: 50%;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    transform: translateY(-10%) !important;
+    height: 10%;
+    width: 20%;
+}
+.mat-snack-bar-container{
+    display: flex !important; 
+    align-items: center !important;
+}

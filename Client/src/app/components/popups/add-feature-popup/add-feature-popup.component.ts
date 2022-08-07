@@ -2,6 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { response } from 'express';
+import { GeneralService } from 'src/app/services/general.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class AddFeaturePopupComponent implements OnInit {
   constructor(
     private dialogRef: DialogRef,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userClientService:UserClientService
+    private userClientService:UserClientService,
+    private generalService: GeneralService,
 
   ) { }
 
@@ -41,11 +43,15 @@ export class AddFeaturePopupComponent implements OnInit {
   addFeature(){
     console.log(this.newFeatureForm);
     this.userClientService.addFeature(this.newFeatureForm).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log("Feature added : ", response);
-        
+        this.generalService.openMessageSnackBar("Feature Added Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
+    
     this.onClosePopup();
   }
 

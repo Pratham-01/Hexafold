@@ -15,12 +15,14 @@ export class BuyRewardPopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef : MatDialogRef<BuyRewardPopupComponent>,
     private rewardsService:RewardsService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
   ) { }
 
+  // userData:any;
+
   ngOnInit(): void {
+    // this.userData = this.data.userData;
     this.data = this.data.data;
-    console.log(this.data);
     
   }
 
@@ -32,7 +34,7 @@ export class BuyRewardPopupComponent implements OnInit {
     var body:any = {
       user: sessionStorage.getItem("email"),
       reward_id: this.data["_id"],
-      price: parseInt(this.data["points"])
+      points: parseInt(this.data["points"]),   
     }
     // console.log(body);
 

@@ -34,8 +34,7 @@ export class AddTaskPopupComponent implements OnInit {
 			task_title: "",
 			description: "",
 			startDateTime: new Date(),
-			deadline: "",    // pending
-			// status: "TODO",
+			deadline: "", 
 			assignedEmployee: "",
 			reward_points: 0,
     }

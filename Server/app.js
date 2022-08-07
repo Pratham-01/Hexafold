@@ -27,6 +27,7 @@ app.put('/updateTrainingStatus', jsonParser, api.updateTrainingStatus);
 app.get('/communityPosts/:company/:post_type', api.getCommunityPosts);
 app.post('/addCommunityPost', jsonParser, api.addCommunityPost);
 app.put('/updateCPLikeComment', jsonParser, api.updateCPLikeComment);
+app.put('/removeAnnouncement', jsonParser, api.removeAnnouncement);
 
 app.get('/showcasePosts/:company', api.getShowcasePosts);
 app.post('/addShowcasePost', jsonParser, api.addShowcasePost);
@@ -52,6 +53,5 @@ app.put('/updateRewardStatus', jsonParser, api.updateRewardStatus);
 
 app.post('/addFact', jsonParser, api.addFact);
 app.get('/getRandomFact/:company', jsonParser, api.getRandomFact);
-app.put('/removeAnnouncement', jsonParser, api.removeAnnouncement);
 
 server = app.listen(process.env.PORT || 8080);

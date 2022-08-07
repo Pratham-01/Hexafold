@@ -56,4 +56,15 @@ export class CommunityService {
     return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  removeAnnouncement(body:any): Observable<any>{
+    let url = this.apiUrls.removeAnnouncement;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
 }
