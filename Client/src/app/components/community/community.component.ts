@@ -81,6 +81,9 @@ export class CommunityComponent implements OnInit {
       if(response){
         console.log(response);
         this.communityPosts = response;
+        this.communityPosts.forEach((post:any) => {
+          post.comment = "";
+        });
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -109,7 +112,7 @@ export class CommunityComponent implements OnInit {
       post_id : post["_id"],
       user : sessionStorage.getItem("email")?.split("@")[0],
       type : "comment",
-      content : this.commentInput,
+      content : post.comment,
     }
     this.communityService.updateCommunityPosts(body).subscribe((response:any) => {
       if(response) {
@@ -120,7 +123,7 @@ export class CommunityComponent implements OnInit {
     }, (error:any) => {
       console.log(error);
     });
-    this.commentInput = "";
+    post.comment = "";
   }
 
   like(post:any){

@@ -93,7 +93,7 @@
             </div>
             <div class="cover-img col-md-6 col-sm-12 d-flex flex-row justify-content-end align-items-center"
               *ngIf="i%2==0">
-              <img [src]="post.cover_img" alt="">
+              <img [src]="post.img" alt="">
             </div>
           </div>
           <div class="footer-container">
@@ -121,7 +121,7 @@
             <div class="post-comment ">
               <img class="comment-photo" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
               <input type="text" class="form-control input-box" placeholder="Post a comment" name="comment-input"
-                [(ngModel)]="commentInput">
+                [(ngModel)]="post.comment">
               <button class="btn btn-dark post-button" (click)="postComment(post)">Post</button>
 
             </div>

@@ -140,6 +140,7 @@ export class DashboardComponent implements OnInit {
         this.projectList = response;
         this.projectList.forEach((p:any) => {
           p.total_cost = 0;
+          p.comment = "";
           p.features.forEach((f:any) => {
             p.total_cost += f.cost;
           });
@@ -156,6 +157,7 @@ export class DashboardComponent implements OnInit {
         this.projectList = response;
         this.projectList.forEach((p:any) => {
           p.total_cost = 0;
+          p.comment = "";
           p.features.forEach((f:any) => {
             p.total_cost += f.cost;
           });
@@ -220,7 +222,7 @@ export class DashboardComponent implements OnInit {
       post_id : post["_id"],
       user : sessionStorage.getItem("email")?.split("@")[0],
       type : "comment",
-      content : this.commentInput,
+      content : post.comment,
     }
     this.showcaseService.updateShowcasePosts(body).subscribe((response:any) => {
       if(response) {
@@ -231,7 +233,7 @@ export class DashboardComponent implements OnInit {
     }, (error:any) => {
       console.log(error);
     });
-    this.commentInput = "";
+    post.comment = "";
   }
 
 
