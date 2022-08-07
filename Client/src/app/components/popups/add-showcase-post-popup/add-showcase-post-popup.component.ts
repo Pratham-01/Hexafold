@@ -1,6 +1,8 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { response } from 'express';
+import { GeneralService } from 'src/app/services/general.service';
 import { ShowcaseService } from 'src/app/services/showcase.service';
 
 @Component({
@@ -11,8 +13,9 @@ import { ShowcaseService } from 'src/app/services/showcase.service';
 export class AddShowcasePostPopupComponent implements OnInit {
 
   constructor(
-    private dialogRef: DialogRef,
-    private showcaseService: ShowcaseService
+    private dialogRef: MatDialogRef<AddShowcasePostPopupComponent>,
+    private showcaseService: ShowcaseService,
+    private generalService: GeneralService,
   ) { }
 
   showcasePostForm:any;
@@ -35,11 +38,14 @@ export class AddShowcasePostPopupComponent implements OnInit {
     console.log(this.showcasePostForm);
 
     this.showcaseService.addShowcasePost(this.showcasePostForm).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
-        
+        this.generalService.openMessageSnackBar("Posted Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
 
     this.onClosePopup();
   }

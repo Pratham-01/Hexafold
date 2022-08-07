@@ -62,7 +62,7 @@ export class RewardComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((response:any) => {
       if(response == "success"){
-        // TODO Get user data call
+        this.getUserData(this.sessionData.email)
       }
     })
   }

@@ -143,10 +143,15 @@ export class SignUpComponent implements OnInit {
 			company_id: sessionStorage.getItem("companyId"),
     }
     this.userClientService.createClient(body).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
+        this.generalService.openMessageSnackBar("Client Created Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
+
     sessionStorage.setItem("type", "client");
     sessionStorage.setItem("email", <string>email);
   }
@@ -164,10 +169,14 @@ export class SignUpComponent implements OnInit {
     console.log(body);
     
     this.userClientService.createUser(body).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
+        this.generalService.openMessageSnackBar("User Created Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
 
     sessionStorage.setItem("type", "user");
     sessionStorage.setItem("email", <string>email);

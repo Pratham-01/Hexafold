@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommunityService } from 'src/app/services/community.service';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-add-community-post-popup',
@@ -12,7 +13,8 @@ export class AddCommunityPostPopupComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AddCommunityPostPopupComponent>,
-    private communityService: CommunityService
+    private communityService: CommunityService,
+    private generalService: GeneralService,
   ) { }
 
   postForm:any;
@@ -38,12 +40,16 @@ export class AddCommunityPostPopupComponent implements OnInit {
     console.log(this.postForm);
 
     this.communityService.addCommunityPosts(this.postForm).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
+        this.generalService.openMessageSnackBar("Posted Successfully", "Ok");
         this.onClosePopup('success');
       }
-    })
-
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+      this.onClosePopup('error');
+    });
     
   }
 

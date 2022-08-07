@@ -202,11 +202,14 @@ export class TrainingHomeComponent implements OnInit {
     // console.log(this.newTrainingForm);
 
     this.trainingService.addTraining(this.newTrainingForm).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
-        
+        this.generalService.openMessageSnackBar("Training Created Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
 
 
     this.resetNewTrainingData();
@@ -235,11 +238,14 @@ export class TrainingHomeComponent implements OnInit {
     // console.log(this.assignTrainingForm);
 
     this.trainingService.assignTraining(this.assignTrainingForm).subscribe((response:any) => {
-      if(response){
+      if(response) {
         console.log(response);
-        this.generalService.openMessageSnackBar(response.message, "ok");
+        this.generalService.openMessageSnackBar("Training Assigned Successfully", "Ok");
       }
-    })
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
 
     this.resetAssignTrainingData();
 

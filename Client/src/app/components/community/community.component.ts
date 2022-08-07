@@ -148,9 +148,21 @@ export class CommunityComponent implements OnInit {
     });
   }
 
-  onAnnouncementDelete(toast:any){
-    console.log("here", toast);
-    
+  onAnnouncementDelete(toast:any, i:any){
+    let body:any = {
+      id : toast["_id"],
+      post_type : "announcement"
+    }
+    this.communityService.removeAnnouncement(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        this.generalService.openMessageSnackBar("Announcement deleted successfully", "Ok");
+        this.announcements.splice(i,1);
+      }
+    }, (error:any) => {
+      console.log(error);
+      this.generalService.openMessageSnackBar("Error", "Ok");
+    });
   }
 
 

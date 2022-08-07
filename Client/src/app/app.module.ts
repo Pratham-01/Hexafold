@@ -63,6 +63,7 @@ import { CreateRewardsPopupComponent } from './components/popups/create-rewards-
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddCommunityPostPopupComponent } from './components/popups/add-community-post-popup/add-community-post-popup.component';
 import { RecreationalComponent } from './components/recreational/recreational.component';
+import { AddFactPopupComponent } from './components/popups/add-fact-popup/add-fact-popup.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { RecreationalComponent } from './components/recreational/recreational.co
     CreateRewardsPopupComponent,
     AddCommunityPostPopupComponent,
     RecreationalComponent,
+    AddFactPopupComponent,
 
   ],
   imports: [

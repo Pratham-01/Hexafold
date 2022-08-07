@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { response } from 'express';
 import { GeneralService } from 'src/app/services/general.service';
+import { AddFactPopupComponent } from '../popups/add-fact-popup/add-fact-popup.component';
 
 @Component({
   selector: 'app-recreational',
@@ -10,14 +12,18 @@ import { GeneralService } from 'src/app/services/general.service';
 export class RecreationalComponent implements OnInit {
 
   constructor(
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private dialog: MatDialog
   ) { }
 
-  activitiesList:any = ["Fun Facts", "Ackinator Game"];
+  sessionData:any;
+  activitiesList:any = ["Fun Facts"];
+  // activitiesList:any = ["Fun Facts", "Ackinator Game"];
   activeTab = 0;
   disableBtnBoolean:any = false;
 
   ngOnInit(): void {
+    this.sessionData = this.generalService.getSessionData();
   }
 
   changeActivity(i:any){
@@ -33,8 +39,17 @@ export class RecreationalComponent implements OnInit {
       }
     }, (error:any) => {
       console.log(error);
+      this.generalService.openMessageSnackBar(error, "Ok");
       this.disableBtnBoolean = false;
     })
   }
+
+  addFact(){
+
+    let dialogRef = this.dialog.open(AddFactPopupComponent, {
+
+    })
+  }
+
 
 }
