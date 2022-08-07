@@ -50,6 +50,6 @@ export class ShowcaseService {
       })
     };
     // console.log(url);
-    return this.http.patch(url, body, httpOptions).pipe(catchError(this.handleError()));
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 }

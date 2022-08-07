@@ -16,15 +16,13 @@ import { CreateProjectPopupComponent } from '../popups/create-project-popup/crea
 })
 export class DashboardComponent implements OnInit {
 
+  commentInput:any;
   sessionData:any = {};
 
   
   projectList:any = [];
   showcasePostList:any = [
-    {title:"Project 1", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
-    {title:"Project 2", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
-    {title:"Project 3", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
-    {title:"Project 4", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."}
+
   ]
   // card_bg_colors = ['#B3F5FF', '#B3D4FF', '#C0B6F2']
   card_bg_colors = ['#221d1c', '#4b3842', '#9192a2', '#595565', '#343d3f']
@@ -102,6 +100,7 @@ export class DashboardComponent implements OnInit {
   }
   
   
+  
 
   // GET DATA CALLS
 
@@ -171,6 +170,7 @@ export class DashboardComponent implements OnInit {
     this.showcaseService.getShowcasePosts(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response){
         console.log(response);
+        this.showcasePostList = response;
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -184,7 +184,55 @@ export class DashboardComponent implements OnInit {
 
   // POST PATCH CALLS
 
+  
+  like(post:any){
+    console.log(post);
+    // post.likes_count += 1;
 
+    let body:any = {
+      post_id : post["_id"],
+      user : sessionStorage.getItem("email"),
+      type : "like",
+      content : (post.likes.findIndex((l:any) => l == sessionStorage.getItem("email")) > -1 ? "sub" : "add" ),
+    }
+    
+    if(body.content == "add") {
+      post.likes.push(sessionStorage.getItem("email"));
+      post.likes_count = post.likes_count + 1;
+    }else{
+      post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
+      post.likes_count = post.likes_count - 1;
+    }
+
+    console.log(post,body);
+
+    this.showcaseService.updateShowcasePosts(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+      }
+    }, (error:any) => {
+      console.log(error);
+    });
+  }
+
+  postComment(post:any){
+    let body:any = {
+      post_id : post["_id"],
+      user : sessionStorage.getItem("email")?.split("@")[0],
+      type : "comment",
+      content : this.commentInput,
+    }
+    this.showcaseService.updateShowcasePosts(body).subscribe((response:any) => {
+      if(response) {
+        console.log(response);
+        body.timestamp = new Date().toLocaleString();
+        post.comments.push(body);
+      }
+    }, (error:any) => {
+      console.log(error);
+    });
+    this.commentInput = "";
+  }
 
 
 }

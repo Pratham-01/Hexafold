@@ -20,7 +20,7 @@
 
       <button class="btn btn-dark" (click)="openCreateNewProjectPopup()" *ngIf="sessionData.user_type == 'Super User'">
         <small>Add New Project &nbsp;&nbsp;</small>
-        <small>+</small> 
+        <small>+</small>
       </button>
     </div>
 
@@ -39,7 +39,7 @@
     </div>
 
     <div class="projects-carousel-backup w-100 d-flex justify-content-center" *ngIf="projectList.length == 0">
-        <h6 class="text-muted text-center">No Projects Available <br> It may take some time to load projects.</h6>
+      <h6 class="text-muted text-center">No Projects Available <br> It may take some time to load projects.</h6>
     </div>
 
 
@@ -49,13 +49,14 @@
         <h2 class="headings my-3">
           Our Achievements
         </h2>
-  
-        <button class="btn btn-dark" (click)="openCreateNewShowcasePostPopup()" *ngIf="sessionData.user_type == 'Super User'">
+
+        <button class="btn btn-dark" (click)="openCreateNewShowcasePostPopup()"
+          *ngIf="sessionData.user_type == 'Super User'">
           <small>Add New Post &nbsp;&nbsp;</small>
-          <small>+</small> 
+          <small>+</small>
         </button>
       </div>
-  
+
       <!-- <div class="projects-carousel row">
         <div *ngFor="let project of projectList" style="padding: 1rem;" class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="card d-flex " [ngStyle]="{'border-left': getCardBorder() }" (click)="goToProject(project.id)">
@@ -71,35 +72,69 @@
       </div> -->
 
       <div class="showcase-posts" *ngIf="showcasePostList.length > 0">
-        <div class="post card"  *ngFor="let post of showcasePostList; let i=index;">
+        <div class="post card" *ngFor="let post of showcasePostList; let i=index;">
           <div class="row heading-container">
             <h4 class="headings">{{post.title}}</h4>
           </div>
+          <div class="reaction">
+            <a class="btn text-green" (click)="like(post)"><i class="fa fa-thumbs-up"></i> {{post.likes_count}}</a>
+            <!-- <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> -->
+          </div>
           <div class="row content-container ">
-            <div class="cover-img col-md-6 col-sm-12 d-flex flex-row justify-content-start align-items-center" *ngIf="i%2">
+            <div class="cover-img col-md-6 col-sm-12 d-flex flex-row justify-content-start align-items-center"
+              *ngIf="i%2">
               <img [src]="post.cover_img" alt="">
+              <!-- <img src="../../../assets/Images/birds-g1cb7d2dcd_1920.jpg" alt=""> -->
             </div>
             <div class="col-md-6 col-sm-12">
-              <p class="subtitle" *ngFor="let cont of post.content">
-                {{cont}}
-              </p> 
+              <p class="subtitle">
+                {{post.content}}
+              </p>
             </div>
-            <div class="cover-img col-md-6 col-sm-12 d-flex flex-row justify-content-end align-items-center" *ngIf="i%2==0">
+            <div class="cover-img col-md-6 col-sm-12 d-flex flex-row justify-content-end align-items-center"
+              *ngIf="i%2==0">
               <img [src]="post.cover_img" alt="">
             </div>
           </div>
           <div class="footer-container">
             <hr>
-            <img src="assets/Images/like-icon.svg" width="32" alt="">
-            <img src="assets/Images/liked-icon.svg" width="32" alt="">
+            <!-- <img src="assets/Images/like-icon.svg" width="32" alt="">
+            <img src="assets/Images/liked-icon.svg" width="32" alt=""> -->
           </div>
+
+          <div class="line-divider"></div>
+
+          <div class="comment-section">
+            <div class="poster-comment" *ngFor="let comment of post.comments">
+              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="comment-photo">
+              <!-- https://bootdey.com/img/Content/avatar/avatar1.png -->
+              <div>
+                <span class="text-muted">{{comment.user}}</span>
+                <br>
+                <span class="text-muted" style="font-size: smaller;">{{comment.timestamp}}</span>
+                <p>
+                  {{comment.content}}
+                </p>
+              </div>
+            </div>
+
+            <div class="post-comment ">
+              <img class="comment-photo" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+              <input type="text" class="form-control input-box" placeholder="Post a comment" name="comment-input"
+                [(ngModel)]="commentInput">
+              <button class="btn btn-dark post-button" (click)="postComment(post)">Post</button>
+
+            </div>
+          </div>
+
+
 
         </div>
       </div>
 
+    </div>
+
+
+
+
   </div>
-
-
-
-
-</div>

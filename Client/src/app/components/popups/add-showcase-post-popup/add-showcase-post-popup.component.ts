@@ -22,8 +22,9 @@ export class AddShowcasePostPopupComponent implements OnInit {
       title : "",
       content : "",
       date_posted : new Date(),
-      cover_img : "",
-      post_type: "showcase"
+      img : "",
+      post_type: "showcase",
+      company_id: sessionStorage.getItem("companyId")
     }
   }
 

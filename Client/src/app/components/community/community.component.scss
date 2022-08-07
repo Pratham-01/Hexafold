@@ -46,6 +46,8 @@ body{margin-top:20px;}
 
   .post-container{
     padding: 20px;
+    height: 75vh;
+    overflow-y: scroll;
 
     .post-detail{
       margin-left: 65px;
