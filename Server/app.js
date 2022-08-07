@@ -45,7 +45,6 @@ app.post('/addComment', jsonParser, api.addComment);
 app.get('/project/:projectId', api.getProject);
 app.put('/removeFeature', jsonParser, api.removeFeature);
 
-
 app.get('/rewards/:company', api.getRewards);
 app.post('/createReward', jsonParser, api.createReward);
 app.post('/redeemReward', jsonParser, api.redeemReward);
@@ -53,5 +52,6 @@ app.put('/updateRewardStatus', jsonParser, api.updateRewardStatus);
 
 app.post('/addFact', jsonParser, api.addFact);
 app.get('/getRandomFact/:company', jsonParser, api.getRandomFact);
+app.put('/removeAnnouncement', jsonParser, api.removeAnnouncement);
 
 server = app.listen(process.env.PORT || 8080);
