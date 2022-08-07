@@ -150,6 +150,17 @@ export class UserClientService {
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
+  addProject(body:any): Observable<any>{
+    let url = this.apiUrls.addProject;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
 
   // ================================= TASKS ================================= 
 
@@ -185,6 +196,17 @@ export class UserClientService {
     };
     // console.log(url);
     return this.http.post(url, body, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  removeFeature(body:any): Observable<any>{
+    let url = this.apiUrls.removeFeature;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    // console.log(url);
+    return this.http.put(url, body, httpOptions).pipe(catchError(this.handleError()));
   }
 
   updateFeatureStatus(body:any): Observable<any>{

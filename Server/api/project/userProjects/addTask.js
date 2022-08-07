@@ -12,10 +12,10 @@ exports.addTask = async (req, res) => {
 			description: req.body.description,
 			startDateTime: req.body.startDateTime,
 			deadline: req.body.deadline,
-			asignor: req.body.assignor, //pushpit ko batana h
-			status: 'pending',
+			// asignor: req.body.assignor, //pushpit ko batana h
+			status: 'TODO',
 			assignedEmployee: req.body.assignedEmployee,
-			reward_points: req.body.rewardPoints ? req.body.rewardPoints : 0,
+			reward_points: req.body.reward_points ? req.body.reward_points : 0,
 		};
 
 		constants.mongoclient.connect(constants.url, function (err, db) {

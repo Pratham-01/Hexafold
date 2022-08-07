@@ -7,7 +7,7 @@ exports.addComment = async (req, res) => {
 		var project_id = new ObjectId(req.body.project_id);
 
 		var comment = {
-			user_type: req.body.user_type,
+			// user_type: req.body.user_type,
 			email: req.body.email,
 			content: req.body.content,
             timestamp: new Date().toISOString()

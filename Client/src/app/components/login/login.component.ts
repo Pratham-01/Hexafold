@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService, 
     private router: Router,
     private toast: HotToastService,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private generalService: GeneralService,
     ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
       })
     ).subscribe(() => {
       this.authService.navigationSubject.next("dashboard");
+      this.generalService.navbarLoginSubject.next(true);
       this.router.navigate(['/dashboard']);
       sessionStorage.setItem("type", this.type);
       sessionStorage.setItem("email", <string>email);

@@ -5,13 +5,13 @@
         <h2 class="headings text-white position-fixed bg-dark m-0">Important <br> Announcements</h2>
         
         <div class="d-flex w-100 justify-content-end">
-            <button class="btn btn-dark m-1" (click)="onCreatePost('announcement')">Post Announcements</button>
+            <button class="btn btn-dark m-1" (click)="onCreatePost('announcement')" *ngIf="sessionData.user_type != 'Employee'">Post Announcements</button>
         </div>
 
         <div class="announcements-list">
             <div style="z-index: 1; padding: 1rem 1.5rem;">
                 <div *ngFor="let toast of announcements" class="mt-2">
-                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.content" (closeHit)="toast.isShow = false" > 
+                    <app-toast [title]="toast.title" [date]="toast.date" [message]="toast.content" (closeHit)="onAnnouncementDelete(toast)" > 
                     </app-toast>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         
         <div class="d-flex w-100 justify-content-between align-items-center px-2">
             <h2 class="px-4 headings">Posts</h2>
-            <button class="btn btn-dark" (click)="onCreatePost('community')">Post in Community</button>
+            <button class="btn btn-dark" (click)="onCreatePost('community')" *ngIf="sessionData.user_type != 'Employee'">Post in Community</button>
         </div>
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
                                         class="profile-photo-sm">
                                     <input type="text" class="form-control" placeholder="Post a comment" name="comment-input" [(ngModel)]="commentInput">
-                                    <div class="d-flex w-25 justify-content-end">
+                                    <div class="d-flex w-25 justify-content-end align-items-center">
                                         <button class="btn btn-dark w-75" (click)="postComment(post)">Post</button>
                                     </div>
                                 </div>

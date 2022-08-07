@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommunityService } from 'src/app/services/community.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { AddCommunityPostPopupComponent } from '../popups/add-community-post-popup/add-community-post-popup.component';
 import { ToastComponent } from '../toast/toast.component';
 @Component({
@@ -11,6 +12,8 @@ import { ToastComponent } from '../toast/toast.component';
   styleUrls: ['./community.component.scss']
 })
 export class CommunityComponent implements OnInit {
+
+  sessionData:any;
 
   isToast:boolean = false;
   isToast1:boolean = false;
@@ -40,7 +43,8 @@ export class CommunityComponent implements OnInit {
     private router: Router, 
     private authService: AuthenticationService,
     private communityService : CommunityService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private generalService: GeneralService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -54,6 +58,8 @@ export class CommunityComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+    this.sessionData = this.generalService.getSessionData();
 
     this.getAnnouncementPosts(); 
     this.getCommunityPosts(); 
@@ -124,20 +130,27 @@ export class CommunityComponent implements OnInit {
       type : "like",
       content : (post.likes.findIndex((l:any) => l == sessionStorage.getItem("email")) > -1 ? "sub" : "add" ),
     }
+    
+    if(body.content == "add") {
+      post.likes.push(sessionStorage.getItem("email"));
+      post.likes_count = post.likes_count + 1;
+    }else{
+      post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
+      post.likes_count = post.likes_count - 1;
+    }
+
     this.communityService.updateCommunityPosts(body).subscribe((response:any) => {
       if(response) {
         console.log(response);
-        if(body.content == "add") {
-          post.likes.push(sessionStorage.getItem("email"));
-          post.likes_count = post.likes_count + 1;
-        }else{
-          post.likes = post.likes.filter((el:any) => el != sessionStorage.getItem("email"))
-          post.likes_count = post.likes_count - 1;
-        }
       }
     }, (error:any) => {
       console.log(error);
     });
+  }
+
+  onAnnouncementDelete(toast:any){
+    console.log("here", toast);
+    
   }
 
 

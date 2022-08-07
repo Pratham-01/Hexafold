@@ -12,8 +12,10 @@ import { UserClientService } from 'src/app/services/user-client.service';
 })
 export class TrainingHomeComponent implements OnInit {
 
+  sessionData:any;
+
   userData:any;
-  trainingData:any;
+  trainingData:any = [];
   courseList:any;
   employeeList:any;
 
@@ -43,6 +45,10 @@ export class TrainingHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.sessionData = this.generalService.getSessionData();
+
+
     this.today = new Date();
     this.getTodaysDate();
     
@@ -59,7 +65,7 @@ export class TrainingHomeComponent implements OnInit {
   // Employee
   getTrainingDataForEmployee(){
     
-    this.trainingService.getUserTrainings("prathamjajodia1@gmail.com").subscribe((response:any) => {
+    this.trainingService.getUserTrainings(sessionStorage.getItem("email")).subscribe((response:any) => {
       if(response){
         console.log("Training data : ", response);
         this.trainingData = response;

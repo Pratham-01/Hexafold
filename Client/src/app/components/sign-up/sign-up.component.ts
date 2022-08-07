@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { switchMap } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -60,7 +61,8 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private usersService: UsersService,
     private activatedRouter: ActivatedRoute,
-    private userClientService: UserClientService
+    private userClientService: UserClientService,
+    private generalService: GeneralService
 
   ) {}
 
@@ -123,6 +125,8 @@ export class SignUpComponent implements OnInit {
         if(this.type == "user") this.createUser();
         else if(this.type == "client") this.createClient();
         this.router.navigate(['/home']);
+        this.generalService.navbarLoginSubject.next(true);
+
       });
   }
 
@@ -154,7 +158,7 @@ export class SignUpComponent implements OnInit {
 			password: password,
 			company_id: sessionStorage.getItem("companyId"),
       position: "",
-      user_type: this.userArray[this.userArray.findIndex((x:any) => x.value == user)].viewValue
+      userType: this.userArray[this.userArray.findIndex((x:any) => x.value == user)].viewValue
 
     }
     console.log(body);

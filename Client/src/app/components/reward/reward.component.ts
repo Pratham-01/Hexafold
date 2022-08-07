@@ -15,13 +15,8 @@ import { CreateRewardsPopupComponent } from '../popups/create-rewards-popup/crea
 })
 export class RewardComponent implements OnInit {
 
-  // items:any = [
-  //   {title:"Product 1", description:"This is the first product", img:"http://bit.ly/2tMBBTd","id": 1,price:"20"},
-  //   {title:"Product 2", description:"This is the 2nd product", img:"http://bit.ly/2tMBBTd","id": 1,price:"20"},
-  //   {title:"Product 3", description:"This is the 3rd product", img:"http://bit.ly/2tMBBTd","id": 1,price:"20"},
-  //   {title:"Product 4", description:"This is the 4th product", img:"http://bit.ly/2tMBBTd","id": 1,price:"20"},
-  //   {title:"Product 5", description:"This is the 5th product", img:"http://bit.ly/2tMBBTd","id": 1,price:"20"},
-  // ]
+ 
+  sessionData:any;
   rewardsList:any = [];
   currBalance:any = 2000;
   userData:any;
@@ -46,6 +41,8 @@ export class RewardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sessionData = this.generalService.getSessionData();
+    
     if(sessionStorage.getItem("email"))
     {
       this.getUserData(sessionStorage.getItem("email"));

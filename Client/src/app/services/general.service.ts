@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError, Subject } from 'rxjs';
 import { ApiUrls } from '../api_urls';
 
 @Injectable({
@@ -15,6 +15,9 @@ export class GeneralService {
     private http: HttpClient,
 
   ) { }
+
+  navbarLoginSubject:any = new Subject();
+  IAMSubject:any = new Subject();
 
   openMessageSnackBar(message: string, action: string) {
     this._snackBar.open(message, action,{
@@ -56,6 +59,15 @@ export class GeneralService {
     };
     // console.log(url);
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  getSessionData(){
+    return {
+      companyId : sessionStorage.getItem("companyId"),
+      email : sessionStorage.getItem("email"),
+      type : sessionStorage.getItem("type"),
+      user_type : sessionStorage.getItem("user_type"),
+    }
   }
 
  }

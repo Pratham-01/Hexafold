@@ -55,7 +55,7 @@ export class TrainingCourseComponent implements OnInit {
       if(response){
         this.trainingData = response[0];
         // if(!this.trainingData.status) this.trainingData.status = "pending";
-        this.getUserData("prathamjajodia1@gmail.com");
+        this.getUserData(sessionStorage.getItem("email"));
       }
     })
   }
@@ -84,7 +84,7 @@ export class TrainingCourseComponent implements OnInit {
   onCompleteCourse(){
     var body:any = {
       training_id : this.trainingData["_id"],
-      user : "prathamjajodia1@gmail.com", //sessionStorage.getItem("email"),
+      user : sessionStorage.getItem("email"),
       status : "done"
     }
 

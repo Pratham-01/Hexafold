@@ -5,7 +5,7 @@ exports.updateFeatureStatus = async (req, res) => {
 	try {
 		console.log('Request received for update status of feature');
 		var projectId = new ObjectId(req.body.projectId);
-		var featureTitle = req.body.featureTitle;
+		var feature_title = req.body.feature_title;
 		var user_type = req.body.user_type;
 		var status = req.body.status;
 		var cost = req.body.cost ? req.body.cost : 0;
@@ -32,7 +32,7 @@ exports.updateFeatureStatus = async (req, res) => {
 			dbo.collection('project').updateOne(
 				{ _id: projectId },
 				upadteValues,
-				{ arrayFilters: [{ 'ele.title': featureTitle }] },
+				{ arrayFilters: [{ 'ele.feature_title': feature_title }] },
 				function (err, result) {
 					if (err) {
 						res.status(500).send({ errors: err });

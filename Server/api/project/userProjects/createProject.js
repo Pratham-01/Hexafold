@@ -5,7 +5,7 @@ exports.createProject = async (req, res) => {
 	try {
 		console.log('Request received for creating a project');
 		var post = {
-			clients: req.body.clients ? req.body.client : '',
+			clients: req.body.clients ? req.body.clients : '',
 			project_title: req.body.project_title ? req.body.project_title : '',
 			comments: [],
 			features: [],

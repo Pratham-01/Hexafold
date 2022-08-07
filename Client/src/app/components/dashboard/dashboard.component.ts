@@ -3,6 +3,7 @@ import { user } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { ShowcaseService } from 'src/app/services/showcase.service';
 import { UserClientService } from 'src/app/services/user-client.service';
 import { AddShowcasePostPopupComponent } from '../popups/add-showcase-post-popup/add-showcase-post-popup.component';
@@ -15,16 +16,10 @@ import { CreateProjectPopupComponent } from '../popups/create-project-popup/crea
 })
 export class DashboardComponent implements OnInit {
 
+  sessionData:any = {};
+
   
-  projectList:any = [
-    // {"title": "Project 1", "id": 1},
-    // {"title": "Project 2", "id": 2},
-    // {"title": "Project 3", "id": 3},
-    // {"title": "Project 4", "id": 4},
-    // {"title": "Project 5", "id": 5},
-    // {"title": "Project 6", "id": 6},
-    // {"title": "Project 7", "id": 7},
-  ]
+  projectList:any = [];
   showcasePostList:any = [
     {title:"Project 1", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
     {title:"Project 2", date_posted : new Date(),cover_img:"http://bit.ly/2tMBBTd", content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \n  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in \n\n  culpa qui officia deserunt mollit anim id est laborum."},
@@ -42,6 +37,7 @@ export class DashboardComponent implements OnInit {
     private userClientService: UserClientService,
     private showcaseService: ShowcaseService,
     private dialog: MatDialog,
+    private generalService: GeneralService,
 
   ) {
 
@@ -59,10 +55,20 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userType = this.userClientService.getLoggedInUserType();
     if (this.userType == "client"){
-      this.getClientData("abcd@gmail.com");
+      this.getClientData(sessionStorage.getItem("email"));
     }else if (this.userType == "user"){
       this.getUserData(sessionStorage.getItem("email"));
     }
+  }
+
+  getSessionData(){
+    this.sessionData = {
+      companyId : sessionStorage.getItem("companyId"),
+      email : sessionStorage.getItem("email"),
+      type : sessionStorage.getItem("type"),
+      user_type : sessionStorage.getItem("user_type"),
+    }
+    this.generalService.IAMSubject.next();
   }
 
   // INTERACTIONS
@@ -103,10 +109,11 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getUserData(email).subscribe((response:any) => {
       if(response){
         console.log("User data: ", response);
-        this.getUserProjects(response[0]["_id"]);
+        this.getUserProjects(response[0]["email"]);
         sessionStorage.setItem("companyId", response[0]["company_id"]);
+        sessionStorage.setItem("user_type", response[0]["user_type"]);
+        this.getSessionData()
         this.getShowcasePosts();
-
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -116,10 +123,11 @@ export class DashboardComponent implements OnInit {
     this.userClientService.getClientData(email).subscribe((response:any) => {
       if(response){
         console.log("Client data: ", response);
-        this.getClientProjects(response[0]["_id"]);
+        this.getClientProjects(response[0]["email"]);
         sessionStorage.setItem("companyId", response[0]["company_id"]);
+        sessionStorage.removeItem("user_type");
+        this.getSessionData()
         this.getShowcasePosts();
-
       }
     }, (error:any)=>{
       console.log("Error : ", error);
