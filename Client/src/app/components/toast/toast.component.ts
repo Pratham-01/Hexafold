@@ -1,4 +1,5 @@
 import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
+import { GeneralService } from 'src/app/services/general.service';
 declare var bootstrap: any;
 
 @Component({
@@ -13,9 +14,13 @@ export class ToastComponent implements OnInit {
   @Input() message: any;
   @Input() date:any;
   
-  constructor() { }
+  constructor(
+    private generalService: GeneralService
+  ) { }
+  sessionData:any;
 
   ngOnInit(): void {
+  this.sessionData = this.generalService.getSessionData();
     // var toastElist = [].slice.call(document.querySelectorAll('.toast'))
     // toastElist.map(function(toastEl){
     //   return new bootstrap.Toast(toastEl,{})

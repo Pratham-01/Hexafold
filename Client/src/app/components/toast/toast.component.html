@@ -5,7 +5,7 @@
             <strong class="me-auto">{{title}}</strong>
             <small>{{date | date:'MM/dd/yy hh:mm'}}</small>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="closeHit.emit(true)"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" (click)="closeHit.emit(true)" *ngIf="sessionData.user_type != 'Employee'"></button>
     </div>
     <div class="toast-body">
         {{message}}
