@@ -31,7 +31,7 @@ export class FeatureCostPopupComponent implements OnInit {
   accept(){
     let body:any = {
       projectId : this.projectData["_id"],
-      featureTitle: this.feature.featureTitle,
+      feature_title: this.feature.feature_title,
       user_type : 'user',
       status : true,
       cost: this.cost
@@ -39,7 +39,7 @@ export class FeatureCostPopupComponent implements OnInit {
     this.userClientService.updateFeatureStatus(body).subscribe((response:any) => {
       if(response) {
         console.log(response);
-        this.generalService.openMessageSnackBar("Feature Rejected Successfully", "OK")
+        this.generalService.openMessageSnackBar("Feature Accepted Successfully", "OK")
       }
     }, (error:any) => {
       console.log(error);

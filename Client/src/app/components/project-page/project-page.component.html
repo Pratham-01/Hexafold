@@ -8,7 +8,7 @@
         <h4 class="headings">Progress</h4>
         <p class="subtitle">The project will soon be completed</p>
         <div class="progress-bar">
-            <div class="progress" style="width: 20%"></div>
+            <div class="progress" id="progress"  [ngStyle]="{'width': projectData.progress +'%'}"></div>
         </div>
     </div>
 
@@ -22,14 +22,14 @@
             <div *ngFor="let feature of projectData.features; let i=index;" class="m-2">
                 <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.manager_acceptance && feature.client_acceptance" (click)="showContent(i)">
                         <div class="w-50 d-flex align-items-center">{{feature.feature_title}}</div>
-                        <div class="w-25 d-flex align-items-center">{{feature.cost | currency}}</div>
+                        <div class="w-25 d-flex align-items-center" *ngIf="sessionData.type == 'client' || sessionData.user_type == 'Super User'">{{feature.cost | currency}}</div>
                         <div class="w-25 d-flex justify-content-end align-items-center">
-                            <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'Done'">
+                            <img src="assets/Images/green-tick.svg" height="16" alt="done" *ngIf="feature.status == 'done'">
                         </div>
                 </div>
 
                 <div *ngIf="feature.showContent" class="taskList">
-                    <button class="btn btn-dark" (click)="onAddTaskPopup(feature)">Add Task</button>
+                    <button class="btn btn-dark" (click)="onAddTaskPopup(feature)" *ngIf="sessionData.user_type == 'Manager' || sessionData.user_type == 'Super User'">Add Task</button>
                     <div  *ngFor="let task of feature.tasks" (click)="onNavigateToTask(feature, task)">
                         
                         <div class="card w-100 d-flex flex-row">
@@ -48,18 +48,18 @@
             No Features Available
         </div>
 
-        <div class="d-flex justify-content-between align-items-end">
-            <h6 class="headings">New Features</h6>
-            <button class="btn btn-dark" (click)="openAddFeaturePopup()">Add New Feature &nbsp;&nbsp; +</button>
+        <div class="d-flex justify-content-between align-items-end" *ngIf="sessionData.user_type != 'Employee'">
+            <h6 class="headings" >New Features</h6>
+            <button class="btn btn-dark" (click)="openAddFeaturePopup()" *ngIf="sessionData.type == 'client'">Add New Feature &nbsp;&nbsp; +</button>
         </div>
 
 
-        <div class="new-features">
+        <div class="new-features" *ngIf="sessionData.user_type != 'Employee'">
             <div *ngFor="let feature of projectData.features" class="m-2">
                 <div class="card w-100 d-flex flex-row feature-card" *ngIf="feature.manager_acceptance == false || feature.client_acceptance == false">
                         <div class="w-50 d-flex align-items-center">{{feature.feature_title}}</div>
-                        <div class="w-25 d-flex align-items-center"></div>
-                        <div class="w-25 d-flex justify-content-end align-items-center">
+                        <div class="w-25 d-flex align-items-center">{{feature.cost | currency}}</div>
+                        <div class="w-25 d-flex justify-content-end align-items-center" *ngIf="sessionData.type == 'client' || sessionData.user_type == 'Super User'">
                             <button class="btn btn-secondary m-2" (click)="onFeatureReject(feature)">Reject</button>
                             <button class="btn btn-dark m-2" (click)="onFeatureAccept(feature)">Accept</button>
                         </div>
@@ -69,7 +69,7 @@
 
         <hr>
 
-        <div class="features-comments">
+        <div class="features-comments" *ngIf="sessionData.user_type != 'Employee'">
 
             <h5 class="headings">Troubleshooting</h5>
             <div class="new-comment">

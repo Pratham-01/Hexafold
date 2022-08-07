@@ -32,7 +32,7 @@
               Dashboard
             </a>
           </li>
-          <li class="nav-item text-center mx-2 mx-lg-1">
+          <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="sessionData.type == 'user'">
             <a class="nav-link" [ngClass]="activeTab == 'chat' ? 'active' : ''" (click)="changeTab('chat')" routerLink = "/chat">
               <div>
                 <!-- <i class="far fa-envelope fa-lg mb-1"></i> -->
@@ -40,7 +40,7 @@
               Chat
             </a>
           </li>
-          <li class="nav-item text-center mx-2 mx-lg-1">
+          <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="sessionData.type == 'user'">
             <a class="nav-link" aria-disabled="true" [ngClass]="activeTab == 'community' ? 'active' : ''" (click)="changeTab('community')" routerLink = "/community" >
               <div>
                 <!-- <i class="far fa-envelope fa-lg mb-1"></i> -->
@@ -48,7 +48,7 @@
               Community
             </a>
           </li>
-          <li class="nav-item text-center mx-2 mx-lg-1">
+          <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="sessionData.type == 'user'">
             <a class="nav-link" [ngClass]="activeTab == 'training' ? 'active' : ''" (click)="changeTab('training')"  aria-current="page" routerLink = "training">
               <div>
                 <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
@@ -56,7 +56,7 @@
               Training
             </a>
           </li>
-          <li class="nav-item text-center mx-2 mx-lg-1">
+          <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="sessionData.type == 'user'">
             <a class="nav-link" [ngClass]="activeTab == 'rewards' ? 'active' : ''" (click)="changeTab('rewards')"  aria-current="page" routerLink = "rewards">
               <div>
                 <!-- <i class="fas fa-home fa-lg mb-1"></i> -->
@@ -64,7 +64,7 @@
               Rewards
             </a>
           </li>
-          <li class="nav-item text-center mx-2 mx-lg-1">
+          <li class="nav-item text-center mx-2 mx-lg-1" *ngIf="sessionData.type == 'user'">
             <a class="nav-link" [ngClass]="activeTab == 'recreational' ? 'active' : ''" (click)="changeTab('recreational')"  aria-current="page" routerLink = "recreational">
               <div>
                 <!-- <i class="fas fa-home fa-lg mb-1"></i> -->

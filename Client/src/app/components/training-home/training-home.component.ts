@@ -12,8 +12,10 @@ import { UserClientService } from 'src/app/services/user-client.service';
 })
 export class TrainingHomeComponent implements OnInit {
 
+  sessionData:any;
+
   userData:any;
-  trainingData:any;
+  trainingData:any = [];
   courseList:any;
   employeeList:any;
 
@@ -43,6 +45,10 @@ export class TrainingHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.sessionData = this.generalService.getSessionData();
+
+
     this.today = new Date();
     this.getTodaysDate();
     

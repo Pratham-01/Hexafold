@@ -17,6 +17,7 @@ export class GeneralService {
   ) { }
 
   navbarLoginSubject:any = new Subject();
+  IAMSubject:any = new Subject();
 
   openMessageSnackBar(message: string, action: string) {
     this._snackBar.open(message, action,{
@@ -58,6 +59,15 @@ export class GeneralService {
     };
     // console.log(url);
     return this.http.get(url, httpOptions).pipe(catchError(this.handleError()));
+  }
+
+  getSessionData(){
+    return {
+      companyId : sessionStorage.getItem("companyId"),
+      email : sessionStorage.getItem("email"),
+      type : sessionStorage.getItem("type"),
+      user_type : sessionStorage.getItem("user_type"),
+    }
   }
 
  }

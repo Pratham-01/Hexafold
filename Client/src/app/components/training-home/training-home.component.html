@@ -28,7 +28,7 @@
             </div>
         </div>
         
-        <div class="create-assign-trainings">
+        <div class="create-assign-trainings" *ngIf="sessionData.user_type != 'Employee'">
             
             <div class="createNewTrainingSection">
                 <div [collapse]="createNewTraining" > 
@@ -130,7 +130,13 @@
 
     
 
-    <div class="employee-trainings">
+    <div class="container" style="margin-top: 3rem;">
+        <h4 class="headings">
+            Assigned Trainings
+        </h4>
+    </div>
+
+    <div class="employee-trainings" *ngIf="trainingData.length != 0">
 
         <div class="training-navbar w-100 d-flex justify-content-center bg-white">
             <div class="tab substitle" (click)="changeTrainingTab('in-progress')" [ngStyle]="currentTrainingTab=='in-progress' ? {'border-bottom':'5px solid #343a40'} : {'border-bottom':'0px'}">In Progress</div>
@@ -138,7 +144,7 @@
         </div>
 
         <div class="trainings-list">
-            <div *ngFor="let course of trainingData" class="d-flex flex-column align-items-center w-100">
+            <div *ngFor="let course of trainingData" class="d-flex flex-column align-items-center w-100" >
                 <div class="card col-md-9 col-sm-10" *ngIf="currentTrainingTab == 'in-progress' ? (course.status == 'pending') : (course.status == 'done')" (click)="openTraining(course)">
                     <div class="row w-100 m-0">
                         <div class="training-image col-md-3 col-sm-12 d-flex justify-content-center">
@@ -167,6 +173,10 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="employee-trainings d-flex justify-content-center align-items-center" *ngIf="trainingData.length == 0">
+        No Trainings Assigned
     </div>
 
     

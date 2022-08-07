@@ -3,7 +3,7 @@
   <div class="top-bar">
     <div class="w-100 d-flex justify-content-between">
       <h2 class="headings">Redeem Points</h2>
-      <button class="btn btn-dark" (click)="onAddReward()">Create Reward &nbsp; +</button>
+      <button class="btn btn-dark" (click)="onAddReward()" *ngIf="sessionData.user_type == 'Super User'">Create Reward &nbsp; +</button>
     </div>
     <h5 class="subtitle">Balance : {{userData.reward_points}}</h5>
   </div>

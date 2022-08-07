@@ -17,6 +17,8 @@ export class TaskPageComponent implements OnInit {
     private generalService: GeneralService
   ) { }
 
+  sessionData:any;
+  
   projectData:any;
   featureData:any;
   taskData:any;
@@ -31,7 +33,8 @@ export class TaskPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("aaaaaa");
+    this.sessionData = this.generalService.getSessionData();
+    
     this.incomingData.projectId = this.activatedRoute.snapshot.paramMap.get('project_id');
     this.incomingData.featur_title = this.activatedRoute.snapshot.paramMap.get('featur_title');
     this.incomingData.task_title = this.activatedRoute.snapshot.paramMap.get('task_title');
@@ -42,7 +45,6 @@ export class TaskPageComponent implements OnInit {
   }
 
   getProjectData(projectId:any){
-    console.log("ayyaaa");
     
     this.userClientService.getParticularProjects(projectId).subscribe((response:any) => {
       if(response){

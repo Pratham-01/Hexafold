@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommunityService } from 'src/app/services/community.service';
+import { GeneralService } from 'src/app/services/general.service';
 import { AddCommunityPostPopupComponent } from '../popups/add-community-post-popup/add-community-post-popup.component';
 import { ToastComponent } from '../toast/toast.component';
 @Component({
@@ -11,6 +12,8 @@ import { ToastComponent } from '../toast/toast.component';
   styleUrls: ['./community.component.scss']
 })
 export class CommunityComponent implements OnInit {
+
+  sessionData:any;
 
   isToast:boolean = false;
   isToast1:boolean = false;
@@ -40,7 +43,8 @@ export class CommunityComponent implements OnInit {
     private router: Router, 
     private authService: AuthenticationService,
     private communityService : CommunityService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private generalService: GeneralService
   ) {
     // Function to throw unsigned user out
     this.authService.currentUser$.subscribe((user:any) => {
@@ -54,6 +58,8 @@ export class CommunityComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+    this.sessionData = this.generalService.getSessionData();
 
     this.getAnnouncementPosts(); 
     this.getCommunityPosts(); 
@@ -140,6 +146,11 @@ export class CommunityComponent implements OnInit {
     }, (error:any) => {
       console.log(error);
     });
+  }
+
+  onAnnouncementDelete(toast:any){
+    console.log("here", toast);
+    
   }
 
 

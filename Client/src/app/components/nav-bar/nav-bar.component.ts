@@ -10,6 +10,8 @@ import { GeneralService } from 'src/app/services/general.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+
+  sessionData:any = {};
  
   user$ = this.authService.currentUser$;
   navbarBoolean:any = false;
@@ -26,12 +28,18 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedInBoolean = sessionStorage.getItem("email") != null;
-
+    
     this.generalService.navbarLoginSubject.subscribe((res:any) => {
       this.isLoggedInBoolean = res;
-    })
+    });
+    this.generalService.IAMSubject.subscribe((res:any) => {
+      this.sessionData = this.generalService.getSessionData();
+    });
+    this.sessionData = this.generalService.getSessionData();
 
-    // this.navbarBoolean = (window.location.href.split("/").pop() == "home" || window.location.href.split("/").pop() == "login") ;
+
+
+        // this.navbarBoolean = (window.location.href.split("/").pop() == "home" || window.location.href.split("/").pop() == "login") ;
     this.showTab(window.location.href)
     this.user$.subscribe((res:any) => {
       if(res) {
@@ -45,6 +53,8 @@ export class NavBarComponent implements OnInit {
       this.changeTab(data)
     })
   }
+
+  
 
   showTab(locn:any){
     let currTab:any = "";
@@ -77,6 +87,7 @@ export class NavBarComponent implements OnInit {
       sessionStorage.removeItem("email");
       sessionStorage.removeItem("type");
       sessionStorage.removeItem("companyId");
+      sessionStorage.removeItem("user_type");
       this.generalService.navbarLoginSubject.next(false);
       
     });

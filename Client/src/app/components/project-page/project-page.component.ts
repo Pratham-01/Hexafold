@@ -16,6 +16,7 @@ import { FeatureCostPopupComponent } from '../popups/feature-cost-popup/feature-
 })
 export class ProjectPageComponent implements OnInit {
 
+  sessionData:any;
   projectId:any;
   projectData:any;
   pcomment:any;
@@ -40,6 +41,8 @@ export class ProjectPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sessionData = this.generalService.getSessionData();
+
     this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id');
     // console.log(this.projectId);
     this.getProjectData(this.projectId);
@@ -56,6 +59,7 @@ export class ProjectPageComponent implements OnInit {
       if(response){
         console.log(response);
         this.projectData = response[0];
+        this.setProgress();
       }
     }, (error:any)=>{
       console.log("Error : ", error);
@@ -77,16 +81,23 @@ export class ProjectPageComponent implements OnInit {
     //     { user: "Divya", description: "Haa bhai nhi dalre" },
     //   ]
     // }
+    
+  }
+
+  setProgress(){
     var doneFeaturesCount:any = 0;
     var acceptedFeaturesCount:any = 0;
     this.projectData.features.forEach((feat:any) => {
-      if(feat.accepted == true) {
+      if(feat.manager_acceptance && feat.client_acceptance) {
         acceptedFeaturesCount++;
         if(feat.status == "done") doneFeaturesCount++;
       }
       feat.showContent = false;
     });
     this.projectData.progress = (doneFeaturesCount / acceptedFeaturesCount)*100;
+    // console.log(this.projectData.progress, "Progress");
+
+    
   }
 
   openAddFeaturePopup(){

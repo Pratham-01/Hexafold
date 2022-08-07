@@ -22,7 +22,7 @@
 
         </div>
         <div class="task-details col-md-3 col-sm-12">
-            <select name="status" id="" class="form-select w-50" [(ngModel)]="taskData.status" (change)="onTaskStatusUpdate()">
+            <select name="status" id="" class="form-select w-50" [(ngModel)]="taskData.status" (change)="onTaskStatusUpdate()" [disabled]="sessionData.type == 'client'">
                 <option value="{{status}}" *ngFor="let status of statusList">{{status}}</option>
             </select>
 
@@ -34,7 +34,7 @@
                 <br>
                 <div class="form-group">
                     <span for="" class="card-text subheading">Assignee</span>
-                    <select name="assignedEmployee" id="" class="form-select" [(ngModel)]="taskData.assignedEmployee" (change)="onTaskAssigneeUpdate()">
+                    <select name="assignedEmployee" id="" class="form-select" [(ngModel)]="taskData.assignedEmployee" (change)="onTaskAssigneeUpdate()" [disabled]="sessionData.type == 'client'">
                         <option value="{{emp.email}}" *ngFor="let emp of employeeList">{{emp.name}}</option>
                     </select>
                 </div>

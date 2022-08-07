@@ -1,6 +1,6 @@
 <div class="dashboard-main container">
 
-  <div class="createe-user-section">
+  <div class="createe-user-section" *ngIf="sessionData.user_type == 'Super User'">
     <h2 class="headings my-3">
       Create New Users and Clients
     </h2>
@@ -18,7 +18,7 @@
         Your Project
       </h2>
 
-      <button class="btn btn-dark" (click)="openCreateNewProjectPopup()">
+      <button class="btn btn-dark" (click)="openCreateNewProjectPopup()" *ngIf="sessionData.user_type == 'Super User'">
         <small>Add New Project &nbsp;&nbsp;</small>
         <small>+</small> 
       </button>
@@ -50,7 +50,7 @@
           Our Achievements
         </h2>
   
-        <button class="btn btn-dark" (click)="openCreateNewShowcasePostPopup()">
+        <button class="btn btn-dark" (click)="openCreateNewShowcasePostPopup()" *ngIf="sessionData.user_type == 'Super User'">
           <small>Add New Post &nbsp;&nbsp;</small>
           <small>+</small> 
         </button>
