@@ -58,7 +58,7 @@
                 </div>
                 
                 <br>
-                <div class="form-group">
+                <div class="form-group" *ngif="sessionData.type != 'client'">
                     <span class="card-text subheading">Reward</span><br>
                     <span>{{taskData.reward_points}}</span>
                 </div>
