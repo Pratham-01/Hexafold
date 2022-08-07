@@ -36,6 +36,8 @@ export class UsersService {
     return collectionData(queryAll) as Observable<ProfileUser[]>;
   }
 
+  
+
   constructor(
     private firestore: Firestore,
     private authService: AuthenticationService
@@ -50,4 +52,6 @@ export class UsersService {
     const ref = doc(this.firestore, 'users', user?.uid);
     return from(updateDoc(ref, { ...user }));
   }
+
+  
 }
