@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(function(){
+      let b = document.getElementById("login-section") as HTMLElement;
+      b.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    },1500);
   }
 
   navigateToLogin(type:any){

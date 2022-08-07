@@ -34,7 +34,7 @@ export class RecreationalComponent implements OnInit {
     this.disableBtnBoolean = true;
     this.generalService.getRandomFact(sessionStorage.getItem("companyId")).subscribe((response:any) => {
       if(response){
-        this.generalService.openMessageSnackBar(response.content, "OOHHHHH");
+        this.generalService.openFactSnackBar(response.content, "OOHHHHH");
         this.disableBtnBoolean = false;
       }
     }, (error:any) => {
